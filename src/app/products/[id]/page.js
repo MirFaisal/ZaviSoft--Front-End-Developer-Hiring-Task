@@ -81,6 +81,7 @@ export default function ProductDetailPage({ params }) {
   }
 
   const imgs = getValidImages(product.images, 4, PLACEHOLDER);
+  const uniqueImgs = [...new Set(imgs)];
 
   return (
     <div className="min-h-screen flex flex-col bg-[#e7e7e3]">
@@ -94,17 +95,17 @@ export default function ProductDetailPage({ params }) {
               <div className="flex flex-col gap-6 lg:hidden">
                 <div className="relative h-[273px] rounded-2xl overflow-hidden bg-[#fafafa]">
                   <Image
-                    src={imgs[selectedImageIndex]}
+                    src={uniqueImgs[selectedImageIndex]}
                     alt={`${product.title} - ${selectedImageIndex + 1}`}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="100vw"
                     priority
                     unoptimized
                   />
                   {/* Dot navigation */}
                   <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
-                    {imgs.map((_, i) => (
+                    {uniqueImgs.map((_, i) => (
                       <button
                         key={i}
                         onClick={() => setSelectedImageIndex(i)}
@@ -117,7 +118,7 @@ export default function ProductDetailPage({ params }) {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  {imgs.map((img, i) => (
+                  {uniqueImgs.map((img, i) => (
                     <button
                       key={i}
                       onClick={() => setSelectedImageIndex(i)}
@@ -128,7 +129,7 @@ export default function ProductDetailPage({ params }) {
                         src={img}
                         alt={`${product.title} thumbnail ${i + 1}`}
                         fill
-                        className="object-cover"
+                        className="object-cover object-top"
                         sizes="64px"
                         unoptimized
                       />
@@ -144,7 +145,7 @@ export default function ProductDetailPage({ params }) {
                     src={imgs[0]}
                     alt={`${product.title} - 1`}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="30vw"
                     priority
                     unoptimized
@@ -155,7 +156,7 @@ export default function ProductDetailPage({ params }) {
                     src={imgs[1]}
                     alt={`${product.title} - 2`}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="30vw"
                     unoptimized
                   />
@@ -165,7 +166,7 @@ export default function ProductDetailPage({ params }) {
                     src={imgs[2]}
                     alt={`${product.title} - 3`}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="30vw"
                     unoptimized
                   />
@@ -175,7 +176,7 @@ export default function ProductDetailPage({ params }) {
                     src={imgs[3]}
                     alt={`${product.title} - 4`}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="30vw"
                     unoptimized
                   />
