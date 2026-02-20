@@ -157,7 +157,7 @@ export default function Header() {
           {/* User */}
           <button
             type="button"
-            className="text-[#232321] hover:opacity-70 transition-opacity hidden sm:block"
+            className="text-[#232321] hover:opacity-70 transition-opacity"
             aria-label="User account"
           >
             <UserIcon />
@@ -184,8 +184,8 @@ export default function Header() {
               className="flex items-center gap-1 hover:opacity-70 transition-opacity"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <span>🔥</span>
               <span>New Drops</span>
+              <span>🔥</span>
             </Link>
             <Link
               href="/categories"
@@ -203,14 +203,6 @@ export default function Header() {
               <span>Women</span>
               <CaretDown />
             </Link>
-            <div className="flex items-center gap-6 pt-2 border-t border-gray-200">
-              <button type="button" aria-label="Search" className="hover:opacity-70">
-                <SearchIcon />
-              </button>
-              <button type="button" aria-label="User account" className="hover:opacity-70">
-                <UserIcon />
-              </button>
-            </div>
           </div>
         </nav>
       )}
