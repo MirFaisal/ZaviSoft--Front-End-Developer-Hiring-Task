@@ -16,88 +16,87 @@ const getValidCategoryImage = (image) => {
 };
 
 export default function CategoriesSection() {
-  const { data: allCategories, isLoading } = useGetCategoriesQuery();
+  const { data: rawCategories, isLoading } = useGetCategoriesQuery();
   const [startIndex, setStartIndex] = useState(0);
 
+  // Filter out test/junk categories, keep even number (max 6)
+  const allCategories = (rawCategories || []).filter((cat) => {
+    const name = (cat.name || "").toLowerCase();
+    return !name.includes("test") && !name.includes("timestamp") && !name.includes("{{") && !name.includes("new category") && name.length > 0;
+  }).slice(0, 4);
+
   // Show 2 categories at a time
-  const visibleCategories = (allCategories || []).slice(startIndex, startIndex + 2);
+  const visibleCategories = allCategories.slice(startIndex, startIndex + 2);
   const canGoBack = startIndex > 0;
-  const canGoForward = allCategories && startIndex + 2 < allCategories.length;
+  const canGoForward = allCategories.length > 0 && startIndex + 2 < allCategories.length;
+
+  const goBack = () => setStartIndex((i) => Math.max(0, i - 1));
+  const goForward = () => setStartIndex((i) => i + 1);
 
   return (
-    <section className="bg-[#232321] w-full">
-      <div className="max-w-360 mx-auto px-4 lg:px-15 pt-16 lg:pt-22.5">
+    <section className="bg-[#232321] lg:mx-10 xl:mx-15">
+      <div className="w-full mx-auto px-4 lg:px-15 pt-6 lg:pt-22.5">
         {/* Header row */}
-        <div className="flex items-end justify-between mb-8 lg:mb-12">
-          <h2 className="font-rubik font-semibold text-4xl lg:text-[74px] text-white uppercase leading-[0.95]">
+        <div className="flex items-end justify-between mb-6 lg:mb-12">
+          <h2 className="font-rubik font-semibold text-2xl lg:text-[74px] text-white uppercase leading-normal lg:leading-[0.95]">
             Categories
           </h2>
 
           {/* Navigation arrows */}
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-2 lg:gap-4 items-center">
             <button
               type="button"
               disabled={!canGoBack}
-              onClick={() => setStartIndex((i) => Math.max(0, i - 2))}
-              className="flex items-center justify-center h-10 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              onClick={goBack}
+              className="flex items-center justify-center size-8 lg:size-10 rounded-lg bg-[#232321] border border-white/20 hover:bg-white/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Previous">
               <Image
-                src="/icons/chevron-forward.svg"
+                src="/icons/chevron-forward-white.svg"
                 alt=""
                 width={24}
                 height={24}
-                className="rotate-180 invert"
+                className="rotate-180"
               />
             </button>
             <button
               type="button"
               disabled={!canGoForward}
-              onClick={() => setStartIndex((i) => i + 2)}
-              className="flex items-center justify-center h-10 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              onClick={goForward}
+              className="flex items-center justify-center size-8 lg:size-10 rounded-lg bg-[#232321] border border-white/20 hover:bg-white/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Next">
-              <Image
-                src="/icons/chevron-forward.svg"
-                alt=""
-                width={24}
-                height={24}
-                className="invert"
-              />
+              <Image src="/icons/chevron-forward-white.svg" alt="" width={24} height={24} />
             </button>
           </div>
         </div>
       </div>
 
       {/* Category cards */}
-      <div className="max-w-360 mx-auto pl-4 lg:pl-15 pb-0">
+      <div className="w-full mx-auto pl-4 lg:pl-15 pb-0">
         {isLoading ? (
           <div className="flex items-center justify-center py-20">
             <Spinner size="lg" />
           </div>
         ) : (
-          <div className="flex gap-0 h-100 lg:h-150">
+          <div className="flex flex-col lg:flex-row gap-0 lg:h-150">
             {visibleCategories.map((category, index) => (
               <div
                 key={category.id}
-                className={`relative flex-1 bg-[#eceef0] ${
-                  index === 1 ? "bg-[#f6f6f6]" : ""
-                } ${index === 0 ? "rounded-tl-4xl lg:rounded-tl-[64px]" : ""} overflow-hidden`}>
+                className={`relative flex-none lg:flex-1 h-[348px] lg:h-full ${
+                  index === 1 ? "bg-[#f6f6f6]" : "bg-[#eceef0]"
+                } ${index === 0 ? "rounded-tl-3xl lg:rounded-tl-[64px]" : ""} overflow-hidden`}>
                 {/* Category image */}
-                <div className="flex items-center justify-center h-full px-8 lg:px-16">
-                  <div className="relative w-full max-w-120 h-full">
-                    <Image
-                      src={getValidCategoryImage(category.image)}
-                      alt={category.name}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 1024px) 50vw, 40vw"
-                      unoptimized
-                    />
-                  </div>
-                </div>
+                <Image
+                  src={getValidCategoryImage(category.image)}
+                  alt={category.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  unoptimized
+                />
 
                 {/* Label + arrow button */}
-                <div className="absolute bottom-6 left-6 lg:bottom-8 lg:left-12 right-6 lg:right-12 flex items-end justify-between">
-                  <h3 className="font-rubik font-semibold text-xl lg:text-4xl text-[#232321] uppercase leading-tight">
+                <div className="absolute bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm px-4 py-4 lg:px-12 lg:py-8 flex items-end justify-between">
+                  <h3 className="font-rubik font-semibold text-2xl lg:text-4xl text-[#232321] uppercase leading-tight">
                     {category.name.split(" ").map((word, i) => (
                       <span key={i} className="block">
                         {word}
@@ -106,7 +105,7 @@ export default function CategoriesSection() {
                   </h3>
                   <Link
                     href={`/categories/${category.id}`}
-                    className="flex items-center justify-center p-2 rounded-lg bg-[#232321] hover:bg-[#1a1a18] transition-colors shrink-0">
+                    className="flex items-center justify-center p-2 rounded lg:rounded-lg bg-[#232321] hover:bg-[#1a1a18] transition-colors shrink-0">
                     <Image
                       src="/icons/arrow-trend-right-up.svg"
                       alt="View category"
