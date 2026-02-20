@@ -93,10 +93,10 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-[#fafafa] rounded-[24px] mx-2 mt-2 md:mx-4 md:mt-4">
       <div className="flex items-center justify-between px-4 py-4 md:px-[60px] md:py-[32px]">
         {/* Left Navigation */}
-        <nav className="hidden md:flex items-start gap-[40px] w-[301px] font-[family-name:var(--font-rubik)] font-semibold text-[16px] text-[#232321]">
+        <nav className="hidden md:flex items-start gap-[40px] w-[331px] font-[family-name:var(--font-rubik)] font-semibold text-[16px] text-[#232321]">
           <Link href="/products" className="flex items-center gap-0 hover:opacity-70 transition-opacity">
-            <span>🔥</span>
             <span className="ml-1">New Drops</span>
+            <span>🔥</span>
           </Link>
           <Link href="/categories" className="flex items-center gap-[2px] hover:opacity-70 transition-opacity">
             <span>Men</span>
