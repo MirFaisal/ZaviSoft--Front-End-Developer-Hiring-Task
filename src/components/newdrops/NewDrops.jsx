@@ -28,7 +28,7 @@ export default function NewDrops() {
         </h2>
         <Link
           href="/products"
-          className="inline-flex items-center justify-center h-10 lg:h-12 px-4 rounded-lg bg-[#4a69e2] lg:bg-[#232321] font-rubik font-medium text-sm text-white uppercase tracking-wider hover:opacity-90 transition-colors w-fit shrink-0">
+          className="inline-flex items-center justify-center h-10 lg:h-12 px-4 rounded-lg bg-[#4a69e2] font-rubik font-medium text-sm text-white uppercase tracking-wider hover:opacity-90 transition-colors w-fit shrink-0">
           Shop New Drops
         </Link>
       </div>

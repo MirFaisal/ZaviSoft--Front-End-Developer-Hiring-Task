@@ -1,25 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { Header, Footer, Cart, CategoryCard, Spinner } from "@/components";
-import { useGetCategoriesQuery, initializeCart } from "@/store";
+import { CategoryCard, Spinner } from "@/components";
+import { useGetCategoriesQuery } from "@/store";
 
 export default function CategoriesPage() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(initializeCart());
-  }, [dispatch]);
-
   const { data: categories, isLoading, error } = useGetCategoriesQuery();
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
-      <Cart />
-
       <main className="flex-1 bg-gray-50">
         {/* Page Header */}
         <div className="bg-white border-b">
@@ -54,8 +43,6 @@ export default function CategoriesPage() {
           )}
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

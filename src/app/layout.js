@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Rubik, Open_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ReduxProvider } from "@/providers";
+import { LayoutShell } from "@/components/layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,7 +43,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} ${openSans.variable} ${inter.variable} antialiased`}>
-        <ReduxProvider>{children}</ReduxProvider>
+        <ReduxProvider>
+          <LayoutShell>{children}</LayoutShell>
+        </ReduxProvider>
       </body>
     </html>
   );

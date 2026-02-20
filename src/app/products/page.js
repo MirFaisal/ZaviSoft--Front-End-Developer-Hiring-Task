@@ -1,22 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Header, Footer, Cart, ProductGrid } from "@/components";
-import { useGetProductsQuery, useGetCategoriesQuery, initializeCart } from "@/store";
+import { useState } from "react";
+import { ProductGrid } from "@/components";
+import { useGetProductsQuery, useGetCategoriesQuery } from "@/store";
 import Link from "next/link";
 
 const PRODUCTS_PER_PAGE = 12;
 
 export default function ProductsPage() {
-  const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState(null);
-
-  // Initialize cart
-  useEffect(() => {
-    dispatch(initializeCart());
-  }, [dispatch]);
 
   const {
     data: products,
@@ -41,10 +34,7 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <Cart />
-
+    <div className="flex flex-col">
       <main className="flex-1 bg-gray-50">
         {/* Page Header */}
         <div className="bg-white border-b">
@@ -133,8 +123,6 @@ export default function ProductsPage() {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

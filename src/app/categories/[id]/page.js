@@ -1,21 +1,15 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { use, useState } from "react";
 import Link from "next/link";
-import { Header, Footer, Cart, ProductGrid, Spinner } from "@/components";
-import { useGetProductsByCategoryQuery, useGetCategoriesQuery, initializeCart } from "@/store";
+import { ProductGrid, Spinner } from "@/components";
+import { useGetProductsByCategoryQuery, useGetCategoriesQuery } from "@/store";
 
 const PRODUCTS_PER_PAGE = 12;
 
 export default function CategoryPage({ params }) {
   const { id } = use(params);
-  const dispatch = useDispatch();
   const [page, setPage] = useState(0);
-
-  useEffect(() => {
-    dispatch(initializeCart());
-  }, [dispatch]);
 
   const { data: categories } = useGetCategoriesQuery();
   const category = categories?.find((c) => c.id === Number(id));
@@ -44,8 +38,6 @@ export default function CategoryPage({ params }) {
   if (!category && !isLoading) {
     return (
       <div className="min-h-screen flex flex-col">
-        <Header />
-        <Cart />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-gray-900 mb-4">Category Not Found</h1>
@@ -56,16 +48,12 @@ export default function CategoryPage({ params }) {
             </Link>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
-      <Cart />
-
       <main className="flex-1 bg-gray-50">
         {/* Page Header */}
         <div className="bg-white border-b">
@@ -120,8 +108,6 @@ export default function CategoryPage({ params }) {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

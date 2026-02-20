@@ -59,7 +59,7 @@ export default function Reviews() {
         </h2>
         <Link
           href="/products"
-          className="inline-flex items-center justify-center h-12 px-4 rounded-lg bg-[#232321] font-rubik font-medium text-sm text-white uppercase tracking-wider hover:bg-[#1a1a18] transition-colors">
+          className="inline-flex items-center justify-center h-12 px-4 rounded-lg bg-[#4a69e2] font-rubik font-medium text-sm text-white uppercase tracking-wider hover:opacity-90transition-colors">
           See all
         </Link>
       </div>

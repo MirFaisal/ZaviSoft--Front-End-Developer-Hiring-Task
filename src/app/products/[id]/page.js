@@ -1,63 +1,66 @@
 "use client";
 
-import { use, useEffect } from "react";
+import { use, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { Header, Footer, Cart, ProductCard, Spinner } from "@/components";
-import { useGetProductByIdQuery, useGetRelatedProductsQuery, addToCart, initializeCart } from "@/store";
+import { Spinner } from "@/components/ui";
+import { useGetProductByIdQuery, useGetProductsByCategoryQuery, addToCart } from "@/store";
+
+const PLACEHOLDER = "https://placehold.co/600x600/e2e8f0/475569?text=Product";
+const SIZES = [38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
+
+const getValidImage = (img) => {
+  if (!img || typeof img !== "string" || img.includes("[") || img.includes("any") || !img.startsWith("http"))
+    return PLACEHOLDER;
+  return img;
+};
+
+const getImages = (images) => {
+  if (!images || images.length === 0) return [PLACEHOLDER, PLACEHOLDER, PLACEHOLDER, PLACEHOLDER];
+  const valid = images.map(getValidImage);
+  // Pad to at least 4 images by repeating
+  while (valid.length < 4) valid.push(valid[valid.length - 1]);
+  return valid.slice(0, 4);
+};
 
 export default function ProductDetailPage({ params }) {
   const { id } = use(params);
   const dispatch = useDispatch();
-
-  // Initialize cart from localStorage
-  useEffect(() => {
-    dispatch(initializeCart());
-  }, [dispatch]);
+  const [selectedSize, setSelectedSize] = useState(38);
+  const [relatedPage, setRelatedPage] = useState(0);
 
   const { data: product, isLoading, error } = useGetProductByIdQuery(id);
 
-  const { data: relatedProducts } = useGetRelatedProductsQuery(id, {
-    skip: !product,
-  });
+  const { data: categoryProducts } = useGetProductsByCategoryQuery(
+    { categoryId: product?.category?.id, offset: 0, limit: 20 },
+    { skip: !product?.category?.id },
+  );
+
+  // Related products = same category, excluding current product
+  const relatedProducts = (categoryProducts || []).filter((p) => p.id !== Number(id)).slice(0, 8);
+  const relatedVisible = relatedProducts.slice(relatedPage * 4, relatedPage * 4 + 4);
+  const relatedPageCount = Math.ceil(relatedProducts.length / 4) || 1;
 
   const handleAddToCart = () => {
     if (!product) return;
-
-    const imageUrl = getValidImage(product.images);
     dispatch(
       addToCart({
         id: product.id,
         title: product.title,
         price: product.price,
-        image: imageUrl,
+        image: getValidImage(product.images?.[0]),
         quantity: 1,
       }),
     );
   };
 
-  // Helper to get valid image URL
-  const getValidImage = (images) => {
-    if (!images || images.length === 0) {
-      return "https://placehold.co/600x600/e2e8f0/475569?text=Product";
-    }
-    const img = images[0];
-    if (img.includes("[") || img.includes("any") || !img.startsWith("http")) {
-      return "https://placehold.co/600x600/e2e8f0/475569?text=Product";
-    }
-    return img;
-  };
-
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col">
-        <Header />
-        <Cart />
         <main className="flex-1 flex items-center justify-center">
           <Spinner size="lg" />
         </main>
-        <Footer />
       </div>
     );
   }
@@ -65,207 +68,264 @@ export default function ProductDetailPage({ params }) {
   if (error || !product) {
     return (
       <div className="min-h-screen flex flex-col">
-        <Header />
-        <Cart />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Product Not Found</h1>
-            <p className="text-gray-600 mb-6">
+            <h1 className="font-rubik font-semibold text-2xl text-[#232321] mb-4">Product Not Found</h1>
+            <p className="text-[#232321]/60 mb-6">
               The product you&apos;re looking for doesn&apos;t exist or has been removed.
             </p>
             <Link
               href="/products"
-              className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors">
+              className="inline-block bg-[#232321] text-white px-6 py-3 rounded-lg hover:bg-[#1a1a18] transition-colors font-rubik font-medium text-sm uppercase tracking-wider">
               Browse Products
             </Link>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
 
-  const mainImage = getValidImage(product.images);
+  const imgs = getImages(product.images);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <Cart />
-
+    <div className="min-h-screen flex flex-col bg-[#e7e7e3]">
       <main className="flex-1">
-        {/* Breadcrumb */}
-        <div className="bg-gray-50 py-4">
-          <div className="container mx-auto px-4">
-            <nav className="flex items-center gap-2 text-sm">
-              <Link href="/" className="text-gray-500 hover:text-indigo-600">
-                Home
-              </Link>
-              <span className="text-gray-400">/</span>
-              <Link href="/products" className="text-gray-500 hover:text-indigo-600">
-                Products
-              </Link>
-              <span className="text-gray-400">/</span>
-              <span className="text-gray-900">{product.title}</span>
-            </nav>
-          </div>
-        </div>
-
-        {/* Product Details */}
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Product Images */}
-              <div className="space-y-4">
-                <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-100">
+        {/* ─── Product Section ─── */}
+        <section className="max-w-[1440px] mx-auto px-4 lg:px-[60px] pt-6 lg:pt-8 pb-12 lg:pb-20">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+            {/* ─── Images 2×2 Grid ─── */}
+            <div className="w-full lg:w-[60%]">
+              <div className="grid grid-cols-2 gap-[16px]">
+                {/* Top-left */}
+                <div className="relative aspect-[429/510] rounded-tl-[48px] overflow-hidden bg-[#fafafa]">
                   <Image
-                    src={mainImage}
-                    alt={product.title}
+                    src={imgs[0]}
+                    alt={`${product.title} - 1`}
                     fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"
+                    sizes="(max-width: 1024px) 50vw, 30vw"
                     priority
                     unoptimized
                   />
                 </div>
+                {/* Top-right */}
+                <div className="relative aspect-[429/510] rounded-tr-[48px] overflow-hidden bg-[#fafafa]">
+                  <Image
+                    src={imgs[1]}
+                    alt={`${product.title} - 2`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 50vw, 30vw"
+                    unoptimized
+                  />
+                </div>
+                {/* Bottom-left */}
+                <div className="relative aspect-[429/510] rounded-bl-[48px] overflow-hidden bg-[#fafafa]">
+                  <Image
+                    src={imgs[2]}
+                    alt={`${product.title} - 3`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 50vw, 30vw"
+                    unoptimized
+                  />
+                </div>
+                {/* Bottom-right */}
+                <div className="relative aspect-[429/510] rounded-br-[48px] overflow-hidden bg-[#fafafa]">
+                  <Image
+                    src={imgs[3]}
+                    alt={`${product.title} - 4`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 50vw, 30vw"
+                    unoptimized
+                  />
+                </div>
+              </div>
+            </div>
 
-                {/* Thumbnail Images */}
-                {product.images && product.images.length > 1 && (
-                  <div className="grid grid-cols-4 gap-4">
-                    {product.images.slice(0, 4).map((img, index) => {
-                      const thumbUrl = getValidImage([img]);
-                      return (
-                        <div
-                          key={index}
-                          className="relative aspect-square rounded-lg overflow-hidden bg-gray-100 cursor-pointer hover:ring-2 hover:ring-indigo-500">
-                          <Image
-                            src={thumbUrl}
-                            alt={`${product.title} - Image ${index + 1}`}
-                            fill
-                            sizes="100px"
-                            className="object-cover"
-                            unoptimized
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
+            {/* ─── Product Info ─── */}
+            <div className="w-full lg:w-[40%] flex flex-col gap-8">
+              {/* Badge + Title + Price */}
+              <div className="flex flex-col gap-4">
+                <span className="self-start bg-[#4a69e2] text-white font-rubik font-semibold text-xs px-4 py-3 rounded-xl">
+                  New Release
+                </span>
+                <h1 className="font-rubik font-semibold text-2xl lg:text-[32px] text-[#232321] uppercase leading-tight">
+                  {product.title}
+                </h1>
+                <p className="font-rubik font-semibold text-xl lg:text-2xl text-[#4a69e2]">
+                  ${product.price.toFixed(2)}
+                </p>
               </div>
 
-              {/* Product Info */}
-              <div className="space-y-6">
-                {/* Category */}
-                {product.category && (
-                  <Link
-                    href={`/categories/${product.category.id}`}
-                    className="inline-block text-sm text-indigo-600 font-medium hover:text-indigo-700">
-                    {product.category.name}
-                  </Link>
-                )}
-
-                {/* Title */}
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{product.title}</h1>
-
-                {/* Price */}
-                <p className="text-3xl font-bold text-indigo-600">${product.price.toFixed(2)}</p>
-
-                {/* Description */}
-                <div className="prose prose-gray max-w-none">
-                  <p className="text-gray-600 leading-relaxed">{product.description}</p>
+              {/* Color */}
+              <div className="flex flex-col gap-2">
+                <p className="font-rubik font-semibold text-base text-[#232321] uppercase">Color</p>
+                <div className="flex gap-2">
+                  <div className="w-12 h-12 rounded-full bg-[#232321] border-2 border-[#232321] cursor-pointer" />
+                  <div className="w-12 h-12 rounded-full bg-[#4a69e2] border-2 border-transparent cursor-pointer hover:border-[#232321] transition-colors" />
                 </div>
+              </div>
 
-                {/* Actions */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              {/* Size */}
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <p className="font-rubik font-semibold text-base text-[#232321] uppercase">Size</p>
+                  <button className="font-rubik font-medium text-sm text-[#232321] uppercase tracking-wider underline underline-offset-2">
+                    Size chart
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-1 max-w-[430px]">
+                  {SIZES.map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`h-12 min-w-[48px] flex-1 flex items-center justify-center rounded-lg font-rubik font-medium text-sm uppercase tracking-wider transition-colors ${
+                        selectedSize === size
+                          ? "bg-[#232321] text-white"
+                          : "bg-[#d2d1d3] text-[#8f8c91] hover:bg-[#c0bfc1]"
+                      }`}>
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col gap-2">
+                <div className="flex gap-2">
                   <button
                     onClick={handleAddToCart}
-                    className="flex-1 bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
-                    Add to Cart
+                    className="flex-1 h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:bg-[#1a1a18] transition-colors">
+                    Add to cart
                   </button>
-                  <button className="flex-1 border-2 border-indigo-600 text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-indigo-50 transition-colors">
-                    Buy Now
+                  <button className="h-12 px-4 bg-[#232321] rounded-lg flex items-center justify-center hover:bg-[#1a1a18] transition-colors">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z"
+                        stroke="white"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </button>
                 </div>
+                <button className="w-full h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:bg-[#1a1a18] transition-colors">
+                  Buy it now
+                </button>
+              </div>
 
-                {/* Features */}
-                <div className="border-t pt-6 mt-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-5 h-5 text-indigo-600">
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
-                          />
-                        </svg>
-                      </div>
-                      <span className="text-sm text-gray-600">Free Shipping</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-5 h-5 text-indigo-600">
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                          />
-                        </svg>
-                      </div>
-                      <span className="text-sm text-gray-600">Easy Returns</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-5 h-5 text-indigo-600">
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
-                          />
-                        </svg>
-                      </div>
-                      <span className="text-sm text-gray-600">Secure Payment</span>
-                    </div>
-                  </div>
+              {/* About the product */}
+              <div className="flex flex-col gap-2 text-[#232321]">
+                <p className="font-rubik font-semibold text-base uppercase">About the product</p>
+                <div className="font-inter text-base opacity-80 leading-relaxed">
+                  <p>{product.description}</p>
+                  <ul className="list-disc ml-6 mt-3 space-y-1">
+                    <li>Pay over time in interest-free installments with Affirm, Klarna or Afterpay.</li>
+                    <li>Join adiClub to get unlimited free standard shipping, returns, &amp; exchanges.</li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Related Products */}
-        {relatedProducts && relatedProducts.length > 0 && (
-          <section className="py-12 bg-gray-50">
-            <div className="container mx-auto px-4">
-              <h2 className="text-2xl font-bold text-gray-900 mb-8">Related Products</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {relatedProducts.slice(0, 4).map((relatedProduct) => (
-                  <ProductCard key={relatedProduct.id} product={relatedProduct} />
+        {/* ─── You may also like ─── */}
+        {relatedProducts.length > 0 && (
+          <section className="max-w-[1440px] mx-auto px-4 lg:px-[60px] pb-12 lg:pb-20">
+            <div className="flex flex-col gap-8 items-center">
+              {/* Header */}
+              <div className="flex items-center justify-between w-full">
+                <h2 className="font-rubik font-semibold text-2xl lg:text-5xl text-[#232321]">
+                  You may also like
+                </h2>
+                <div className="flex gap-4 items-center">
+                  <button
+                    type="button"
+                    onClick={() => setRelatedPage((p) => Math.max(0, p - 1))}
+                    disabled={relatedPage === 0}
+                    className="flex items-center justify-center h-10 px-3 rounded-lg bg-[#232321] hover:bg-[#1a1a18] transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+                    <Image
+                      src="/icons/chevron-forward-white.svg"
+                      alt=""
+                      width={24}
+                      height={24}
+                      className="rotate-180"
+                    />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setRelatedPage((p) => Math.min(relatedPageCount - 1, p + 1))}
+                    disabled={relatedPage >= relatedPageCount - 1}
+                    className="flex items-center justify-center h-10 px-3 rounded-lg bg-[#232321] hover:bg-[#1a1a18] transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+                    <Image src="/icons/chevron-forward-white.svg" alt="" width={24} height={24} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Product Cards Grid */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+                {relatedVisible.map((rp) => {
+                  const rpImg = getValidImage(rp.images?.[0]);
+                  return (
+                    <div key={rp.id} className="flex flex-col gap-4">
+                      {/* Image */}
+                      <div className="relative bg-[#fafafa] rounded-[28px] p-2 h-[250px] lg:h-[350px]">
+                        <div className="relative w-full h-full rounded-3xl overflow-hidden">
+                          <Image
+                            src={rpImg}
+                            alt={rp.title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 1024px) 50vw, 25vw"
+                            unoptimized
+                          />
+                        </div>
+                        <span className="absolute top-2 left-2 bg-[#4a69e2] text-white font-rubik font-semibold text-xs px-4 py-3 rounded-br-3xl rounded-tl-3xl">
+                          New
+                        </span>
+                      </div>
+                      {/* Info */}
+                      <div className="flex flex-col gap-4">
+                        <p className="font-rubik font-semibold text-base lg:text-2xl text-[#232321] leading-tight line-clamp-2 uppercase">
+                          {rp.title}
+                        </p>
+                        <Link
+                          href={`/products/${rp.id}`}
+                          className="w-full h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:bg-[#1a1a18] transition-colors flex items-center justify-center">
+                          <span>View Product - </span>
+                          <span className="text-[#ffa52f] ml-1">${rp.price}</span>
+                        </Link>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Pagination Dots */}
+              <div className="flex gap-1">
+                {Array.from({ length: relatedPageCount }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setRelatedPage(i)}
+                    className={`h-1.5 w-10 rounded-lg transition-colors ${
+                      i === relatedPage ? "bg-[#4a69e2]" : "bg-[#232321]/25"
+                    }`}
+                    aria-label={`Page ${i + 1}`}
+                  />
                 ))}
               </div>
             </div>
           </section>
         )}
       </main>
-
-      <Footer />
     </div>
   );
 }
