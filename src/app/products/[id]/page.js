@@ -4,7 +4,7 @@ import { use, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { Spinner, NavArrows, SectionHeader } from "@/components/ui";
+import { Spinner, NavArrows, SectionHeader, ImageSlider } from "@/components/ui";
 import { ProductCardBranded } from "@/components/products";
 import { useGetProductByIdQuery, useGetProductsByCategoryQuery, addToCart } from "@/store";
 import { getValidImageUrl, getValidImages } from "@/lib/utils";
@@ -23,7 +23,6 @@ export default function ProductDetailPage({ params }) {
   const [selectedSize, setSelectedSize] = useState(38);
   const [selectedColor, setSelectedColor] = useState(COLORS[0].value);
   const [relatedPage, setRelatedPage] = useState(0);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const { data: product, isLoading, error } = useGetProductByIdQuery(id);
 
@@ -81,7 +80,6 @@ export default function ProductDetailPage({ params }) {
   }
 
   const imgs = getValidImages(product.images, 4, PLACEHOLDER);
-  const uniqueImgs = [...new Set(imgs)];
 
   return (
     <div className="min-h-screen flex flex-col bg-[#e7e7e3]">
@@ -92,51 +90,7 @@ export default function ProductDetailPage({ params }) {
             {/* ─── Images ─── */}
             <div className="w-full lg:w-[80%]">
               {/* Mobile: Hero image + thumbnails */}
-              <div className="flex flex-col gap-6 lg:hidden">
-                <div className="relative h-[273px] rounded-2xl overflow-hidden bg-[#fafafa]">
-                  <Image
-                    src={uniqueImgs[selectedImageIndex]}
-                    alt={`${product.title} - ${selectedImageIndex + 1}`}
-                    fill
-                    className="object-cover object-top"
-                    sizes="100vw"
-                    priority
-                    unoptimized
-                  />
-                  {/* Dot navigation */}
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
-                    {uniqueImgs.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setSelectedImageIndex(i)}
-                        className={`h-1.5 w-3 rounded-full transition-colors ${
-                          i === selectedImageIndex ? "bg-[#4a69e2]" : "bg-[#fff]/30"
-                        }`}
-                        aria-label={`Image ${i + 1}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  {uniqueImgs.map((img, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setSelectedImageIndex(i)}
-                      className={`relative size-16 rounded-lg overflow-hidden bg-[#fafafa] cursor-pointer transition-opacity ${
-                        selectedImageIndex === i ? "ring-2 ring-[#232321]" : "opacity-60"
-                      }`}>
-                      <Image
-                        src={img}
-                        alt={`${product.title} thumbnail ${i + 1}`}
-                        fill
-                        className="object-cover object-top"
-                        sizes="64px"
-                        unoptimized
-                      />
-                    </button>
-                  ))}
-                </div>
-              </div>
+              <ImageSlider images={imgs} alt={product.title} className="lg:hidden" />
 
               {/* Desktop: 2×2 Grid */}
               <div className="hidden lg:grid grid-cols-2 gap-4">

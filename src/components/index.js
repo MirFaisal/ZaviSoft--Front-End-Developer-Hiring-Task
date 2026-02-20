@@ -23,4 +23,13 @@ export { Reviews, ReviewCard } from "./reviews";
 export { CategoryCard } from "./categories";
 
 // UI components
-export { Button, Spinner, NavArrows, Breadcrumb, SectionHeader, PageHeader, Pagination } from "./ui";
+export {
+  Button,
+  Spinner,
+  NavArrows,
+  Breadcrumb,
+  SectionHeader,
+  PageHeader,
+  Pagination,
+  ImageSlider,
+} from "./ui";
