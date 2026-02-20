@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono, Rubik, Open_Sans } from "next/font/google";
+import { Geist, Geist_Mono, Rubik, Open_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ReduxProvider } from "@/providers";
 
@@ -24,6 +24,12 @@ const openSans = Open_Sans({
   weight: ["400", "600", "700"],
 });
 
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
 export const metadata = {
   title: "ZaviSoft E-Commerce | Premium Shopping Experience",
   description:
@@ -35,7 +41,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} ${openSans.variable} antialiased`}>
+        className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} ${openSans.variable} ${inter.variable} antialiased`}>
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>

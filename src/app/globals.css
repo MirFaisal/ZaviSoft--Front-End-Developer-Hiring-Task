@@ -12,6 +12,7 @@
   --font-mono: var(--font-geist-mono);
   --font-rubik: var(--font-rubik);
   --font-open-sans: var(--font-open-sans);
+  --font-inter: var(--font-inter);
 }
 
 @media (prefers-color-scheme: dark) {
