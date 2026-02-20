@@ -35,7 +35,7 @@ export default function Footer() {
       <div className="w-full">
         {/* ── Blue CTA Section ── */}
         <div className="relative bg-[#4a69e2] rounded-t-3xl lg:rounded-[48px] p-4 lg:px-18 lg:pt-16 lg:pb-64 overflow-hidden">
-          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             {/* Left – Text + Form */}
             <div className="flex flex-col gap-6 max-w-xl">
               <div className="flex flex-col gap-2">
@@ -52,58 +52,56 @@ export default function Footer() {
                 onSubmit={(e) => {
                   e.preventDefault();
                   setEmail("");
-                }}
-              >
+                }}>
                 <input
                   type="email"
                   placeholder="Email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 min-w-0 h-12 px-4 rounded-lg border border-[#232321] lg:border-white bg-transparent font-inter text-base text-white placeholder:text-[#79767c] lg:placeholder:text-white/70 outline-none focus:ring-2 focus:ring-white/40 tracking-[0.5px]"
+                  className="flex-1 min-w-0 h-12 px-4 rounded-lg border border-white lg:border-white bg-transparent font-inter text-base text-white placeholder:text-white/70 lg:placeholder:text-white/70 outline-none focus:ring-2 focus:ring-white/40 tracking-[0.5px]"
                 />
                 <button
                   type="submit"
-                  className="h-10 lg:h-12 px-4 lg:px-6 rounded-lg bg-[#232321] font-rubik font-medium text-sm text-white uppercase tracking-wider hover:bg-[#1a1a18] transition-colors cursor-pointer"
-                >
+                  className="h-12 px-4 lg:px-6 rounded-lg bg-[#232321] font-rubik font-medium text-sm text-white uppercase tracking-wider hover:bg-[#1a1a18] transition-colors cursor-pointer">
                   Submit
                 </button>
               </form>
             </div>
 
             {/* Right – KICKS Logo + Add Circle (desktop only) */}
-            <div className="hidden lg:flex items-center gap-4 shrink-0">
+            <div className="hidden lg:inline-flex items-start gap-1 shrink-0">
               <Image
                 src="/images/logo-white-outline.svg"
                 alt="KICKS"
-                width={300}
-                height={80}
-                className="w-auto h-16 xl:h-20"
+                width={351}
+                height={88}
+                className="w-87.75 h-22"
               />
               <Image
                 src="/icons/add-circle.svg"
                 alt=""
-                width={48}
-                height={48}
-                className="w-12 h-12"
+                width={32}
+                height={32}
+                className="w-8 h-8 -ml-2 -mt-4"
               />
             </div>
           </div>
 
-          {/* KICKS Logo + Add Circle (mobile – partially visible, overflows) */}
-          <div className="lg:hidden relative mt-8 h-26.5">
+          {/* KICKS Logo + Add Circle (mobile) */}
+          <div className="lg:hidden relative mt-8 mb-[41.96px] inline-flex items-start">
             <Image
               src="/images/logo-white-outline.svg"
               alt="KICKS"
-              width={1262}
-              height={314}
-              className="w-[350%] max-w-none h-auto"
+              width={351}
+              height={88}
+              className="w-45 h-auto"
             />
             <Image
               src="/icons/add-circle.svg"
               alt=""
-              width={24}
-              height={24}
-              className="absolute top-0.75 left-45.75 w-6 h-6"
+              width={16}
+              height={16}
+              className="w-4 h-4 -ml-1 -mt-2"
             />
           </div>
         </div>
@@ -113,15 +111,15 @@ export default function Footer() {
           {/* Content */}
           <div className="px-4 py-6 lg:px-18 lg:pt-12 lg:pb-12">
             {/* Mobile: flex column, Desktop: 4-col grid */}
-            <div className="flex flex-col gap-10 lg:grid lg:grid-cols-4 lg:gap-10">
+            <div className="flex flex-col gap-10 lg:grid lg:grid-cols-5 lg:gap-10">
               {/* About Us */}
-              <div>
+              <div className="lg:col-span-2">
                 <h3 className="font-rubik font-semibold text-2xl lg:text-4xl text-[#ffa52f] mb-1">
                   About us
                 </h3>
                 <p className="font-open-sans font-semibold text-base lg:text-xl text-[#e7e7e3] leading-relaxed">
-                  We are the biggest hyperstore in the universe. We got you all
-                  cover with our exclusive collections and latest drops.
+                  We are the biggest hyperstore in the universe. We got you all cover with our exclusive
+                  collections and latest drops.
                 </p>
               </div>
 
@@ -135,10 +133,7 @@ export default function Footer() {
                   <ul className="flex flex-col gap-2 font-open-sans font-semibold text-base lg:text-xl text-[#e7e7e3]">
                     {categories.map((cat) => (
                       <li key={cat.name}>
-                        <Link
-                          href={cat.href}
-                          className="hover:text-white transition-colors"
-                        >
+                        <Link href={cat.href} className="hover:text-white transition-colors">
                           {cat.name}
                         </Link>
                       </li>
@@ -154,10 +149,7 @@ export default function Footer() {
                   <ul className="flex flex-col gap-2 font-open-sans font-semibold text-base lg:text-xl text-[#e7e7e3]">
                     {companyLinks.map((link) => (
                       <li key={link.name}>
-                        <Link
-                          href={link.href}
-                          className="hover:text-white transition-colors"
-                        >
+                        <Link href={link.href} className="hover:text-white transition-colors">
                           {link.name}
                         </Link>
                       </li>
@@ -176,14 +168,8 @@ export default function Footer() {
                         key={social.name}
                         href={social.href}
                         aria-label={social.name}
-                        className="hover:opacity-70 transition-opacity"
-                      >
-                        <Image
-                          src={social.icon}
-                          alt={social.name}
-                          width={24}
-                          height={24}
-                        />
+                        className="hover:opacity-70 transition-opacity">
+                        <Image src={social.icon} alt={social.name} width={24} height={24} />
                       </a>
                     ))}
                   </div>
@@ -193,22 +179,20 @@ export default function Footer() {
           </div>
 
           {/* Large KICKS watermark logo */}
-          <div className="px-1 pb-1 lg:px-7 lg:pb-6">
+          <div className="px-1 pb-1 mt-10 h-17 lg:h-75 lg:px-7 lg:pb-6">
             <Image
               src="/images/logo-white.svg"
               alt="KICKS"
               width={1262}
               height={314}
-              className="w-full h-auto opacity-90"
+              className="w-full h-auto opacity-90 "
             />
           </div>
         </div>
       </div>
 
       {/* Copyright */}
-      <p className="font-open-sans text-base text-[#232321] text-center">
-        © All rights reserved
-      </p>
+      <p className="font-open-sans text-base text-[#232321] text-center">© All rights reserved</p>
     </footer>
   );
 }
