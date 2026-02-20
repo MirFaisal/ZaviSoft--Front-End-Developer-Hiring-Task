@@ -35,8 +35,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} ${openSans.variable} antialiased`}
-      >
+        className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} ${openSans.variable} antialiased`}>
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
