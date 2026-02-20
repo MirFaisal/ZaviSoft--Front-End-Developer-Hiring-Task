@@ -4,16 +4,10 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useGetCategoriesQuery } from "@/store";
-import { Spinner } from "@/components/ui";
+import { Spinner, NavArrows } from "@/components/ui";
+import { getValidImageUrl } from "@/lib/utils";
 
-const PLACEHOLDER = "https://placehold.co/600x600/e2e8f0/475569?text=Category";
-
-const getValidCategoryImage = (image) => {
-  if (!image || typeof image !== "string" || image.includes("[") || image.includes("any") || !image.startsWith("http")) {
-    return PLACEHOLDER;
-  }
-  return image;
-};
+const CATEGORY_PLACEHOLDER = "https://placehold.co/600x600/e2e8f0/475569?text=Category";
 
 export default function CategoriesSection() {
   const { data: rawCategories, isLoading } = useGetCategoriesQuery();
@@ -43,30 +37,13 @@ export default function CategoriesSection() {
           </h2>
 
           {/* Navigation arrows */}
-          <div className="flex gap-4 items-center">
-            <button
-              type="button"
-              disabled={!canGoBack}
-              onClick={goBack}
-              className="flex items-center justify-center h-10 px-3 rounded-lg bg-white hover:bg-white/80 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-              aria-label="Previous">
-              <Image
-                src="/icons/chevron-forward-white.svg"
-                alt=""
-                width={24}
-                height={24}
-                className="rotate-180 invert"
-              />
-            </button>
-            <button
-              type="button"
-              disabled={!canGoForward}
-              onClick={goForward}
-              className="flex items-center justify-center h-10 px-3 rounded-lg bg-white hover:bg-white/80 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-              aria-label="Next">
-              <Image src="/icons/chevron-forward-white.svg" alt="" width={24} height={24} className="invert" />
-            </button>
-          </div>
+          <NavArrows
+            onPrev={goBack}
+            onNext={goForward}
+            canGoBack={canGoBack}
+            canGoForward={canGoForward}
+            variant="light"
+          />
         </div>
       </div>
 
@@ -86,7 +63,7 @@ export default function CategoriesSection() {
                 } ${index === 0 ? "rounded-tl-3xl lg:rounded-tl-[64px]" : ""} overflow-hidden`}>
                 {/* Category image */}
                 <Image
-                  src={getValidCategoryImage(category.image)}
+                  src={getValidImageUrl(category.image, CATEGORY_PLACEHOLDER)}
                   alt={category.name}
                   fill
                   className="object-cover"

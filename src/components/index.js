@@ -2,7 +2,7 @@
 export { Header, Footer } from "./layout";
 
 // Product components
-export { ProductCard, ProductGrid, ProductCardSkeleton } from "./products";
+export { ProductCard, ProductCardBranded, ProductGrid, ProductCardSkeleton } from "./products";
 
 // Cart components
 export { Cart } from "./cart";
@@ -23,4 +23,4 @@ export { Reviews } from "./reviews";
 export { CategoryCard } from "./categories";
 
 // UI components
-export { Button, Spinner } from "./ui";
+export { Button, Spinner, NavArrows, Breadcrumb, SectionHeader, PageHeader, Pagination } from "./ui";

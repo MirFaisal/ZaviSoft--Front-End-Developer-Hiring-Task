@@ -3,23 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { getValidImageUrl } from "@/lib/utils";
 
 export default function CategoryCard({ category }) {
   const { id, name, image } = category;
   const [imgError, setImgError] = useState(false);
 
   const placeholder = `https://placehold.co/400x300/e2e8f0/475569?text=${encodeURIComponent(name)}`;
-
-  // Validate image URL
-  const getImageUrl = () => {
-    if (imgError) return placeholder;
-    if (!image || !image.startsWith("http") || image.includes("any") || image.includes("[")) {
-      return placeholder;
-    }
-    return image;
-  };
-
-  const imageUrl = getImageUrl();
+  const imageUrl = imgError ? placeholder : getValidImageUrl(image, placeholder);
 
   return (
     <Link href={`/categories/${id}`} className="group block">

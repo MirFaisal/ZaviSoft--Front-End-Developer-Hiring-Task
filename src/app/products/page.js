@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ProductGrid } from "@/components";
+import { ProductGrid, PageHeader, Pagination } from "@/components";
 import { useGetProductsQuery, useGetCategoriesQuery } from "@/store";
-import Link from "next/link";
 
 const PRODUCTS_PER_PAGE = 12;
 
@@ -36,20 +35,14 @@ export default function ProductsPage() {
   return (
     <div className="flex flex-col">
       <main className="flex-1 bg-gray-50">
-        {/* Page Header */}
-        <div className="bg-white border-b">
-          <div className="container mx-auto px-4 py-8">
-            <nav className="flex items-center gap-2 text-sm mb-4">
-              <Link href="/" className="text-gray-500 hover:text-indigo-600">
-                Home
-              </Link>
-              <span className="text-gray-400">/</span>
-              <span className="text-gray-900">Products</span>
-            </nav>
-            <h1 className="text-3xl font-bold text-gray-900">All Products</h1>
-            <p className="mt-2 text-gray-600">Browse our collection of quality products</p>
-          </div>
-        </div>
+        <PageHeader
+          title="All Products"
+          description="Browse our collection of quality products"
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Products" },
+          ]}
+        />
 
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col lg:flex-row gap-8">
@@ -63,7 +56,7 @@ export default function ProductsPage() {
                       onClick={() => setSelectedCategory(null)}
                       className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                         !selectedCategory
-                          ? "bg-indigo-100 text-indigo-700"
+                          ? "bg-[#4a69e2]/10 text-[#4a69e2]"
                           : "text-gray-600 hover:bg-gray-100"
                       }`}>
                       All Categories
@@ -75,7 +68,7 @@ export default function ProductsPage() {
                         onClick={() => setSelectedCategory(category.id)}
                         className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                           selectedCategory === category.id
-                            ? "bg-indigo-100 text-indigo-700"
+                            ? "bg-[#4a69e2]/10 text-[#4a69e2]"
                             : "text-gray-600 hover:bg-gray-100"
                         }`}>
                         {category.name}
@@ -93,7 +86,7 @@ export default function ProductsPage() {
                 <div className="flex items-center justify-between mb-6">
                   <p className="text-gray-600">
                     Showing page {page + 1}
-                    {isFetching && <span className="ml-2 text-indigo-600">Loading...</span>}
+                    {isFetching && <span className="ml-2 text-[#4a69e2]">Loading...</span>}
                   </p>
                 </div>
 
@@ -102,21 +95,12 @@ export default function ProductsPage() {
 
                 {/* Pagination */}
                 {products && products.length > 0 && (
-                  <div className="flex items-center justify-center gap-4 mt-8 pt-8 border-t">
-                    <button
-                      onClick={handlePrevPage}
-                      disabled={page === 0}
-                      className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-                      ← Previous
-                    </button>
-                    <span className="text-gray-600">Page {page + 1}</span>
-                    <button
-                      onClick={handleNextPage}
-                      disabled={products.length < PRODUCTS_PER_PAGE}
-                      className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-                      Next →
-                    </button>
-                  </div>
+                  <Pagination
+                    page={page}
+                    hasMore={products.length >= PRODUCTS_PER_PAGE}
+                    onPrev={handlePrevPage}
+                    onNext={handleNextPage}
+                  />
                 )}
               </div>
             </div>

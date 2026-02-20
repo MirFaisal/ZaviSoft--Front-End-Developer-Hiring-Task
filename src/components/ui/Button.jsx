@@ -1,35 +1,50 @@
+import Link from "next/link";
+
+/**
+ * Reusable button component matching the KICKS design system.
+ *
+ * @param {React.ReactNode} children
+ * @param {"dark"|"blue"|"outline"} variant - Button style
+ * @param {"sm"|"md"|"lg"} size - Button size
+ * @param {string} href - If provided, renders as a Next.js Link
+ * @param {string} className - Additional class names
+ * @param {object} props - Other native button/link props
+ */
 export default function Button({
   children,
-  variant = "primary",
+  variant = "dark",
   size = "md",
+  href,
   className = "",
   ...props
 }) {
-  const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2";
+  const base =
+    "inline-flex items-center justify-center font-rubik font-medium uppercase tracking-wider rounded-lg transition-colors";
 
   const variants = {
-    primary:
-      "bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500",
-    secondary:
-      "bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500",
-    outline:
-      "border border-indigo-600 text-indigo-600 hover:bg-indigo-50 focus:ring-indigo-500",
-    ghost: "text-gray-700 hover:bg-gray-100 focus:ring-gray-500",
-    danger: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500",
+    dark: "bg-[#232321] text-white hover:bg-[#1a1a18]",
+    blue: "bg-[#4a69e2] text-white hover:opacity-90",
+    outline: "border border-[#232321] text-[#232321] hover:bg-[#232321]/5",
   };
 
   const sizes = {
-    sm: "px-3 py-1.5 text-sm",
-    md: "px-4 py-2 text-base",
-    lg: "px-6 py-3 text-lg",
+    sm: "h-10 px-4 text-xs",
+    md: "h-12 px-6 text-sm",
+    lg: "h-14 px-8 text-base",
   };
 
+  const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
+
+  if (href) {
+    return (
+      <Link href={href} className={classes} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <button
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
-      {...props}
-    >
+    <button className={classes} {...props}>
       {children}
     </button>
   );

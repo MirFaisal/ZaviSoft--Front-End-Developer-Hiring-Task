@@ -5,32 +5,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store";
+import { getFirstValidImage } from "@/lib/utils";
 
-const PLACEHOLDER_IMAGE = "https://placehold.co/400x400/e2e8f0/475569?text=Product";
-
-// Helper to validate and get image URL
-const getValidImageUrl = (images) => {
-  if (!images || images.length === 0) return PLACEHOLDER_IMAGE;
-  
-  const img = images[0];
-  if (
-    !img ||
-    typeof img !== "string" ||
-    img.includes("[") ||
-    img.includes("any") ||
-    !img.startsWith("http")
-  ) {
-    return PLACEHOLDER_IMAGE;
-  }
-  return img;
-};
+const PLACEHOLDER = "https://placehold.co/400x400/e2e8f0/475569?text=Product";
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();
   const { id, title, price, images, category } = product;
   const [imgError, setImgError] = useState(false);
 
-  const imageUrl = imgError ? PLACEHOLDER_IMAGE : getValidImageUrl(images);
+  const imageUrl = imgError ? PLACEHOLDER : getFirstValidImage(images, PLACEHOLDER);
 
   const handleAddToCart = (e) => {
     e.preventDefault();

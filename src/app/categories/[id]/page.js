@@ -2,7 +2,7 @@
 
 import { use, useState } from "react";
 import Link from "next/link";
-import { ProductGrid, Spinner } from "@/components";
+import { ProductGrid, PageHeader, Pagination } from "@/components";
 import { useGetProductsByCategoryQuery, useGetCategoriesQuery } from "@/store";
 
 const PRODUCTS_PER_PAGE = 12;
@@ -43,7 +43,7 @@ export default function CategoryPage({ params }) {
             <h1 className="text-2xl font-bold text-gray-900 mb-4">Category Not Found</h1>
             <Link
               href="/categories"
-              className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700">
+              className="inline-block bg-[#232321] text-white px-6 py-3 rounded-lg hover:bg-[#1a1a18] transition-colors font-rubik font-medium text-sm uppercase tracking-wider">
               Browse Categories
             </Link>
           </div>
@@ -55,24 +55,15 @@ export default function CategoryPage({ params }) {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-1 bg-gray-50">
-        {/* Page Header */}
-        <div className="bg-white border-b">
-          <div className="container mx-auto px-4 py-8">
-            <nav className="flex items-center gap-2 text-sm mb-4">
-              <Link href="/" className="text-gray-500 hover:text-indigo-600">
-                Home
-              </Link>
-              <span className="text-gray-400">/</span>
-              <Link href="/categories" className="text-gray-500 hover:text-indigo-600">
-                Categories
-              </Link>
-              <span className="text-gray-400">/</span>
-              <span className="text-gray-900">{category?.name || "Loading..."}</span>
-            </nav>
-            <h1 className="text-3xl font-bold text-gray-900">{category?.name || "Loading..."}</h1>
-            <p className="mt-2 text-gray-600">Browse all products in {category?.name || "this category"}</p>
-          </div>
-        </div>
+        <PageHeader
+          title={category?.name || "Loading..."}
+          description={`Browse all products in ${category?.name || "this category"}`}
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Categories", href: "/categories" },
+            { label: category?.name || "Loading..." },
+          ]}
+        />
 
         <div className="container mx-auto px-4 py-8">
           <div className="bg-white rounded-lg shadow-sm p-6">
@@ -80,7 +71,7 @@ export default function CategoryPage({ params }) {
             <div className="flex items-center justify-between mb-6">
               <p className="text-gray-600">
                 Showing page {page + 1}
-                {isFetching && <span className="ml-2 text-indigo-600">Loading...</span>}
+                {isFetching && <span className="ml-2 text-[#4a69e2]">Loading...</span>}
               </p>
             </div>
 
@@ -89,21 +80,12 @@ export default function CategoryPage({ params }) {
 
             {/* Pagination */}
             {products && products.length > 0 && (
-              <div className="flex items-center justify-center gap-4 mt-8 pt-8 border-t">
-                <button
-                  onClick={handlePrevPage}
-                  disabled={page === 0}
-                  className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                  ← Previous
-                </button>
-                <span className="text-gray-600">Page {page + 1}</span>
-                <button
-                  onClick={handleNextPage}
-                  disabled={products.length < PRODUCTS_PER_PAGE}
-                  className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed">
-                  Next →
-                </button>
-              </div>
+              <Pagination
+                page={page}
+                hasMore={products.length >= PRODUCTS_PER_PAGE}
+                onPrev={handlePrevPage}
+                onNext={handleNextPage}
+              />
             )}
           </div>
         </div>

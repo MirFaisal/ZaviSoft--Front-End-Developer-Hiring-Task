@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { CategoryCard, Spinner } from "@/components";
+import { CategoryCard, Spinner, PageHeader } from "@/components";
 import { useGetCategoriesQuery } from "@/store";
 
 export default function CategoriesPage() {
@@ -10,20 +9,14 @@ export default function CategoriesPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-1 bg-gray-50">
-        {/* Page Header */}
-        <div className="bg-white border-b">
-          <div className="container mx-auto px-4 py-8">
-            <nav className="flex items-center gap-2 text-sm mb-4">
-              <Link href="/" className="text-gray-500 hover:text-indigo-600">
-                Home
-              </Link>
-              <span className="text-gray-400">/</span>
-              <span className="text-gray-900">Categories</span>
-            </nav>
-            <h1 className="text-3xl font-bold text-gray-900">Shop by Category</h1>
-            <p className="mt-2 text-gray-600">Browse our product categories to find exactly what you need</p>
-          </div>
-        </div>
+        <PageHeader
+          title="Shop by Category"
+          description="Browse our product categories to find exactly what you need"
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Categories" },
+          ]}
+        />
 
         <div className="container mx-auto px-4 py-12">
           {isLoading ? (

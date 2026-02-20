@@ -4,8 +4,10 @@ import { use, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { Spinner } from "@/components/ui";
+import { Spinner, NavArrows, SectionHeader } from "@/components/ui";
+import { ProductCardBranded } from "@/components/products";
 import { useGetProductByIdQuery, useGetProductsByCategoryQuery, addToCart } from "@/store";
+import { getValidImageUrl, getValidImages } from "@/lib/utils";
 
 const PLACEHOLDER = "https://placehold.co/600x600/e2e8f0/475569?text=Product";
 const SIZES_ROW1 = [38, 39, 40, 41, 42, 43, 44, 45];
@@ -15,20 +17,6 @@ const COLORS = [
   { name: "Dark Navy", value: "#232321" },
   { name: "Olive Green", value: "#7D8471" },
 ];
-
-const getValidImage = (img) => {
-  if (!img || typeof img !== "string" || img.includes("[") || img.includes("any") || !img.startsWith("http"))
-    return PLACEHOLDER;
-  return img;
-};
-
-const getImages = (images) => {
-  if (!images || images.length === 0) return [PLACEHOLDER, PLACEHOLDER, PLACEHOLDER, PLACEHOLDER];
-  const valid = images.map(getValidImage);
-  // Pad to at least 4 images by repeating
-  while (valid.length < 4) valid.push(valid[valid.length - 1]);
-  return valid.slice(0, 4);
-};
 
 export default function ProductDetailPage({ params }) {
   const { id } = use(params);
@@ -56,7 +44,7 @@ export default function ProductDetailPage({ params }) {
         id: product.id,
         title: product.title,
         price: product.price,
-        image: getValidImage(product.images?.[0]),
+        image: getValidImageUrl(product.images?.[0], PLACEHOLDER),
         quantity: 1,
       }),
     );
@@ -92,7 +80,7 @@ export default function ProductDetailPage({ params }) {
     );
   }
 
-  const imgs = getImages(product.images);
+  const imgs = getValidImages(product.images, 4, PLACEHOLDER);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#e7e7e3]">
@@ -296,71 +284,25 @@ export default function ProductDetailPage({ params }) {
           <section className="max-w-[1440px] mx-auto px-4 lg:px-[60px] pb-12 lg:pb-20">
             <div className="flex flex-col gap-8 items-center">
               {/* Header */}
-              <div className="flex items-center justify-between w-full">
-                <h2 className="font-rubik font-semibold text-2xl lg:text-5xl text-[#232321]">
-                  You may also like
-                </h2>
-                <div className="flex gap-4 items-center">
-                  <button
-                    type="button"
-                    onClick={() => setRelatedPage((p) => Math.max(0, p - 1))}
-                    disabled={relatedPage === 0}
-                    className="flex items-center justify-center h-10 px-3 rounded-lg bg-[#232321] hover:bg-[#1a1a18] transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
-                    <Image
-                      src="/icons/chevron-forward-white.svg"
-                      alt=""
-                      width={24}
-                      height={24}
-                      className="rotate-180"
-                    />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setRelatedPage((p) => Math.min(relatedPageCount - 1, p + 1))}
-                    disabled={relatedPage >= relatedPageCount - 1}
-                    className="flex items-center justify-center h-10 px-3 rounded-lg bg-[#232321] hover:bg-[#1a1a18] transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
-                    <Image src="/icons/chevron-forward-white.svg" alt="" width={24} height={24} />
-                  </button>
-                </div>
-              </div>
+              <SectionHeader
+                title="You may also like"
+                className="w-full"
+                action={
+                  <NavArrows
+                    onPrev={() => setRelatedPage((p) => Math.max(0, p - 1))}
+                    onNext={() => setRelatedPage((p) => Math.min(relatedPageCount - 1, p + 1))}
+                    canGoBack={relatedPage > 0}
+                    canGoForward={relatedPage < relatedPageCount - 1}
+                    variant="dark"
+                  />
+                }
+              />
 
               {/* Product Cards Grid */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-                {relatedVisible.map((rp) => {
-                  const rpImg = getValidImage(rp.images?.[0]);
-                  return (
-                    <div key={rp.id} className="flex flex-col gap-4">
-                      {/* Image */}
-                      <div className="relative bg-[#fafafa] rounded-[28px] p-2 h-[250px] lg:h-[350px]">
-                        <div className="relative w-full h-full rounded-3xl overflow-hidden">
-                          <Image
-                            src={rpImg}
-                            alt={rp.title}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 1024px) 50vw, 25vw"
-                            unoptimized
-                          />
-                        </div>
-                        <span className="absolute top-2 left-2 bg-[#4a69e2] text-white font-rubik font-semibold text-xs px-4 py-3 rounded-br-3xl rounded-tl-3xl">
-                          New
-                        </span>
-                      </div>
-                      {/* Info */}
-                      <div className="flex flex-col gap-4">
-                        <p className="font-rubik font-semibold text-base lg:text-2xl text-[#232321] leading-tight line-clamp-2 uppercase">
-                          {rp.title}
-                        </p>
-                        <Link
-                          href={`/products/${rp.id}`}
-                          className="w-full h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:bg-[#1a1a18] transition-colors flex items-center justify-center">
-                          <span>View Product - </span>
-                          <span className="text-[#ffa52f] ml-1">${rp.price}</span>
-                        </Link>
-                      </div>
-                    </div>
-                  );
-                })}
+                {relatedVisible.map((rp) => (
+                  <ProductCardBranded key={rp.id} product={rp} badge="New" />
+                ))}
               </div>
 
               {/* Pagination Dots */}

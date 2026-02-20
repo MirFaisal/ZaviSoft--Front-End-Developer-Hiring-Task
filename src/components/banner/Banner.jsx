@@ -9,16 +9,12 @@ import { Spinner } from "@/components/ui";
 const PLACEHOLDER = "https://placehold.co/1320x750/e2e8f0/475569?text=Featured+Product";
 const BANNER_PRODUCT_ID = 5; // Classic Black Hooded Sweatshirt
 
-const isValidUrl = (url) => {
-  if (!url || typeof url !== "string") return false;
-  if (url.includes("[") || url.includes("any") || !url.startsWith("http")) return false;
-  return true;
-};
-
 // Get all valid image URLs from a product's images array
 const getProductImages = (images) => {
   if (!images || images.length === 0) return [PLACEHOLDER];
-  const valid = images.filter(isValidUrl);
+  const valid = images.filter(
+    (url) => url && typeof url === "string" && url.startsWith("http") && !url.includes("[") && !url.includes("any"),
+  );
   return valid.length > 0 ? valid : [PLACEHOLDER];
 };
 
