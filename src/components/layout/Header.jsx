@@ -59,26 +59,12 @@ function SearchIcon() {
 // User icon
 function UserIcon() {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
       <path
-        d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
+        d="M8 9.02344C9.49038 9.02344 10.9417 9.44425 12.0869 10.207C13.3756 11.0661 14.1954 12.2896 14.458 13.7461C14.5175 14.0752 14.4366 14.3997 14.2383 14.6367C14.1484 14.7445 14.0357 14.8309 13.9082 14.8896C13.7805 14.9484 13.6405 14.9784 13.5 14.9766H2.5L2.39453 14.9717C2.29041 14.9614 2.18829 14.9345 2.09277 14.8906C1.96512 14.8319 1.85177 14.7446 1.76172 14.6367C1.5637 14.3998 1.48362 14.0759 1.54297 13.7471C1.80553 12.2906 2.62441 11.0665 3.91309 10.207C5.05825 9.4439 6.5096 9.02347 8 9.02344ZM8 1.02344C8.93131 1.02344 9.77446 1.38265 10.3779 2.03418C10.9888 2.69377 11.2873 3.58184 11.2168 4.53516C11.0765 6.43571 9.63265 7.97656 8 7.97656C6.3674 7.97645 4.92128 6.43493 4.7832 4.53418C4.71374 3.57211 5.01019 2.68177 5.61719 2.02734C6.21773 1.38008 7.06374 1.02348 8 1.02344Z"
+        fill="#232321"
         stroke="#232321"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
-        stroke="#232321"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-width="0.046875"
       />
     </svg>
   );
@@ -144,7 +130,7 @@ export default function Header() {
         </Link>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-[24px] md:gap-[40px] justify-end w-auto md:w-[301px]">
+        <div className="flex items-center gap-[9px]  md:gap-[40px] justify-end w-auto md:w-[301px]">
           {/* Search */}
           <button
             type="button"
@@ -167,7 +153,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => dispatch(toggleCart())}
-            className="bg-[#ffa52f] rounded-full w-[32px] h-[32px] flex items-center justify-center font-[family-name:var(--font-open-sans)] font-semibold text-[16px] text-[#232321] hover:opacity-80 transition-opacity shrink-0"
+            className="bg-[#ffa52f] rounded-full w-[20px] h-[20px] p-[10px] flex items-center justify-center font-[family-name:var(--font-open-sans)] font-semibold text-[14px] text-[#232321] hover:opacity-80 transition-opacity shrink-0"
             aria-label="Cart"
           >
             {cartItemCount}
