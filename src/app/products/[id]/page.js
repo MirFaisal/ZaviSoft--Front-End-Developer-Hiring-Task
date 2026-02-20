@@ -102,19 +102,19 @@ export default function ProductDetailPage({ params }) {
                     priority
                     unoptimized
                   />
-                </div>
-                {/* Dot navigation */}
-                <div className="flex gap-1 justify-center">
-                  {imgs.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setSelectedImageIndex(i)}
-                      className={`h-1.5 w-3 rounded-full transition-colors ${
-                        i === selectedImageIndex ? "bg-[#4a69e2]" : "bg-[#232321]/30"
-                      }`}
-                      aria-label={`Image ${i + 1}`}
-                    />
-                  ))}
+                  {/* Dot navigation */}
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
+                    {imgs.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setSelectedImageIndex(i)}
+                        className={`h-1.5 w-3 rounded-full transition-colors ${
+                          i === selectedImageIndex ? "bg-[#4a69e2]" : "bg-[#fff]/30"
+                        }`}
+                        aria-label={`Image ${i + 1}`}
+                      />
+                    ))}
+                  </div>
                 </div>
                 <div className="flex gap-2">
                   {imgs.map((img, i) => (
