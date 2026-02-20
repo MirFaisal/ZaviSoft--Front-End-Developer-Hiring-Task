@@ -243,20 +243,7 @@ export default function ProductDetailPage({ params }) {
                     Add to cart
                   </button>
                   <button className="h-12 px-4 bg-[#232321] rounded-lg flex items-center justify-center hover:opacity-90 transition-colors cursor-pointer">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z"
-                        stroke="white"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <Image src="/icons/heart.svg" alt="Wishlist" width={24} height={24} />
                   </button>
                 </div>
                 <button className="w-full h-12 bg-[#4a69e2] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
