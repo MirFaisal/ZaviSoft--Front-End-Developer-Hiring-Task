@@ -9,20 +9,12 @@ import { selectCartItemCount, toggleCart } from "@/store";
 // Caret down icon for dropdown menus
 function CaretDown() {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="shrink-0"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5" fill="none">
       <path
-        d="M7 10L12 15L17 10"
+        d="M0.563477 0.0234375H7.11621C7.57661 0.0234375 7.82492 0.563357 7.52539 0.913086L4.24902 4.73633C4.19847 4.79525 4.13596 4.84254 4.06543 4.875C3.99479 4.90748 3.91759 4.9248 3.83984 4.9248C3.76224 4.92475 3.68574 4.90741 3.61523 4.875C3.5446 4.84252 3.48127 4.79535 3.43066 4.73633L0.155273 0.913086L0.104492 0.845703C-0.113992 0.498212 0.131881 0.0234375 0.563477 0.0234375Z"
+        fill="#232321"
         stroke="#232321"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        strokeWidth="0.046875"
       />
     </svg>
   );
