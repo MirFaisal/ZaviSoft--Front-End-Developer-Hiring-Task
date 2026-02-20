@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -18,94 +19,127 @@ export default function Cart() {
   const total = useSelector(selectCartTotal);
   const isOpen = useSelector(selectIsCartOpen);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/50 z-40"
+        className="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
         onClick={() => dispatch(closeCart())}
       />
 
       {/* Cart Sidebar */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-xl z-50 flex flex-col">
+      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl z-50 flex flex-col animate-[slideIn_0.3s_ease-out]">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b">
-          <h2 className="text-lg font-semibold">Shopping Cart</h2>
+        <div className="flex items-center justify-between px-6 py-5 border-b border-[#e7e7e3]">
+          <h2 className="font-rubik font-semibold text-xl text-[#232321] uppercase">
+            Your Bag
+          </h2>
+          <span className="font-open-sans text-sm text-[#232321]/60">
+            {items.length} {items.length === 1 ? "item" : "items"}
+          </span>
           <button
             onClick={() => dispatch(closeCart())}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            className="size-10 flex items-center justify-center rounded-lg bg-[#e7e7e3] hover:bg-[#d2d1d3] transition-colors cursor-pointer"
             aria-label="Close cart"
           >
-            <Image src="/icons/close.svg" alt="Close" width={24} height={24} />
+            <Image src="/icons/close.svg" alt="Close" width={20} height={20} />
           </button>
         </div>
 
         {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="flex-1 overflow-y-auto px-6 py-4">
           {items.length === 0 ? (
-            <div className="text-center py-12">
-              <Image src="/icons/cart-empty.svg" alt="Empty cart" width={64} height={64} className="mx-auto" />
-              <p className="mt-4 text-gray-500">Your cart is empty</p>
+            <div className="flex flex-col items-center justify-center h-full gap-4">
+              <div className="size-24 rounded-full bg-[#fafafa] flex items-center justify-center">
+                <Image src="/icons/cart-empty.svg" alt="Empty cart" width={48} height={48} />
+              </div>
+              <div className="text-center">
+                <p className="font-rubik font-semibold text-lg text-[#232321]">Your bag is empty</p>
+                <p className="font-open-sans text-sm text-[#232321]/60 mt-1">
+                  Looks like you haven&apos;t added anything yet
+                </p>
+              </div>
+              <button
+                onClick={() => dispatch(closeCart())}
+                className="mt-2 h-12 px-8 bg-[#4a69e2] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer"
+              >
+                Continue Shopping
+              </button>
             </div>
           ) : (
-            <ul className="space-y-4">
+            <ul className="space-y-3">
               {items.map((item) => (
                 <li
                   key={item.id}
-                  className="flex gap-4 bg-gray-50 rounded-lg p-3"
+                  className="flex gap-4 bg-[#fafafa] rounded-2xl p-3"
                 >
                   {/* Product Image */}
-                  <div className="relative w-20 h-20 rounded-md overflow-hidden shrink-0">
+                  <div className="relative w-24 h-24 rounded-xl overflow-hidden shrink-0 bg-[#e7e7e3]">
                     <Image
                       src={item.image}
                       alt={item.title}
                       fill
-                      className="object-cover"
+                      className="object-cover object-top"
                       unoptimized
                     />
                   </div>
 
                   {/* Product Details */}
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-medium text-gray-900 truncate">
-                      {item.title}
-                    </h3>
-                    <p className="text-indigo-600 font-semibold">
-                      ${item.price.toFixed(2)}
-                    </p>
+                  <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
+                    <div>
+                      <h3 className="font-rubik font-semibold text-sm text-[#232321] line-clamp-2 leading-snug">
+                        {item.title}
+                      </h3>
+                      <p className="font-rubik font-semibold text-base text-[#4a69e2] mt-1">
+                        ${item.price.toFixed(2)}
+                      </p>
+                    </div>
 
                     {/* Quantity Controls */}
-                    <div className="flex items-center gap-2 mt-2">
+                    <div className="flex items-center justify-between mt-2">
+                      <div className="flex items-center gap-1 bg-white rounded-lg border border-[#e7e7e3]">
+                        <button
+                          onClick={() => dispatch(decrementQuantity(item.id))}
+                          className="w-8 h-8 flex items-center justify-center rounded-l-lg hover:bg-[#e7e7e3] transition-colors font-rubik font-medium text-[#232321] cursor-pointer"
+                          aria-label="Decrease quantity"
+                        >
+                          −
+                        </button>
+                        <span className="w-8 text-center font-rubik font-semibold text-sm text-[#232321]">
+                          {item.quantity}
+                        </span>
+                        <button
+                          onClick={() => dispatch(incrementQuantity(item.id))}
+                          className="w-8 h-8 flex items-center justify-center rounded-r-lg hover:bg-[#e7e7e3] transition-colors font-rubik font-medium text-[#232321] cursor-pointer"
+                          aria-label="Increase quantity"
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      {/* Remove Button */}
                       <button
-                        onClick={() => dispatch(decrementQuantity(item.id))}
-                        className="w-8 h-8 flex items-center justify-center bg-white border rounded-md hover:bg-gray-100 transition-colors"
-                        aria-label="Decrease quantity"
+                        onClick={() => dispatch(removeFromCart(item.id))}
+                        className="size-8 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors cursor-pointer group"
+                        aria-label="Remove item"
                       >
-                        -
-                      </button>
-                      <span className="w-8 text-center font-medium">
-                        {item.quantity}
-                      </span>
-                      <button
-                        onClick={() => dispatch(incrementQuantity(item.id))}
-                        className="w-8 h-8 flex items-center justify-center bg-white border rounded-md hover:bg-gray-100 transition-colors"
-                        aria-label="Increase quantity"
-                      >
-                        +
+                        <Image src="/icons/trash.svg" alt="Remove" width={18} height={18} className="opacity-40 group-hover:opacity-100 transition-opacity" />
                       </button>
                     </div>
                   </div>
-
-                  {/* Remove Button */}
-                  <button
-                    onClick={() => dispatch(removeFromCart(item.id))}
-                    className="p-1 opacity-60 hover:opacity-100 transition-opacity"
-                    aria-label="Remove item"
-                  >
-                    <Image src="/icons/trash.svg" alt="Remove" width={20} height={20} />
-                  </button>
                 </li>
               ))}
             </ul>
@@ -114,12 +148,23 @@ export default function Cart() {
 
         {/* Footer */}
         {items.length > 0 && (
-          <div className="border-t p-4 space-y-4">
-            <div className="flex justify-between text-lg font-semibold">
-              <span>Total</span>
-              <span>${total.toFixed(2)}</span>
+          <div className="border-t border-[#e7e7e3] px-6 py-5 space-y-4">
+            <div className="flex flex-col gap-2">
+              <div className="flex justify-between font-open-sans text-sm text-[#232321]/60">
+                <span>Subtotal</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between font-open-sans text-sm text-[#232321]/60">
+                <span>Shipping</span>
+                <span className="text-[#4a69e2] font-semibold">Free</span>
+              </div>
+              <div className="h-px bg-[#e7e7e3] my-1" />
+              <div className="flex justify-between">
+                <span className="font-rubik font-semibold text-lg text-[#232321]">Total</span>
+                <span className="font-rubik font-semibold text-lg text-[#ffa52f]">${total.toFixed(2)}</span>
+              </div>
             </div>
-            <button className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+            <button className="w-full h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
               Checkout
             </button>
           </div>
