@@ -38,10 +38,7 @@ export default function ProductsPage() {
         <PageHeader
           title="All Products"
           description="Browse our collection of quality products"
-          breadcrumbs={[
-            { label: "Home", href: "/" },
-            { label: "Products" },
-          ]}
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Products" }]}
         />
 
         <div className="container mx-auto px-4 py-8">

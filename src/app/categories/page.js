@@ -12,10 +12,7 @@ export default function CategoriesPage() {
         <PageHeader
           title="Shop by Category"
           description="Browse our product categories to find exactly what you need"
-          breadcrumbs={[
-            { label: "Home", href: "/" },
-            { label: "Categories" },
-          ]}
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Categories" }]}
         />
 
         <div className="container mx-auto px-4 py-12">

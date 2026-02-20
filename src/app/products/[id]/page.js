@@ -239,10 +239,10 @@ export default function ProductDetailPage({ params }) {
                 <div className="flex gap-2">
                   <button
                     onClick={handleAddToCart}
-                    className="flex-1 h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:bg-[#1a1a18] transition-colors">
+                    className="flex-1 h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
                     Add to cart
                   </button>
-                  <button className="h-12 px-4 bg-[#232321] rounded-lg flex items-center justify-center hover:bg-[#1a1a18] transition-colors">
+                  <button className="h-12 px-4 bg-[#232321] rounded-lg flex items-center justify-center hover:opacity-90 transition-colors cursor-pointer">
                     <svg
                       width="24"
                       height="24"
@@ -259,7 +259,7 @@ export default function ProductDetailPage({ params }) {
                     </svg>
                   </button>
                 </div>
-                <button className="w-full h-12 bg-[#4a69e2] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors">
+                <button className="w-full h-12 bg-[#4a69e2] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
                   Buy it now
                 </button>
               </div>

@@ -30,8 +30,17 @@ export function truncateText(text, maxLength = 50) {
  * @param {string} placeholder - Fallback URL
  * @returns {string}
  */
-export function getValidImageUrl(url, placeholder = "https://placehold.co/400x400/e2e8f0/475569?text=Product") {
-  if (!url || typeof url !== "string" || url.includes("[") || url.includes("any") || !url.startsWith("http")) {
+export function getValidImageUrl(
+  url,
+  placeholder = "https://placehold.co/400x400/e2e8f0/475569?text=Product",
+) {
+  if (
+    !url ||
+    typeof url !== "string" ||
+    url.includes("[") ||
+    url.includes("any") ||
+    !url.startsWith("http")
+  ) {
     return placeholder;
   }
   return url;
@@ -43,7 +52,10 @@ export function getValidImageUrl(url, placeholder = "https://placehold.co/400x40
  * @param {string} placeholder - Fallback URL
  * @returns {string}
  */
-export function getFirstValidImage(images, placeholder = "https://placehold.co/400x400/e2e8f0/475569?text=Product") {
+export function getFirstValidImage(
+  images,
+  placeholder = "https://placehold.co/400x400/e2e8f0/475569?text=Product",
+) {
   if (!images || !Array.isArray(images) || images.length === 0) return placeholder;
   return getValidImageUrl(images[0], placeholder);
 }
@@ -55,7 +67,11 @@ export function getFirstValidImage(images, placeholder = "https://placehold.co/4
  * @param {string} placeholder - Fallback URL
  * @returns {string[]}
  */
-export function getValidImages(images, count = 4, placeholder = "https://placehold.co/600x600/e2e8f0/475569?text=Product") {
+export function getValidImages(
+  images,
+  count = 4,
+  placeholder = "https://placehold.co/600x600/e2e8f0/475569?text=Product",
+) {
   if (!images || images.length === 0) return Array(count).fill(placeholder);
   const valid = images.map((img) => getValidImageUrl(img, placeholder));
   while (valid.length < count) valid.push(valid[valid.length - 1]);
