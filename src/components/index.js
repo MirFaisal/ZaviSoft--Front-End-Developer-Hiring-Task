@@ -7,6 +7,18 @@ export { ProductCard, ProductGrid, ProductCardSkeleton } from "./products";
 // Cart components
 export { Cart } from "./cart";
 
+// Banner components
+export { Banner } from "./banner";
+
+// New Drops components
+export { NewDrops } from "./newdrops";
+
+// Categories Section components
+export { CategoriesSection } from "./categories-section";
+
+// Reviews components
+export { Reviews } from "./reviews";
+
 // Category components
 export { CategoryCard } from "./categories";
 
