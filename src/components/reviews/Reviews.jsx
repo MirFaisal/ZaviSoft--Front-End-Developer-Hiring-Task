@@ -37,7 +37,7 @@ export default function Reviews() {
           Reviews
         </h2>
         <Link
-          href="/products"
+          href="#"
           className="inline-flex items-center justify-center h-12 px-4 rounded-lg bg-[#4a69e2] font-rubik font-medium text-sm text-white uppercase tracking-wider hover:opacity-90 transition-colors">
           See all
         </Link>
