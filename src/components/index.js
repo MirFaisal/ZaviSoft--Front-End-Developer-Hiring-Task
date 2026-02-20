@@ -17,7 +17,7 @@ export { NewDrops } from "./newdrops";
 export { CategoriesSection } from "./categories-section";
 
 // Reviews components
-export { Reviews } from "./reviews";
+export { Reviews, ReviewCard } from "./reviews";
 
 // Category components
 export { CategoryCard } from "./categories";
