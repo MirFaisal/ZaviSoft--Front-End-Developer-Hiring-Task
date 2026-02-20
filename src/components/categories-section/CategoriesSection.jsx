@@ -43,28 +43,28 @@ export default function CategoriesSection() {
           </h2>
 
           {/* Navigation arrows */}
-          <div className="flex gap-2 lg:gap-4 items-center">
+          <div className="flex gap-4 items-center">
             <button
               type="button"
               disabled={!canGoBack}
               onClick={goBack}
-              className="flex items-center justify-center size-8 lg:size-10 rounded-lg bg-[#232321] border border-white/20 hover:bg-white/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="flex items-center justify-center h-10 px-3 rounded-lg bg-white hover:bg-white/80 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Previous">
               <Image
                 src="/icons/chevron-forward-white.svg"
                 alt=""
                 width={24}
                 height={24}
-                className="rotate-180"
+                className="rotate-180 invert"
               />
             </button>
             <button
               type="button"
               disabled={!canGoForward}
               onClick={goForward}
-              className="flex items-center justify-center size-8 lg:size-10 rounded-lg bg-[#232321] border border-white/20 hover:bg-white/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="flex items-center justify-center h-10 px-3 rounded-lg bg-white hover:bg-white/80 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Next">
-              <Image src="/icons/chevron-forward-white.svg" alt="" width={24} height={24} />
+              <Image src="/icons/chevron-forward-white.svg" alt="" width={24} height={24} className="invert" />
             </button>
           </div>
         </div>

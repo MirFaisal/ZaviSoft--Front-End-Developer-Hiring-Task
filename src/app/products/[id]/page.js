@@ -8,7 +8,13 @@ import { Spinner } from "@/components/ui";
 import { useGetProductByIdQuery, useGetProductsByCategoryQuery, addToCart } from "@/store";
 
 const PLACEHOLDER = "https://placehold.co/600x600/e2e8f0/475569?text=Product";
-const SIZES = [38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
+const SIZES_ROW1 = [38, 39, 40, 41, 42, 43, 44, 45];
+const SIZES_ROW2 = [46, 47];
+const DISABLED_SIZES = new Set([39, 40]);
+const COLORS = [
+  { name: "Dark Navy", value: "#232321" },
+  { name: "Olive Green", value: "#7D8471" },
+];
 
 const getValidImage = (img) => {
   if (!img || typeof img !== "string" || img.includes("[") || img.includes("any") || !img.startsWith("http"))
@@ -28,6 +34,7 @@ export default function ProductDetailPage({ params }) {
   const { id } = use(params);
   const dispatch = useDispatch();
   const [selectedSize, setSelectedSize] = useState(38);
+  const [selectedColor, setSelectedColor] = useState(COLORS[0].value);
   const [relatedPage, setRelatedPage] = useState(0);
 
   const { data: product, isLoading, error } = useGetProductByIdQuery(id);
@@ -94,7 +101,7 @@ export default function ProductDetailPage({ params }) {
         <section className="max-w-[1440px] mx-auto px-4 lg:px-[60px] pt-6 lg:pt-8 pb-12 lg:pb-20">
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
             {/* ─── Images 2×2 Grid ─── */}
-            <div className="w-full lg:w-[60%]">
+            <div className="w-full lg:w-[80%]">
               <div className="grid grid-cols-2 gap-[16px]">
                 {/* Top-left */}
                 <div className="relative aspect-[429/510] rounded-tl-[48px] overflow-hidden bg-[#fafafa]">
@@ -162,9 +169,24 @@ export default function ProductDetailPage({ params }) {
               {/* Color */}
               <div className="flex flex-col gap-2">
                 <p className="font-rubik font-semibold text-base text-[#232321] uppercase">Color</p>
-                <div className="flex gap-2">
-                  <div className="w-12 h-12 rounded-full bg-[#232321] border-2 border-[#232321] cursor-pointer" />
-                  <div className="w-12 h-12 rounded-full bg-[#4a69e2] border-2 border-transparent cursor-pointer hover:border-[#232321] transition-colors" />
+                <div className="flex items-center gap-4">
+                  {COLORS.map((color) => {
+                    const isSelected = selectedColor === color.value;
+                    return (
+                      <button
+                        key={color.value}
+                        onClick={() => setSelectedColor(color.value)}
+                        aria-label={color.name}
+                        className="size-12 rounded-full flex items-center justify-center cursor-pointer">
+                        <span
+                          className={`block rounded-full transition-all duration-200 ${
+                            isSelected ? "size-8 ring-[3px] ring-[#232321] ring-offset-[3px]" : "size-8"
+                          }`}
+                          style={{ backgroundColor: color.value }}
+                        />
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -176,19 +198,51 @@ export default function ProductDetailPage({ params }) {
                     Size chart
                   </button>
                 </div>
-                <div className="flex flex-wrap gap-1 max-w-[430px]">
-                  {SIZES.map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`h-12 min-w-[48px] flex-1 flex items-center justify-center rounded-lg font-rubik font-medium text-sm uppercase tracking-wider transition-colors ${
-                        selectedSize === size
-                          ? "bg-[#232321] text-white"
-                          : "bg-[#d2d1d3] text-[#8f8c91] hover:bg-[#c0bfc1]"
-                      }`}>
-                      {size}
-                    </button>
-                  ))}
+                <div className="flex flex-col gap-1 max-w-[430px]">
+                  {/* Row 1: sizes 38-45 */}
+                  <div className="flex gap-1">
+                    {SIZES_ROW1.map((size) => {
+                      const isDisabled = DISABLED_SIZES.has(size);
+                      const isSelected = selectedSize === size;
+                      return (
+                        <button
+                          key={size}
+                          disabled={isDisabled}
+                          onClick={() => !isDisabled && setSelectedSize(size)}
+                          className={`h-12 flex-1 flex items-center justify-center rounded-lg font-rubik font-medium text-sm uppercase tracking-wider transition-colors ${
+                            isSelected
+                              ? "bg-[#232321] text-white"
+                              : isDisabled
+                                ? "bg-[#d2d1d3] text-[#8f8c91] cursor-not-allowed"
+                                : "bg-white text-[#232321] hover:bg-gray-100 cursor-pointer"
+                          }`}>
+                          {size}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {/* Row 2: sizes 46-47 */}
+                  <div className="flex gap-1">
+                    {SIZES_ROW2.map((size) => {
+                      const isDisabled = DISABLED_SIZES.has(size);
+                      const isSelected = selectedSize === size;
+                      return (
+                        <button
+                          key={size}
+                          disabled={isDisabled}
+                          onClick={() => !isDisabled && setSelectedSize(size)}
+                          className={`h-12 shrink-0 w-[calc((100%-7*4px)/8)] flex items-center justify-center rounded-lg font-rubik font-medium text-sm uppercase tracking-wider transition-colors ${
+                            isSelected
+                              ? "bg-[#232321] text-white"
+                              : isDisabled
+                                ? "bg-[#d2d1d3] text-[#8f8c91] cursor-not-allowed"
+                                : "bg-white text-[#232321] hover:bg-gray-100 cursor-pointer"
+                          }`}>
+                          {size}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
 
@@ -217,7 +271,7 @@ export default function ProductDetailPage({ params }) {
                     </svg>
                   </button>
                 </div>
-                <button className="w-full h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:bg-[#1a1a18] transition-colors">
+                <button className="w-full h-12 bg-[#4a69e2] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors">
                   Buy it now
                 </button>
               </div>
