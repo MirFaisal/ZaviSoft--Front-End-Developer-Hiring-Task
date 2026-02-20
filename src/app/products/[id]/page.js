@@ -10,8 +10,7 @@ import { useGetProductByIdQuery, useGetProductsByCategoryQuery, addToCart } from
 import { getValidImageUrl, getValidImages } from "@/lib/utils";
 
 const PLACEHOLDER = "https://placehold.co/600x600/e2e8f0/475569?text=Product";
-const SIZES_ROW1 = [38, 39, 40, 41, 42, 43, 44, 45];
-const SIZES_ROW2 = [46, 47];
+const ALL_SIZES = [38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
 const DISABLED_SIZES = new Set([39, 40]);
 const COLORS = [
   { name: "Dark Navy", value: "#232321" },
@@ -24,6 +23,7 @@ export default function ProductDetailPage({ params }) {
   const [selectedSize, setSelectedSize] = useState(38);
   const [selectedColor, setSelectedColor] = useState(COLORS[0].value);
   const [relatedPage, setRelatedPage] = useState(0);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const { data: product, isLoading, error } = useGetProductByIdQuery(id);
 
@@ -88,51 +88,95 @@ export default function ProductDetailPage({ params }) {
         {/* ─── Product Section ─── */}
         <section className="max-w-[1440px] mx-auto px-4 lg:px-[60px] pt-6 lg:pt-8 pb-12 lg:pb-20">
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-            {/* ─── Images 2×2 Grid ─── */}
+            {/* ─── Images ─── */}
             <div className="w-full lg:w-[80%]">
-              <div className="grid grid-cols-2 gap-[16px]">
-                {/* Top-left */}
+              {/* Mobile: Hero image + thumbnails */}
+              <div className="flex flex-col gap-6 lg:hidden">
+                <div className="relative h-[273px] rounded-2xl overflow-hidden bg-[#fafafa]">
+                  <Image
+                    src={imgs[selectedImageIndex]}
+                    alt={`${product.title} - ${selectedImageIndex + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="100vw"
+                    priority
+                    unoptimized
+                  />
+                </div>
+                {/* Dot navigation */}
+                <div className="flex gap-1 justify-center">
+                  {imgs.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setSelectedImageIndex(i)}
+                      className={`h-1.5 w-3 rounded-full transition-colors ${
+                        i === selectedImageIndex ? "bg-[#4a69e2]" : "bg-[#232321]/30"
+                      }`}
+                      aria-label={`Image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+                <div className="flex gap-2">
+                  {imgs.map((img, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setSelectedImageIndex(i)}
+                      className={`relative size-16 rounded-lg overflow-hidden bg-[#fafafa] cursor-pointer transition-opacity ${
+                        selectedImageIndex === i ? "ring-2 ring-[#232321]" : "opacity-60"
+                      }`}>
+                      <Image
+                        src={img}
+                        alt={`${product.title} thumbnail ${i + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="64px"
+                        unoptimized
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Desktop: 2×2 Grid */}
+              <div className="hidden lg:grid grid-cols-2 gap-4">
                 <div className="relative aspect-[429/510] rounded-tl-[48px] overflow-hidden bg-[#fafafa]">
                   <Image
                     src={imgs[0]}
                     alt={`${product.title} - 1`}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 50vw, 30vw"
+                    sizes="30vw"
                     priority
                     unoptimized
                   />
                 </div>
-                {/* Top-right */}
                 <div className="relative aspect-[429/510] rounded-tr-[48px] overflow-hidden bg-[#fafafa]">
                   <Image
                     src={imgs[1]}
                     alt={`${product.title} - 2`}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 50vw, 30vw"
+                    sizes="30vw"
                     unoptimized
                   />
                 </div>
-                {/* Bottom-left */}
                 <div className="relative aspect-[429/510] rounded-bl-[48px] overflow-hidden bg-[#fafafa]">
                   <Image
                     src={imgs[2]}
                     alt={`${product.title} - 3`}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 50vw, 30vw"
+                    sizes="30vw"
                     unoptimized
                   />
                 </div>
-                {/* Bottom-right */}
                 <div className="relative aspect-[429/510] rounded-br-[48px] overflow-hidden bg-[#fafafa]">
                   <Image
                     src={imgs[3]}
                     alt={`${product.title} - 4`}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 50vw, 30vw"
+                    sizes="30vw"
                     unoptimized
                   />
                 </div>
@@ -143,13 +187,13 @@ export default function ProductDetailPage({ params }) {
             <div className="w-full lg:w-[40%] flex flex-col gap-8">
               {/* Badge + Title + Price */}
               <div className="flex flex-col gap-4">
-                <span className="self-start bg-[#4a69e2] text-white font-rubik font-semibold text-xs px-4 py-3 rounded-xl">
+                <span className="self-start bg-[#4a69e2] text-white font-rubik font-semibold text-xs px-4 py-2 rounded-lg">
                   New Release
                 </span>
-                <h1 className="font-rubik font-semibold text-2xl lg:text-[32px] text-[#232321] uppercase leading-tight">
+                <h1 className="font-rubik font-semibold text-xl lg:text-[32px] text-[#232321] uppercase leading-tight">
                   {product.title}
                 </h1>
-                <p className="font-rubik font-semibold text-xl lg:text-2xl text-[#4a69e2]">
+                <p className="font-rubik font-semibold text-2xl text-[#4a69e2]">
                   ${product.price.toFixed(2)}
                 </p>
               </div>
@@ -186,51 +230,26 @@ export default function ProductDetailPage({ params }) {
                     Size chart
                   </button>
                 </div>
-                <div className="flex flex-col gap-1 max-w-[430px]">
-                  {/* Row 1: sizes 38-45 */}
-                  <div className="flex gap-1">
-                    {SIZES_ROW1.map((size) => {
-                      const isDisabled = DISABLED_SIZES.has(size);
-                      const isSelected = selectedSize === size;
-                      return (
-                        <button
-                          key={size}
-                          disabled={isDisabled}
-                          onClick={() => !isDisabled && setSelectedSize(size)}
-                          className={`h-12 flex-1 flex items-center justify-center rounded-lg font-rubik font-medium text-sm uppercase tracking-wider transition-colors ${
-                            isSelected
-                              ? "bg-[#232321] text-white"
-                              : isDisabled
-                                ? "bg-[#d2d1d3] text-[#8f8c91] cursor-not-allowed"
-                                : "bg-white text-[#232321] hover:bg-gray-100 cursor-pointer"
-                          }`}>
-                          {size}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  {/* Row 2: sizes 46-47 */}
-                  <div className="flex gap-1">
-                    {SIZES_ROW2.map((size) => {
-                      const isDisabled = DISABLED_SIZES.has(size);
-                      const isSelected = selectedSize === size;
-                      return (
-                        <button
-                          key={size}
-                          disabled={isDisabled}
-                          onClick={() => !isDisabled && setSelectedSize(size)}
-                          className={`h-12 shrink-0 w-[calc((100%-7*4px)/8)] flex items-center justify-center rounded-lg font-rubik font-medium text-sm uppercase tracking-wider transition-colors ${
-                            isSelected
-                              ? "bg-[#232321] text-white"
-                              : isDisabled
-                                ? "bg-[#d2d1d3] text-[#8f8c91] cursor-not-allowed"
-                                : "bg-white text-[#232321] hover:bg-gray-100 cursor-pointer"
-                          }`}>
-                          {size}
-                        </button>
-                      );
-                    })}
-                  </div>
+                <div className="grid grid-cols-6 lg:grid-cols-8 gap-2">
+                  {ALL_SIZES.map((size) => {
+                    const isDisabled = DISABLED_SIZES.has(size);
+                    const isSelected = selectedSize === size;
+                    return (
+                      <button
+                        key={size}
+                        disabled={isDisabled}
+                        onClick={() => !isDisabled && setSelectedSize(size)}
+                        className={`h-12 flex items-center justify-center rounded-lg font-rubik font-medium text-sm uppercase tracking-wider transition-colors ${
+                          isSelected
+                            ? "bg-[#232321] text-white"
+                            : isDisabled
+                              ? "bg-[#d2d1d3] text-[#8f8c91] cursor-not-allowed"
+                              : "bg-white text-[#232321] hover:bg-gray-100 cursor-pointer"
+                        }`}>
+                        {size}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
