@@ -12,7 +12,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#fafafa] rounded-3xl mx-4 lg:mx-15 mt-8">
+    <header className="sticky top-0 z-50 bg-[#fafafa] rounded-3xl mx-4 lg:mx-10 xl:mx-15 mt-8">
       <div className="flex items-center justify-between p-4 lg:p-8">
         {/* Left Navigation */}
         <nav className="hidden lg:flex items-start gap-10 w-82.75 font-rubik font-semibold text-base text-[#232321]">
@@ -35,8 +35,7 @@ export default function Header() {
           type="button"
           className="lg:hidden p-2 text-[#232321]"
           aria-label="Menu"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
           <Image
             src={mobileMenuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
             alt={mobileMenuOpen ? "Close menu" : "Open menu"}
@@ -63,8 +62,7 @@ export default function Header() {
           <button
             type="button"
             className="text-[#232321] hover:opacity-70 transition-opacity hidden sm:block"
-            aria-label="Search"
-          >
+            aria-label="Search">
             <Image src="/icons/search.svg" alt="Search" width={24} height={24} />
           </button>
 
@@ -72,8 +70,7 @@ export default function Header() {
           <button
             type="button"
             className="text-[#232321] hover:opacity-70 transition-opacity"
-            aria-label="User account"
-          >
+            aria-label="User account">
             <Image
               src="/icons/user.svg"
               alt="User account"
@@ -88,8 +85,7 @@ export default function Header() {
             type="button"
             onClick={() => dispatch(toggleCart())}
             className="bg-[#ffa52f] rounded-full w-5 h-5 p-2.5 lg:w-8 lg:h-8 flex items-center justify-center font-open-sans font-semibold text-sm lg:text-base text-[#232321] hover:opacity-80 transition-opacity shrink-0"
-            aria-label="Cart"
-          >
+            aria-label="Cart">
             {cartItemCount}
           </button>
         </div>
@@ -102,24 +98,21 @@ export default function Header() {
             <Link
               href="/products"
               className="flex items-center gap-1 hover:opacity-70 transition-opacity"
-              onClick={() => setMobileMenuOpen(false)}
-            >
+              onClick={() => setMobileMenuOpen(false)}>
               <span>New Drops</span>
               <span>🔥</span>
             </Link>
             <Link
               href="/categories"
               className="flex items-center gap-0.5 hover:opacity-70 transition-opacity"
-              onClick={() => setMobileMenuOpen(false)}
-            >
+              onClick={() => setMobileMenuOpen(false)}>
               <span>Men</span>
               <Image src="/icons/caret-down.svg" alt="" width={8} height={5} />
             </Link>
             <Link
               href="/categories"
               className="flex items-center gap-0.5 hover:opacity-70 transition-opacity"
-              onClick={() => setMobileMenuOpen(false)}
-            >
+              onClick={() => setMobileMenuOpen(false)}>
               <span>Women</span>
               <Image src="/icons/caret-down.svg" alt="" width={8} height={5} />
             </Link>
