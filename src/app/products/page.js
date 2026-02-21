@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { ProductGrid, PageHeader, Pagination } from "@/components";
-import { useGetProductsQuery, useGetCategoriesQuery } from "@/store";
+import {
+  useGetProductsQuery,
+  useGetCategoriesQuery,
+  useGetProductsByCategoryQuery,
+} from "@/store";
 
 const PRODUCTS_PER_PAGE = 12;
 
@@ -10,17 +14,44 @@ export default function ProductsPage() {
   const [page, setPage] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
+  // Fetch all products (skip when a category is selected)
   const {
-    data: products,
-    isLoading,
-    error,
-    isFetching,
-  } = useGetProductsQuery({
-    offset: page * PRODUCTS_PER_PAGE,
-    limit: PRODUCTS_PER_PAGE,
-  });
+    data: allProducts,
+    isLoading: allLoading,
+    error: allError,
+    isFetching: allFetching,
+  } = useGetProductsQuery(
+    { offset: page * PRODUCTS_PER_PAGE, limit: PRODUCTS_PER_PAGE },
+    { skip: selectedCategory !== null }
+  );
+
+  // Fetch category-specific products (skip when no category is selected)
+  const {
+    data: categoryProducts,
+    isLoading: catLoading,
+    error: catError,
+    isFetching: catFetching,
+  } = useGetProductsByCategoryQuery(
+    {
+      categoryId: selectedCategory,
+      offset: page * PRODUCTS_PER_PAGE,
+      limit: PRODUCTS_PER_PAGE,
+    },
+    { skip: selectedCategory === null }
+  );
 
   const { data: categories } = useGetCategoriesQuery();
+
+  // Pick the active dataset
+  const products = selectedCategory ? categoryProducts : allProducts;
+  const isLoading = selectedCategory ? catLoading : allLoading;
+  const error = selectedCategory ? catError : allError;
+  const isFetching = selectedCategory ? catFetching : allFetching;
+
+  const handleCategoryChange = (categoryId) => {
+    setSelectedCategory(categoryId);
+    setPage(0); // reset to first page on category change
+  };
 
   const handleNextPage = () => {
     setPage((prev) => prev + 1);
@@ -52,7 +83,7 @@ export default function ProductsPage() {
                 <ul className="space-y-1">
                   <li>
                     <button
-                      onClick={() => setSelectedCategory(null)}
+                      onClick={() => handleCategoryChange(null)}
                       className={`w-full text-left px-3 py-2.5 rounded-xl transition-colors font-rubik text-sm cursor-pointer ${
                         !selectedCategory
                           ? "bg-[#4a69e2] text-white font-semibold"
@@ -64,7 +95,7 @@ export default function ProductsPage() {
                   {categories?.map((category) => (
                     <li key={category.id}>
                       <button
-                        onClick={() => setSelectedCategory(category.id)}
+                        onClick={() => handleCategoryChange(category.id)}
                         className={`w-full text-left px-3 py-2.5 rounded-xl transition-colors font-rubik text-sm cursor-pointer ${
                           selectedCategory === category.id
                             ? "bg-[#4a69e2] text-white font-semibold"
