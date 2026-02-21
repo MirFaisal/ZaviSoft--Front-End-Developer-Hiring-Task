@@ -2,11 +2,7 @@
 
 import { useState } from "react";
 import { ProductGrid, PageHeader, Pagination } from "@/components";
-import {
-  useGetProductsQuery,
-  useGetCategoriesQuery,
-  useGetProductsByCategoryQuery,
-} from "@/store";
+import { useGetProductsQuery, useGetCategoriesQuery, useGetProductsByCategoryQuery } from "@/store";
 
 const PRODUCTS_PER_PAGE = 12;
 
@@ -22,7 +18,7 @@ export default function ProductsPage() {
     isFetching: allFetching,
   } = useGetProductsQuery(
     { offset: page * PRODUCTS_PER_PAGE, limit: PRODUCTS_PER_PAGE },
-    { skip: selectedCategory !== null }
+    { skip: selectedCategory !== null },
   );
 
   // Fetch category-specific products (skip when no category is selected)
@@ -37,7 +33,7 @@ export default function ProductsPage() {
       offset: page * PRODUCTS_PER_PAGE,
       limit: PRODUCTS_PER_PAGE,
     },
-    { skip: selectedCategory === null }
+    { skip: selectedCategory === null },
   );
 
   const { data: categories } = useGetCategoriesQuery();
