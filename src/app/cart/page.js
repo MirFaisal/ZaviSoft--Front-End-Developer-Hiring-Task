@@ -2,22 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  selectCartItems,
-  selectCartTotal,
-  selectCartItemCount,
-  removeFromCart,
-  incrementQuantity,
-  decrementQuantity,
-  useGetProductsQuery,
-} from "@/store";
-import { YouMayAlsoLike } from "@/components";
+import { useSelector } from "react-redux";
+import { selectCartItems, selectCartTotal, selectCartItemCount, useGetProductsQuery } from "@/store";
+import { YouMayAlsoLike, CartItem } from "@/components";
 
 const DELIVERY_FEE = 6.99;
 
 export default function CartPage() {
-  const dispatch = useDispatch();
   const items = useSelector(selectCartItems);
   const subtotal = useSelector(selectCartTotal);
   const itemCount = useSelector(selectCartItemCount);
@@ -83,74 +74,10 @@ export default function CartPage() {
                 </p>
               </div>
 
-              {/* Cart Items — Figma node 1:3921 */}
+              {/* Cart Items */}
               <div className="flex flex-col gap-8 lg:gap-12">
                 {items.map((item) => (
-                  <div key={item.id} className="flex gap-4 lg:gap-6">
-                    {/* Product Image — 207.818×225 */}
-                    <div className="relative w-24 h-28 lg:w-52 lg:h-56 shrink-0 rounded-2xl lg:rounded-3xl overflow-hidden bg-[#e7e7e3]">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover object-top"
-                        unoptimized
-                      />
-                    </div>
-
-                    {/* Details — flex-col gap-[48px] between info and actions */}
-                    <div className="flex-1 flex flex-col gap-6 lg:gap-12">
-                      {/* Info block — flex gap-[80px] between details and price */}
-                      <div className="flex gap-4 lg:gap-20">
-                        {/* Product details — w-[325px], gap-[20px] */}
-                        <div className="flex-1 lg:flex-none lg:w-[325px] flex flex-col gap-3">
-                          {/* Title + descriptions — gap-[8px] */}
-                          <div className="flex flex-col gap-1">
-                            <h3 className="font-rubik font-semibold text-sm lg:text-xl text-[#232321] uppercase leading-normal">
-                              {item.title}
-                            </h3>
-                            <p className="font-open-sans font-semibold text-xs lg:text-lg text-[#232321]/80 leading-normal line-clamp-2">
-                              {item.description || "No description available"}
-                            </p>
-                          </div>
-                          {/* Size + Quantity — gap-[40px], each gap-[24px] */}
-                          <div className="flex items-center gap-6 lg:gap-10">
-                            <div className="flex items-center gap-3 lg:gap-4">
-                              <span className="font-open-sans font-semibold text-xs lg:text-lg text-[#232321]/80">
-                                Size 10
-                              </span>
-                              <Image src="/icons/caret-down.svg" alt="" width={18} height={18} />
-                            </div>
-                            <div className="flex items-center gap-3 lg:gap-4">
-                              <span className="font-open-sans font-semibold text-xs lg:text-lg text-[#232321]/80">
-                                Quantity {item.quantity}
-                              </span>
-                              <Image src="/icons/caret-down.svg" alt="" width={18} height={18} />
-                            </div>
-                          </div>
-                        </div>
-                        {/* Price — Rubik SemiBold 24px #4a69e2 */}
-                        <p className="font-rubik font-semibold text-sm lg:text-2xl text-[#4a69e2] shrink-0">
-                          ${item.price.toFixed(2)}
-                        </p>
-                      </div>
-
-                      {/* Actions — gap-[24px] between heart and bin */}
-                      <div className="flex items-center gap-6">
-                        <button
-                          className="size-6 flex items-center justify-center hover:opacity-70 transition-opacity cursor-pointer"
-                          aria-label="Add to wishlist">
-                          <Image src="/icons/heart.svg" alt="Wishlist" width={24} height={24} />
-                        </button>
-                        <button
-                          onClick={() => dispatch(removeFromCart(item.id))}
-                          className="size-6 flex items-center justify-center hover:opacity-70 transition-opacity cursor-pointer"
-                          aria-label="Remove item">
-                          <Image src="/icons/trash.svg" alt="Remove" width={24} height={24} />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  <CartItem key={item.id} item={item} />
                 ))}
               </div>
             </div>
