@@ -37,13 +37,13 @@ export default function ProductDetailPage({ params }) {
       <div className="min-h-screen flex flex-col">
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="font-rubik font-semibold text-2xl text-[#232321] mb-4">Product Not Found</h1>
-            <p className="text-[#232321]/60 mb-6">
+            <h1 className="font-rubik font-semibold text-2xl text-kicks-dark mb-4">Product Not Found</h1>
+            <p className="text-kicks-dark/60 mb-6">
               The product you&apos;re looking for doesn&apos;t exist or has been removed.
             </p>
             <Link
               href="/products"
-              className="inline-block bg-[#232321] text-white px-6 py-3 rounded-lg hover:bg-[#1a1a18] transition-colors font-rubik font-medium text-sm uppercase tracking-wider">
+              className="inline-block bg-kicks-dark text-white px-6 py-3 rounded-lg hover:bg-kicks-dark-hover transition-colors font-rubik font-medium text-sm uppercase tracking-wider">
               Browse Products
             </Link>
           </div>
@@ -55,7 +55,7 @@ export default function ProductDetailPage({ params }) {
   const imgs = getValidImages(product.images, 4, PLACEHOLDER);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#e7e7e3]">
+    <div className="min-h-screen flex flex-col bg-kicks-bg">
       <main className="flex-1">
         {/* ─── Product Section ─── */}
         <section className="max-w-[1440px] mx-auto px-4 lg:px-[60px] pt-6 lg:pt-8 pb-12 lg:pb-20">

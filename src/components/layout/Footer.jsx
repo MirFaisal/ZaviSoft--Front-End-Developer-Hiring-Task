@@ -34,7 +34,7 @@ export default function Footer() {
       {/* Sections wrapper – blue + dark stacked with overlap */}
       <div className="w-full">
         {/* ── Blue CTA Section ── */}
-        <div className="relative bg-[#4a69e2] rounded-t-3xl lg:rounded-[48px] p-4 lg:px-18 lg:pt-16 lg:pb-64 overflow-hidden">
+        <div className="relative bg-kicks-blue rounded-t-3xl lg:rounded-[48px] p-4 lg:px-18 lg:pt-16 lg:pb-64 overflow-hidden">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             {/* Left – Text + Form */}
             <div className="flex flex-col gap-6 max-w-xl">
@@ -42,7 +42,7 @@ export default function Footer() {
                 <h2 className="font-rubik font-semibold text-[32px] lg:text-5xl text-white uppercase leading-tight">
                   Join our KicksPlus Club &amp; get 15% off
                 </h2>
-                <p className="font-open-sans font-semibold text-base lg:text-xl text-[#e7e7e3]">
+                <p className="font-open-sans font-semibold text-base lg:text-xl text-kicks-bg">
                   Sign up for free! Join the community.
                 </p>
               </div>
@@ -62,7 +62,7 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="h-12 px-4 lg:px-6 rounded-lg bg-[#232321] font-rubik font-medium text-sm text-white uppercase tracking-wider hover:bg-[#1a1a18] transition-colors cursor-pointer">
+                  className="h-12 px-4 lg:px-6 rounded-lg bg-kicks-dark font-rubik font-medium text-sm text-white uppercase tracking-wider hover:bg-kicks-dark-hover transition-colors cursor-pointer">
                   Submit
                 </button>
               </form>
@@ -107,17 +107,17 @@ export default function Footer() {
         </div>
 
         {/* ── Dark Footer Section (overlaps blue) ── */}
-        <div className="relative -mt-5 lg:-mt-52 bg-[#232321] rounded-3xl lg:rounded-[48px] overflow-hidden">
+        <div className="relative -mt-5 lg:-mt-52 bg-kicks-dark rounded-3xl lg:rounded-[48px] overflow-hidden">
           {/* Content */}
           <div className="px-4 py-6 lg:px-18 lg:pt-12 lg:pb-12">
             {/* Mobile: flex column, Desktop: 4-col grid */}
             <div className="flex flex-col gap-10 lg:grid lg:grid-cols-5 lg:gap-10">
               {/* About Us */}
               <div className="lg:col-span-2">
-                <h3 className="font-rubik font-semibold text-2xl lg:text-4xl text-[#ffa52f] mb-1">
+                <h3 className="font-rubik font-semibold text-2xl lg:text-4xl text-kicks-yellow mb-1">
                   About us
                 </h3>
-                <p className="font-open-sans font-semibold text-base lg:text-xl text-[#e7e7e3] leading-relaxed">
+                <p className="font-open-sans font-semibold text-base lg:text-xl text-kicks-bg leading-relaxed">
                   We are the biggest hyperstore in the universe. We got you all cover with our exclusive
                   collections and latest drops.
                 </p>
@@ -127,10 +127,10 @@ export default function Footer() {
               <div className="flex flex-col gap-6 lg:contents">
                 {/* Categories */}
                 <div>
-                  <h3 className="font-rubik font-semibold text-xl lg:text-2xl text-[#ffa52f] mb-4">
+                  <h3 className="font-rubik font-semibold text-xl lg:text-2xl text-kicks-yellow mb-4">
                     Categories
                   </h3>
-                  <ul className="flex flex-col gap-2 font-open-sans font-semibold text-base lg:text-xl text-[#e7e7e3]">
+                  <ul className="flex flex-col gap-2 font-open-sans font-semibold text-base lg:text-xl text-kicks-bg">
                     {categories.map((cat) => (
                       <li key={cat.name}>
                         <Link href={cat.href} className="hover:text-white transition-colors">
@@ -143,10 +143,10 @@ export default function Footer() {
 
                 {/* Company */}
                 <div>
-                  <h3 className="font-rubik font-semibold text-xl lg:text-2xl text-[#ffa52f] mb-4">
+                  <h3 className="font-rubik font-semibold text-xl lg:text-2xl text-kicks-yellow mb-4">
                     Company
                   </h3>
-                  <ul className="flex flex-col gap-2 font-open-sans font-semibold text-base lg:text-xl text-[#e7e7e3]">
+                  <ul className="flex flex-col gap-2 font-open-sans font-semibold text-base lg:text-xl text-kicks-bg">
                     {companyLinks.map((link) => (
                       <li key={link.name}>
                         <Link href={link.href} className="hover:text-white transition-colors">
@@ -159,7 +159,7 @@ export default function Footer() {
 
                 {/* Follow Us */}
                 <div>
-                  <h3 className="font-rubik font-semibold text-xl lg:text-2xl text-[#ffa52f] mb-4">
+                  <h3 className="font-rubik font-semibold text-xl lg:text-2xl text-kicks-yellow mb-4">
                     Follow us
                   </h3>
                   <div className="flex gap-4 items-center">
@@ -192,7 +192,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <p className="font-open-sans text-base text-[#232321] text-center">© All rights reserved</p>
+      <p className="font-open-sans text-base text-kicks-dark text-center">© All rights reserved</p>
     </footer>
   );
 }

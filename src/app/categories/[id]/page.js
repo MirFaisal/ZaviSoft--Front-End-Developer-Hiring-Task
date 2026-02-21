@@ -38,14 +38,14 @@ export default function CategoryPage({ params }) {
   if (!category && !isLoading) {
     return (
       <div className="min-h-screen flex flex-col">
-        <main className="flex-1 bg-[#e7e7e3] flex items-center justify-center">
+        <main className="flex-1 bg-kicks-bg flex items-center justify-center">
           <div className="text-center">
-            <h1 className="font-rubik font-semibold text-2xl text-[#232321] mb-4 uppercase">
+            <h1 className="font-rubik font-semibold text-2xl text-kicks-dark mb-4 uppercase">
               Category Not Found
             </h1>
             <Link
               href="/categories"
-              className="inline-block bg-[#232321] text-white px-6 py-3 rounded-lg hover:bg-[#1a1a18] transition-colors font-rubik font-medium text-sm uppercase tracking-wider">
+              className="inline-block bg-kicks-dark text-white px-6 py-3 rounded-lg hover:bg-kicks-dark-hover transition-colors font-rubik font-medium text-sm uppercase tracking-wider">
               Browse Categories
             </Link>
           </div>
@@ -56,7 +56,7 @@ export default function CategoryPage({ params }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-1 bg-[#e7e7e3]">
+      <main className="flex-1 bg-kicks-bg">
         <PageHeader
           title={category?.name || "Loading..."}
           description={`Browse all products in ${category?.name || "this category"}`}
@@ -70,9 +70,9 @@ export default function CategoryPage({ params }) {
         <div className="max-w-[1440px] mx-auto px-4 lg:px-[60px] py-8 lg:py-12">
           {/* Results info */}
           <div className="flex items-center justify-between mb-6">
-            <p className="font-open-sans text-sm text-[#232321]/60">
+            <p className="font-open-sans text-sm text-kicks-dark/60">
               Showing page {page + 1}
-              {isFetching && <span className="ml-2 text-[#4a69e2] font-rubik font-medium">Loading...</span>}
+              {isFetching && <span className="ml-2 text-kicks-blue font-rubik font-medium">Loading...</span>}
             </p>
           </div>
 

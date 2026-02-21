@@ -43,7 +43,7 @@ export default function YouMayAlsoLike({ products = [], title = "You may also li
               key={i}
               onClick={() => setPage(i)}
               className={`h-1.5 w-10 rounded-lg transition-colors ${
-                i === page ? "bg-[#4a69e2]" : "bg-[#232321]/25"
+                i === page ? "bg-kicks-blue" : "bg-kicks-dark/25"
               }`}
               aria-label={`Page ${i + 1}`}
             />

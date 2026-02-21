@@ -28,7 +28,7 @@ export default function CategoriesSection() {
   const goForward = () => setStartIndex((i) => i + 1);
 
   return (
-    <section className="bg-[#232321] lg:mx-10 xl:mx-15">
+    <section className="bg-kicks-dark lg:mx-10 xl:mx-15">
       <div className="w-full mx-auto px-4 lg:px-15 pt-6 lg:pt-22.5">
         {/* Header row */}
         <div className="flex items-end justify-between mb-6 lg:mb-12">
@@ -73,7 +73,7 @@ export default function CategoriesSection() {
 
                 {/* Label + arrow button */}
                 <div className="absolute bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm px-4 py-4 lg:px-12 lg:py-8 flex items-end justify-between">
-                  <h3 className="font-rubik font-semibold text-2xl lg:text-4xl text-[#232321] uppercase leading-tight">
+                  <h3 className="font-rubik font-semibold text-2xl lg:text-4xl text-kicks-dark uppercase leading-tight">
                     {category.name.split(" ").map((word, i) => (
                       <span key={i} className="block">
                         {word}
@@ -82,7 +82,7 @@ export default function CategoriesSection() {
                   </h3>
                   <Link
                     href={`/categories/${category.id}`}
-                    className="flex items-center justify-center p-2 rounded lg:rounded-lg bg-[#232321] hover:bg-[#1a1a18] transition-colors shrink-0">
+                    className="flex items-center justify-center p-2 rounded lg:rounded-lg bg-kicks-dark hover:bg-kicks-dark-hover transition-colors shrink-0">
                     <Image
                       src="/icons/arrow-trend-right-up.svg"
                       alt="View category"

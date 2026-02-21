@@ -8,6 +8,17 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* KICKS Brand Tokens */
+  --color-kicks-dark: #232321;
+  --color-kicks-dark-hover: #1a1a18;
+  --color-kicks-blue: #4a69e2;
+  --color-kicks-yellow: #ffa52f;
+  --color-kicks-bg: #e7e7e3;
+  --color-kicks-card: #fafafa;
+  --color-kicks-disabled: #d2d1d3;
+  --color-kicks-muted: #8f8c91;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-rubik: var(--font-rubik);

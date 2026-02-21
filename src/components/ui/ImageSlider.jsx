@@ -19,7 +19,7 @@ export default function ImageSlider({ images = [], alt = "Image", className = ""
   return (
     <div className={`flex flex-col gap-6 ${className}`}>
       {/* Hero image */}
-      <div className="relative h-[273px] rounded-2xl overflow-hidden bg-[#fafafa]">
+      <div className="relative h-[273px] rounded-2xl overflow-hidden bg-kicks-card">
         <Image
           src={uniqueImages[activeIndex]}
           alt={`${alt} - ${activeIndex + 1}`}
@@ -37,7 +37,7 @@ export default function ImageSlider({ images = [], alt = "Image", className = ""
                 key={i}
                 onClick={() => setActiveIndex(i)}
                 className={`h-1.5 w-3 rounded-full transition-colors ${
-                  i === activeIndex ? "bg-[#4a69e2]" : "bg-[#fff]/30"
+                  i === activeIndex ? "bg-kicks-blue" : "bg-[#fff]/30"
                 }`}
                 aria-label={`Image ${i + 1}`}
               />
@@ -53,8 +53,8 @@ export default function ImageSlider({ images = [], alt = "Image", className = ""
             <button
               key={i}
               onClick={() => setActiveIndex(i)}
-              className={`relative size-16 rounded-lg overflow-hidden bg-[#fafafa] cursor-pointer transition-opacity ${
-                activeIndex === i ? "ring-2 ring-[#232321]" : "opacity-60"
+              className={`relative size-16 rounded-lg overflow-hidden bg-kicks-card cursor-pointer transition-opacity ${
+                activeIndex === i ? "ring-2 ring-kicks-dark" : "opacity-60"
               }`}>
               <Image
                 src={img}

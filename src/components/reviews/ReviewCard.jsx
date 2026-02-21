@@ -14,7 +14,7 @@ function StarRating({ rating }) {
           />
         ))}
       </div>
-      <span className="font-open-sans font-semibold text-base text-[#232321]">
+      <span className="font-open-sans font-semibold text-base text-kicks-dark">
         {rating.toFixed(1)}
       </span>
     </div>
@@ -25,13 +25,13 @@ export default function ReviewCard({ title, text, rating, avatar, productImage }
   return (
     <div className="flex flex-col">
       {/* Review text card */}
-      <div className="bg-[#fafafa] rounded-t-4xl p-6 lg:p-8 flex flex-col gap-2">
+      <div className="bg-kicks-card rounded-t-4xl p-6 lg:p-8 flex flex-col gap-2">
         <div className="flex gap-2 items-start justify-between">
           <div className="flex flex-col gap-2 flex-1">
-            <h3 className="font-rubik font-semibold text-2xl text-[#232321] leading-normal">
+            <h3 className="font-rubik font-semibold text-2xl text-kicks-dark leading-normal">
               {title}
             </h3>
-            <p className="font-open-sans text-base text-[#232321] opacity-80 leading-normal">
+            <p className="font-open-sans text-base text-kicks-dark opacity-80 leading-normal">
               {text}
             </p>
           </div>

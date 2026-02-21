@@ -13,7 +13,7 @@ import Image from "next/image";
 export default function NavArrows({ onPrev, onNext, canGoBack = true, canGoForward = true, variant = "dark" }) {
   const btnClass =
     variant === "dark"
-      ? "bg-[#232321] hover:bg-[#1a1a18]"
+      ? "bg-kicks-dark hover:bg-kicks-dark-hover"
       : "bg-white hover:bg-white/80";
 
   const iconClass = variant === "light" ? "invert" : "";

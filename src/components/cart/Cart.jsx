@@ -45,16 +45,16 @@ export default function Cart() {
       {/* Cart Sidebar */}
       <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl z-50 flex flex-col animate-[slideIn_0.3s_ease-out]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-[#e7e7e3]">
-          <h2 className="font-rubik font-semibold text-xl text-[#232321] uppercase">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-kicks-bg">
+          <h2 className="font-rubik font-semibold text-xl text-kicks-dark uppercase">
             Your Bag
           </h2>
-          <span className="font-open-sans text-sm text-[#232321]/60">
+          <span className="font-open-sans text-sm text-kicks-dark/60">
             {items.length} {items.length === 1 ? "item" : "items"}
           </span>
           <button
             onClick={() => dispatch(closeCart())}
-            className="size-10 flex items-center justify-center rounded-lg bg-[#e7e7e3] hover:bg-[#d2d1d3] transition-colors cursor-pointer"
+            className="size-10 flex items-center justify-center rounded-lg bg-kicks-bg hover:bg-kicks-disabled transition-colors cursor-pointer"
             aria-label="Close cart"
           >
             <Image src="/icons/close.svg" alt="Close" width={20} height={20} />
@@ -65,18 +65,18 @@ export default function Cart() {
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-4">
-              <div className="size-24 rounded-full bg-[#fafafa] flex items-center justify-center">
+              <div className="size-24 rounded-full bg-kicks-card flex items-center justify-center">
                 <Image src="/icons/cart-empty.svg" alt="Empty cart" width={48} height={48} />
               </div>
               <div className="text-center">
-                <p className="font-rubik font-semibold text-lg text-[#232321]">Your bag is empty</p>
-                <p className="font-open-sans text-sm text-[#232321]/60 mt-1">
+                <p className="font-rubik font-semibold text-lg text-kicks-dark">Your bag is empty</p>
+                <p className="font-open-sans text-sm text-kicks-dark/60 mt-1">
                   Looks like you haven&apos;t added anything yet
                 </p>
               </div>
               <button
                 onClick={() => dispatch(closeCart())}
-                className="mt-2 h-12 px-8 bg-[#4a69e2] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer"
+                className="mt-2 h-12 px-8 bg-kicks-blue text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer"
               >
                 Continue Shopping
               </button>
@@ -86,10 +86,10 @@ export default function Cart() {
               {items.map((item) => (
                 <li
                   key={item.id}
-                  className="flex gap-4 bg-[#fafafa] rounded-2xl p-3"
+                  className="flex gap-4 bg-kicks-card rounded-2xl p-3"
                 >
                   {/* Product Image */}
-                  <div className="relative w-24 h-24 rounded-xl overflow-hidden shrink-0 bg-[#e7e7e3]">
+                  <div className="relative w-24 h-24 rounded-xl overflow-hidden shrink-0 bg-kicks-bg">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -102,30 +102,30 @@ export default function Cart() {
                   {/* Product Details */}
                   <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
                     <div>
-                      <h3 className="font-rubik font-semibold text-sm text-[#232321] line-clamp-2 leading-snug">
+                      <h3 className="font-rubik font-semibold text-sm text-kicks-dark line-clamp-2 leading-snug">
                         {item.title}
                       </h3>
-                      <p className="font-rubik font-semibold text-base text-[#4a69e2] mt-1">
+                      <p className="font-rubik font-semibold text-base text-kicks-blue mt-1">
                         ${item.price.toFixed(2)}
                       </p>
                     </div>
 
                     {/* Quantity Controls */}
                     <div className="flex items-center justify-between mt-2">
-                      <div className="flex items-center gap-1 bg-white rounded-lg border border-[#e7e7e3]">
+                      <div className="flex items-center gap-1 bg-white rounded-lg border border-kicks-bg">
                         <button
                           onClick={() => dispatch(decrementQuantity(item.id))}
-                          className="w-8 h-8 flex items-center justify-center rounded-l-lg hover:bg-[#e7e7e3] transition-colors font-rubik font-medium text-[#232321] cursor-pointer"
+                          className="w-8 h-8 flex items-center justify-center rounded-l-lg hover:bg-kicks-bg transition-colors font-rubik font-medium text-kicks-dark cursor-pointer"
                           aria-label="Decrease quantity"
                         >
                           −
                         </button>
-                        <span className="w-8 text-center font-rubik font-semibold text-sm text-[#232321]">
+                        <span className="w-8 text-center font-rubik font-semibold text-sm text-kicks-dark">
                           {item.quantity}
                         </span>
                         <button
                           onClick={() => dispatch(incrementQuantity(item.id))}
-                          className="w-8 h-8 flex items-center justify-center rounded-r-lg hover:bg-[#e7e7e3] transition-colors font-rubik font-medium text-[#232321] cursor-pointer"
+                          className="w-8 h-8 flex items-center justify-center rounded-r-lg hover:bg-kicks-bg transition-colors font-rubik font-medium text-kicks-dark cursor-pointer"
                           aria-label="Increase quantity"
                         >
                           +
@@ -150,20 +150,20 @@ export default function Cart() {
 
         {/* Footer */}
         {items.length > 0 && (
-          <div className="border-t border-[#e7e7e3] px-6 py-5 space-y-4">
+          <div className="border-t border-kicks-bg px-6 py-5 space-y-4">
             <div className="flex flex-col gap-2">
-              <div className="flex justify-between font-open-sans text-sm text-[#232321]/60">
+              <div className="flex justify-between font-open-sans text-sm text-kicks-dark/60">
                 <span>Subtotal</span>
                 <span>${total.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between font-open-sans text-sm text-[#232321]/60">
+              <div className="flex justify-between font-open-sans text-sm text-kicks-dark/60">
                 <span>Shipping</span>
-                <span className="text-[#4a69e2] font-semibold">Free</span>
+                <span className="text-kicks-blue font-semibold">Free</span>
               </div>
-              <div className="h-px bg-[#e7e7e3] my-1" />
+              <div className="h-px bg-kicks-bg my-1" />
               <div className="flex justify-between">
-                <span className="font-rubik font-semibold text-lg text-[#232321]">Total</span>
-                <span className="font-rubik font-semibold text-lg text-[#ffa52f]">${total.toFixed(2)}</span>
+                <span className="font-rubik font-semibold text-lg text-kicks-dark">Total</span>
+                <span className="font-rubik font-semibold text-lg text-kicks-yellow">${total.toFixed(2)}</span>
               </div>
             </div>
             <button
@@ -171,10 +171,10 @@ export default function Cart() {
                 dispatch(closeCart());
                 router.push("/cart");
               }}
-              className="w-full h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
+              className="w-full h-12 bg-kicks-dark text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
               View Cart
             </button>
-            <button className="w-full h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
+            <button className="w-full h-12 bg-kicks-dark text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
               Checkout
             </button>
           </div>

@@ -22,9 +22,9 @@ export default function Button({
     "inline-flex items-center justify-center font-rubik font-medium uppercase tracking-wider rounded-lg transition-colors";
 
   const variants = {
-    dark: "bg-[#232321] text-white hover:bg-[#1a1a18]",
-    blue: "bg-[#4a69e2] text-white hover:opacity-90",
-    outline: "border border-[#232321] text-[#232321] hover:bg-[#232321]/5",
+    dark: "bg-kicks-dark text-white hover:bg-kicks-dark-hover",
+    blue: "bg-kicks-blue text-white hover:opacity-90",
+    outline: "border border-kicks-dark text-kicks-dark hover:bg-kicks-dark/5",
   };
 
   const sizes = {

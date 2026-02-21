@@ -9,13 +9,13 @@ export default function Breadcrumb({ items }) {
     <nav className="flex items-center gap-2 font-open-sans text-sm mb-4">
       {items.map((item, i) => (
         <span key={i} className="flex items-center gap-2">
-          {i > 0 && <span className="text-[#232321]/30">/</span>}
+          {i > 0 && <span className="text-kicks-dark/30">/</span>}
           {item.href ? (
-            <Link href={item.href} className="text-[#232321]/50 hover:text-[#4a69e2] transition-colors">
+            <Link href={item.href} className="text-kicks-dark/50 hover:text-kicks-blue transition-colors">
               {item.label}
             </Link>
           ) : (
-            <span className="text-[#232321] font-semibold">{item.label}</span>
+            <span className="text-kicks-dark font-semibold">{item.label}</span>
           )}
         </span>
       ))}

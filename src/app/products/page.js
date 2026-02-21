@@ -61,7 +61,7 @@ export default function ProductsPage() {
 
   return (
     <div className="flex flex-col">
-      <main className="flex-1 bg-[#e7e7e3]">
+      <main className="flex-1 bg-kicks-bg">
         <PageHeader
           title="All Products"
           description="Browse our collection of quality products"
@@ -72,8 +72,8 @@ export default function ProductsPage() {
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Sidebar Filters */}
             <aside className="lg:w-64 flex-shrink-0">
-              <div className="bg-[#fafafa] rounded-2xl p-6 sticky top-[100px]">
-                <h2 className="font-rubik font-semibold text-[#232321] uppercase text-sm tracking-wider mb-4">
+              <div className="bg-kicks-card rounded-2xl p-6 sticky top-[100px]">
+                <h2 className="font-rubik font-semibold text-kicks-dark uppercase text-sm tracking-wider mb-4">
                   Categories
                 </h2>
                 <ul className="space-y-1">
@@ -82,8 +82,8 @@ export default function ProductsPage() {
                       onClick={() => handleCategoryChange(null)}
                       className={`w-full text-left px-3 py-2.5 rounded-xl transition-colors font-rubik text-sm cursor-pointer ${
                         !selectedCategory
-                          ? "bg-[#4a69e2] text-white font-semibold"
-                          : "text-[#232321]/70 hover:bg-[#e7e7e3]"
+                          ? "bg-kicks-blue text-white font-semibold"
+                          : "text-kicks-dark/70 hover:bg-kicks-bg"
                       }`}>
                       All Categories
                     </button>
@@ -94,8 +94,8 @@ export default function ProductsPage() {
                         onClick={() => handleCategoryChange(category.id)}
                         className={`w-full text-left px-3 py-2.5 rounded-xl transition-colors font-rubik text-sm cursor-pointer ${
                           selectedCategory === category.id
-                            ? "bg-[#4a69e2] text-white font-semibold"
-                            : "text-[#232321]/70 hover:bg-[#e7e7e3]"
+                            ? "bg-kicks-blue text-white font-semibold"
+                            : "text-kicks-dark/70 hover:bg-kicks-bg"
                         }`}>
                         {category.name}
                       </button>
@@ -109,10 +109,10 @@ export default function ProductsPage() {
             <div className="flex-1">
               {/* Results info */}
               <div className="flex items-center justify-between mb-6">
-                <p className="font-open-sans text-sm text-[#232321]/60">
+                <p className="font-open-sans text-sm text-kicks-dark/60">
                   Showing page {page + 1}
                   {isFetching && (
-                    <span className="ml-2 text-[#4a69e2] font-rubik font-medium">Loading...</span>
+                    <span className="ml-2 text-kicks-blue font-rubik font-medium">Loading...</span>
                   )}
                 </p>
               </div>

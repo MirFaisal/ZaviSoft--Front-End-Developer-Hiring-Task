@@ -7,8 +7,8 @@ export default function ProductGrid({ products, isLoading, error }) {
   if (error) {
     return (
       <div className="text-center py-16">
-        <p className="font-rubik font-semibold text-lg text-[#232321]">Something went wrong</p>
-        <p className="font-open-sans text-sm text-[#232321]/60 mt-1">Failed to load products. Please try again.</p>
+        <p className="font-rubik font-semibold text-lg text-kicks-dark">Something went wrong</p>
+        <p className="font-open-sans text-sm text-kicks-dark/60 mt-1">Failed to load products. Please try again.</p>
       </div>
     );
   }
@@ -26,8 +26,8 @@ export default function ProductGrid({ products, isLoading, error }) {
   if (!products || products.length === 0) {
     return (
       <div className="text-center py-16">
-        <p className="font-rubik font-semibold text-lg text-[#232321]">No products found</p>
-        <p className="font-open-sans text-sm text-[#232321]/60 mt-1">Try adjusting your filters</p>
+        <p className="font-rubik font-semibold text-lg text-kicks-dark">No products found</p>
+        <p className="font-open-sans text-sm text-kicks-dark/60 mt-1">Try adjusting your filters</p>
       </div>
     );
   }

@@ -33,12 +33,12 @@ export default function Reviews() {
     <section className="mx-4 lg:mx-10 xl:mx-15">
       {/* Header row */}
       <div className="flex items-center justify-between mb-8 lg:mb-12">
-        <h2 className="font-rubik font-semibold text-3xl lg:text-[74px] text-[#232321] uppercase leading-[0.95]">
+        <h2 className="font-rubik font-semibold text-3xl lg:text-[74px] text-kicks-dark uppercase leading-[0.95]">
           Reviews
         </h2>
         <Link
           href="#"
-          className="inline-flex items-center justify-center h-12 px-4 rounded-lg bg-[#4a69e2] font-rubik font-medium text-sm text-white uppercase tracking-wider hover:opacity-90 transition-colors">
+          className="inline-flex items-center justify-center h-12 px-4 rounded-lg bg-kicks-blue font-rubik font-medium text-sm text-white uppercase tracking-wider hover:opacity-90 transition-colors">
           See all
         </Link>
       </div>

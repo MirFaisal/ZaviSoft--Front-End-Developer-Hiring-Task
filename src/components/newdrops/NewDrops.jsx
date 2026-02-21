@@ -12,12 +12,12 @@ export default function NewDrops() {
     <section className="mx-4 lg:mx-10 xl:mx-15">
       {/* Header row */}
       <div className="flex items-center justify-between mb-8">
-        <h2 className="font-rubik font-semibold text-2xl lg:text-[74px] text-[#232321] uppercase leading-normal lg:leading-[0.95] max-w-[220px] lg:max-w-147.25">
+        <h2 className="font-rubik font-semibold text-2xl lg:text-[74px] text-kicks-dark uppercase leading-normal lg:leading-[0.95] max-w-[220px] lg:max-w-147.25">
           Don&apos;t miss out new drops
         </h2>
         <Link
           href="/products"
-          className="inline-flex items-center justify-center h-10 lg:h-12 px-4 rounded-lg bg-[#4a69e2] font-rubik font-medium text-sm text-white uppercase tracking-wider hover:opacity-90 transition-colors w-fit shrink-0">
+          className="inline-flex items-center justify-center h-10 lg:h-12 px-4 rounded-lg bg-kicks-blue font-rubik font-medium text-sm text-white uppercase tracking-wider hover:opacity-90 transition-colors w-fit shrink-0">
           Shop New Drops
         </Link>
       </div>

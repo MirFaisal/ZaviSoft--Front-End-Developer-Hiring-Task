@@ -13,7 +13,7 @@ export default function ProductImageGrid({ images = [], alt = "Product" }) {
       {images.slice(0, 4).map((src, i) => (
         <div
           key={i}
-          className={`relative aspect-[429/510] ${CORNER_CLASSES[i]} overflow-hidden bg-[#fafafa]`}>
+          className={`relative aspect-[429/510] ${CORNER_CLASSES[i]} overflow-hidden bg-kicks-card`}>
           <Image
             src={src}
             alt={`${alt} - ${i + 1}`}

@@ -37,20 +37,20 @@ export default function ProductInfo({ product }) {
     <div className="w-full lg:w-[40%] flex flex-col gap-8">
       {/* Badge + Title + Price */}
       <div className="flex flex-col gap-4">
-        <span className="self-start bg-[#4a69e2] text-white font-rubik font-semibold text-xs px-4 py-2 rounded-lg">
+        <span className="self-start bg-kicks-blue text-white font-rubik font-semibold text-xs px-4 py-2 rounded-lg">
           New Release
         </span>
-        <h1 className="font-rubik font-semibold text-xl lg:text-[32px] text-[#232321] uppercase leading-tight">
+        <h1 className="font-rubik font-semibold text-xl lg:text-[32px] text-kicks-dark uppercase leading-tight">
           {product.title}
         </h1>
-        <p className="font-rubik font-semibold text-2xl text-[#4a69e2]">
+        <p className="font-rubik font-semibold text-2xl text-kicks-blue">
           ${product.price.toFixed(2)}
         </p>
       </div>
 
       {/* Color */}
       <div className="flex flex-col gap-2">
-        <p className="font-rubik font-semibold text-base text-[#232321] uppercase">Color</p>
+        <p className="font-rubik font-semibold text-base text-kicks-dark uppercase">Color</p>
         <div className="flex items-center gap-4">
           {COLORS.map((color) => {
             const isSelected = selectedColor === color.value;
@@ -62,7 +62,7 @@ export default function ProductInfo({ product }) {
                 className="size-12 rounded-full flex items-center justify-center cursor-pointer">
                 <span
                   className={`block rounded-full transition-all duration-200 ${
-                    isSelected ? "size-8 ring-[3px] ring-[#232321] ring-offset-[3px]" : "size-8"
+                    isSelected ? "size-8 ring-[3px] ring-kicks-dark ring-offset-[3px]" : "size-8"
                   }`}
                   style={{ backgroundColor: color.value }}
                 />
@@ -75,8 +75,8 @@ export default function ProductInfo({ product }) {
       {/* Size */}
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
-          <p className="font-rubik font-semibold text-base text-[#232321] uppercase">Size</p>
-          <button className="font-rubik font-medium text-sm text-[#232321] uppercase tracking-wider underline underline-offset-2">
+          <p className="font-rubik font-semibold text-base text-kicks-dark uppercase">Size</p>
+          <button className="font-rubik font-medium text-sm text-kicks-dark uppercase tracking-wider underline underline-offset-2">
             Size chart
           </button>
         </div>
@@ -91,10 +91,10 @@ export default function ProductInfo({ product }) {
                 onClick={() => !isDisabled && setSelectedSize(size)}
                 className={`h-12 flex items-center justify-center rounded-lg font-rubik font-medium text-sm uppercase tracking-wider transition-colors ${
                   isSelected
-                    ? "bg-[#232321] text-white"
+                    ? "bg-kicks-dark text-white"
                     : isDisabled
-                      ? "bg-[#d2d1d3] text-[#8f8c91] cursor-not-allowed"
-                      : "bg-white text-[#232321] hover:bg-gray-100 cursor-pointer"
+                      ? "bg-kicks-disabled text-kicks-muted cursor-not-allowed"
+                      : "bg-white text-kicks-dark hover:bg-gray-100 cursor-pointer"
                 }`}>
                 {size}
               </button>
@@ -108,20 +108,20 @@ export default function ProductInfo({ product }) {
         <div className="flex gap-2">
           <button
             onClick={handleAddToCart}
-            className="flex-1 h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
+            className="flex-1 h-12 bg-kicks-dark text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
             Add to cart
           </button>
-          <button className="h-12 px-4 bg-[#232321] rounded-lg flex items-center justify-center hover:opacity-90 transition-colors cursor-pointer">
+          <button className="h-12 px-4 bg-kicks-dark rounded-lg flex items-center justify-center hover:opacity-90 transition-colors cursor-pointer">
             <Image src="/icons/heart.svg" alt="Wishlist" width={24} height={24} />
           </button>
         </div>
-        <button className="w-full h-12 bg-[#4a69e2] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
+        <button className="w-full h-12 bg-kicks-blue text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
           Buy it now
         </button>
       </div>
 
       {/* About the product */}
-      <div className="flex flex-col gap-2 text-[#232321]">
+      <div className="flex flex-col gap-2 text-kicks-dark">
         <p className="font-rubik font-semibold text-base uppercase">About the product</p>
         <div className="font-inter text-base opacity-80 leading-relaxed">
           <p>{product.description}</p>

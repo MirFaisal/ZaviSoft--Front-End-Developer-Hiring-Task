@@ -43,10 +43,10 @@ export default function Banner() {
     return (
       <section className="mx-4 lg:mx-10 xl:mx-15">
         <h2 ref={headingRef} className="font-rubik font-bold uppercase leading-none mb-6 whitespace-nowrap w-full">
-          <span className="text-[#232321]">Do it </span>
-          <span className="text-[#4a69e2]">right</span>
+          <span className="text-kicks-dark">Do it </span>
+          <span className="text-kicks-blue">right</span>
         </h2>
-        <div className="flex items-center justify-center w-full aspect-square lg:aspect-1320/750 rounded-3xl lg:rounded-[64px] bg-[#fafafa]">
+        <div className="flex items-center justify-center w-full aspect-square lg:aspect-1320/750 rounded-3xl lg:rounded-[64px] bg-kicks-card">
           <Spinner size="lg" />
         </div>
       </section>
@@ -63,8 +63,8 @@ export default function Banner() {
     <section className="mx-4 lg:mx-10 xl:mx-15">
       {/* ── "DO IT RIGHT" heading ── */}
       <h2 ref={headingRef} className="font-rubik font-bold uppercase leading-none mb-6 whitespace-nowrap w-full">
-        <span className="text-[#232321]">Do it </span>
-        <span className="text-[#4a69e2]">right</span>
+        <span className="text-kicks-dark">Do it </span>
+        <span className="text-kicks-blue">right</span>
       </h2>
 
       {/* ── Banner Image Card ── */}
@@ -85,8 +85,8 @@ export default function Banner() {
         {/* Rotated side tag */}
         <div className="flex absolute left-0 top-4 lg:top-20 h-[157px] lg:h-59.25 w-[30px] lg:w-16.75 items-center justify-center z-20">
           <div className="-rotate-90">
-            <div className="bg-[#232321] rounded-b-lg lg:rounded-b-2xl p-2 lg:px-6 lg:py-6 w-auto lg:w-59.25">
-              <p className="font-rubik font-semibold text-xs lg:text-base text-[#e7e7e3] whitespace-nowrap">
+            <div className="bg-kicks-dark rounded-b-lg lg:rounded-b-2xl p-2 lg:px-6 lg:py-6 w-auto lg:w-59.25">
+              <p className="font-rubik font-semibold text-xs lg:text-base text-kicks-bg whitespace-nowrap">
                 {product?.category?.name || "Featured Product"}
               </p>
             </div>
@@ -99,7 +99,7 @@ export default function Banner() {
             <h3 className="font-rubik font-semibold text-2xl lg:text-[74px] text-white leading-tight uppercase line-clamp-2">
               {product?.title || "Shop Now"}
             </h3>
-            <p className="font-open-sans font-semibold text-sm lg:text-2xl text-[#e7e7e3] max-w-[197px] lg:max-w-122.5">
+            <p className="font-open-sans font-semibold text-sm lg:text-2xl text-kicks-bg max-w-[197px] lg:max-w-122.5">
               {product?.description
                 ? product.description.length > 80
                   ? product.description.slice(0, 80) + "..."
@@ -109,7 +109,7 @@ export default function Banner() {
           </div>
           <Link
             href={product ? `/products/${product.id}` : "/products"}
-            className="inline-flex items-center justify-center h-8 lg:h-12 px-4 rounded-lg bg-[#232321] font-rubik font-medium text-sm text-white uppercase tracking-wider hover:bg-[#1a1a18] transition-colors w-fit">
+            className="inline-flex items-center justify-center h-8 lg:h-12 px-4 rounded-lg bg-kicks-dark font-rubik font-medium text-sm text-white uppercase tracking-wider hover:bg-kicks-dark-hover transition-colors w-fit">
             {product ? `Shop now — $${product.price}` : "Shop now"}
           </Link>
         </div>
@@ -124,7 +124,7 @@ export default function Banner() {
                   const imgIndex = productImages.indexOf(imgUrl);
                   if (imgIndex !== -1) setActiveThumb(imgIndex);
                 }}
-                className="size-16 lg:size-40 rounded-lg lg:rounded-4xl border border-[#e7e7e3] lg:border-3 overflow-hidden block hover:opacity-90 transition-opacity cursor-pointer">
+                className="size-16 lg:size-40 rounded-lg lg:rounded-4xl border border-kicks-bg lg:border-3 overflow-hidden block hover:opacity-90 transition-opacity cursor-pointer">
                 <Image
                   src={imgUrl}
                   alt={`${product?.title || "Product"} - view ${i + 1}`}

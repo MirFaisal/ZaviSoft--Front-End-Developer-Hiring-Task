@@ -8,7 +8,7 @@ export default function CategoriesPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-1 bg-[#e7e7e3]">
+      <main className="flex-1 bg-kicks-bg">
         <PageHeader
           title="Shop by Category"
           description="Browse our product categories to find exactly what you need"
@@ -22,8 +22,8 @@ export default function CategoriesPage() {
             </div>
           ) : error ? (
             <div className="text-center py-16">
-              <p className="font-rubik font-semibold text-lg text-[#232321]">Something went wrong</p>
-              <p className="font-open-sans text-sm text-[#232321]/60 mt-1">
+              <p className="font-rubik font-semibold text-lg text-kicks-dark">Something went wrong</p>
+              <p className="font-open-sans text-sm text-kicks-dark/60 mt-1">
                 Failed to load categories. Please try again.
               </p>
             </div>

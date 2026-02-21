@@ -12,10 +12,10 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#fafafa] rounded-3xl mx-4 lg:mx-10 xl:mx-15 mt-8">
+    <header className="sticky top-0 z-50 bg-kicks-card rounded-3xl mx-4 lg:mx-10 xl:mx-15 mt-8">
       <div className="flex items-center justify-between p-4 lg:p-8">
         {/* Left Navigation */}
-        <nav className="hidden lg:flex items-start gap-10 w-82.75 font-rubik font-semibold text-base text-[#232321]">
+        <nav className="hidden lg:flex items-start gap-10 w-82.75 font-rubik font-semibold text-base text-kicks-dark">
           <Link href="/products" className="flex items-center gap-0 hover:opacity-70 transition-opacity">
             <span className="ml-1">New Drops</span>
             <span>🔥</span>
@@ -33,7 +33,7 @@ export default function Header() {
         {/* Mobile menu button */}
         <button
           type="button"
-          className="lg:hidden p-2 text-[#232321]"
+          className="lg:hidden p-2 text-kicks-dark"
           aria-label="Menu"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
           <Image
@@ -61,7 +61,7 @@ export default function Header() {
           {/* Search */}
           <button
             type="button"
-            className="text-[#232321] hover:opacity-70 transition-opacity hidden sm:block"
+            className="text-kicks-dark hover:opacity-70 transition-opacity hidden sm:block"
             aria-label="Search">
             <Image src="/icons/search.svg" alt="Search" width={24} height={24} />
           </button>
@@ -69,7 +69,7 @@ export default function Header() {
           {/* User */}
           <button
             type="button"
-            className="text-[#232321] hover:opacity-70 transition-opacity"
+            className="text-kicks-dark hover:opacity-70 transition-opacity"
             aria-label="User account">
             <Image
               src="/icons/user.svg"
@@ -84,7 +84,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => dispatch(toggleCart())}
-            className="bg-[#ffa52f] rounded-full w-5 h-5 p-2.5 lg:w-8 lg:h-8 flex items-center justify-center font-open-sans font-semibold text-sm lg:text-base text-[#232321] hover:opacity-80 transition-opacity shrink-0"
+            className="bg-kicks-yellow rounded-full w-5 h-5 p-2.5 lg:w-8 lg:h-8 flex items-center justify-center font-open-sans font-semibold text-sm lg:text-base text-kicks-dark hover:opacity-80 transition-opacity shrink-0"
             aria-label="Cart">
             {cartItemCount}
           </button>
@@ -93,7 +93,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <nav className="lg:hidden border-t border-gray-200 px-4 py-4 font-rubik font-semibold text-base text-[#232321]">
+        <nav className="lg:hidden border-t border-gray-200 px-4 py-4 font-rubik font-semibold text-base text-kicks-dark">
           <div className="flex flex-col gap-4">
             <Link
               href="/products"
