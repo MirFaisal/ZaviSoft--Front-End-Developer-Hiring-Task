@@ -41,11 +41,11 @@ export default function ProductsPage() {
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Products" }]}
         />
 
-        <div className="max-w-[1440px] mx-auto px-4 lg:px-[60px] py-8 lg:py-12">
+        <div className="max-w-360 mx-auto px-4 lg:px-[60px] py-8 lg:py-12">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Sidebar Filters */}
             <aside className="lg:w-64 flex-shrink-0">
-              <div className="bg-[#fafafa] rounded-2xl p-6 sticky top-24">
+              <div className="bg-[#fafafa] rounded-2xl p-6 sticky top-[100px]">
                 <h2 className="font-rubik font-semibold text-[#232321] uppercase text-sm tracking-wider mb-4">
                   Categories
                 </h2>
