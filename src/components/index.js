@@ -11,7 +11,7 @@ export {
 } from "./products";
 
 // Cart components
-export { Cart, CartItem } from "./cart";
+export { Cart, CartItem, CartEmptyState } from "./cart";
 
 // Banner components
 export { Banner } from "./banner";
