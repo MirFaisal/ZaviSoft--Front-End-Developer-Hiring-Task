@@ -1,6 +1,6 @@
 "use client";
 
-import ProductCard from "./ProductCard";
+import { ProductCardBranded } from "./";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 
 export default function ProductGrid({ products, isLoading, error }) {
@@ -35,7 +35,7 @@ export default function ProductGrid({ products, isLoading, error }) {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCardBranded key={product.id} product={product} badge="" />
       ))}
     </div>
   );
