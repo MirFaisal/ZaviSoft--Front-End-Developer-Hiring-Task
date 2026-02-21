@@ -1,10 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { selectCartItems, selectCartTotal, selectCartItemCount, useGetProductsQuery } from "@/store";
-import { YouMayAlsoLike, CartItem } from "@/components";
+import { YouMayAlsoLike, CartItem, CartEmptyState } from "@/components";
 
 const DELIVERY_FEE = 6.99;
 
@@ -45,22 +44,7 @@ export default function CartPage() {
       <div className="max-w-360 mx-auto px-4 lg:px-15 pb-12 lg:pb-20">
         {items.length === 0 ? (
           /* Empty State */
-          <div className="flex flex-col items-center justify-center py-20 gap-6">
-            <div className="size-28 rounded-full bg-[#fafafa] flex items-center justify-center">
-              <Image src="/icons/cart-empty.svg" alt="Empty cart" width={56} height={56} />
-            </div>
-            <div className="text-center">
-              <p className="font-rubik font-semibold text-2xl text-[#232321]">Your bag is empty</p>
-              <p className="font-open-sans text-base text-[#232321]/60 mt-2">
-                Looks like you haven&apos;t added anything yet
-              </p>
-            </div>
-            <Link
-              href="/products"
-              className="h-12 px-8 bg-[#4a69e2] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors flex items-center justify-center">
-              Continue Shopping
-            </Link>
-          </div>
+          <CartEmptyState />
         ) : (
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start">
             {/* Left: Your Bag */}
