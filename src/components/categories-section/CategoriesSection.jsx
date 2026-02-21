@@ -17,7 +17,7 @@ export default function CategoriesSection() {
   const allCategories = (rawCategories || []).filter((cat) => {
     const name = (cat.name || "").toLowerCase();
     return !name.includes("test") && !name.includes("timestamp") && !name.includes("{{") && !name.includes("new category") && name.length > 0;
-  }).slice(0, 4);
+  }).slice(0, 6);
 
   // Show 2 categories at a time
   const visibleCategories = allCategories.slice(startIndex, startIndex + 2);
@@ -56,47 +56,53 @@ export default function CategoriesSection() {
         ) : (
           <div className="flex flex-col lg:flex-row gap-0 lg:h-150">
             {visibleCategories.map((category, index) => (
-              <div
-                key={category.id}
-                className={`relative flex-none lg:flex-1 h-[348px] lg:h-full ${
-                  index === 1 ? "bg-[#f6f6f6]" : "bg-[#eceef0]"
-                } ${index === 0 ? "rounded-tl-3xl lg:rounded-tl-[64px]" : ""} overflow-hidden`}>
-                {/* Category image */}
-                <Image
-                  src={getValidImageUrl(category.image, CATEGORY_PLACEHOLDER)}
-                  alt={category.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  unoptimized
-                />
-
-                {/* Label + arrow button */}
-                <div className="absolute bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm px-4 py-4 lg:px-12 lg:py-8 flex items-end justify-between">
-                  <h3 className="font-rubik font-semibold text-2xl lg:text-4xl text-kicks-dark uppercase leading-tight">
-                    {category.name.split(" ").map((word, i) => (
-                      <span key={i} className="block">
-                        {word}
-                      </span>
-                    ))}
-                  </h3>
-                  <Link
-                    href={`/categories/${category.id}`}
-                    className="flex items-center justify-center p-2 rounded lg:rounded-lg bg-kicks-dark hover:bg-kicks-dark-hover transition-colors shrink-0">
-                    <Image
-                      src="/icons/arrow-trend-right-up.svg"
-                      alt="View category"
-                      width={24}
-                      height={24}
-                      className="-rotate-45"
-                    />
-                  </Link>
-                </div>
-              </div>
+              <CategoryCardItem key={category.id} category={category} index={index} />
             ))}
           </div>
         )}
       </div>
     </section>
+  );
+}
+
+function CategoryCardItem({ category, index }) {
+  const [imgError, setImgError] = useState(false);
+  const placeholder = `https://placehold.co/600x600/e2e8f0/475569?text=${encodeURIComponent(category.name)}`;
+  const src = imgError ? placeholder : getValidImageUrl(category.image, placeholder);
+
+  return (
+    <div
+      className={`relative flex-none lg:flex-1 h-[348px] lg:h-full ${
+        index === 1 ? "bg-[#f6f6f6]" : "bg-[#eceef0]"
+      } ${index === 0 ? "rounded-tl-3xl lg:rounded-tl-[64px]" : ""} overflow-hidden`}>
+      {/* Category image */}
+      <Image
+        src={src}
+        alt={category.name}
+        fill
+        className="object-cover"
+        sizes="(max-width: 1024px) 100vw, 40vw"
+        unoptimized
+        onError={() => setImgError(true)}
+      />
+
+      {/* Label + arrow button */}
+      <div className="absolute bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm px-4 py-4 lg:px-12 lg:py-8 flex items-end justify-between">
+        <h3 className="font-rubik font-semibold text-2xl lg:text-4xl text-kicks-dark uppercase leading-tight line-clamp-2">
+          {category.name}
+        </h3>
+        <Link
+          href={`/categories/${category.id}`}
+          className="flex items-center justify-center p-2 rounded lg:rounded-lg bg-kicks-dark hover:bg-kicks-dark-hover transition-colors shrink-0">
+          <Image
+            src="/icons/arrow-trend-right-up.svg"
+            alt="View category"
+            width={24}
+            height={24}
+            className="-rotate-45"
+          />
+        </Link>
+      </div>
+    </div>
   );
 }
