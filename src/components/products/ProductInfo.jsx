@@ -125,10 +125,6 @@ export default function ProductInfo({ product }) {
         <p className="font-rubik font-semibold text-base uppercase">About the product</p>
         <div className="font-inter text-base opacity-80 leading-relaxed">
           <p>{product.description}</p>
-          <ul className="list-disc ml-6 mt-3 space-y-1">
-            <li>Pay over time in interest-free installments with Affirm, Klarna or Afterpay.</li>
-            <li>Join adiClub to get unlimited free standard shipping, returns, &amp; exchanges.</li>
-          </ul>
         </div>
       </div>
     </div>
