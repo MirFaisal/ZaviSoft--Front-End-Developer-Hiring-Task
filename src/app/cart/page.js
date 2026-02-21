@@ -62,11 +62,11 @@ export default function CartPage() {
             </Link>
           </div>
         ) : (
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start">
             {/* Left: Your Bag */}
-            <div className="flex-1 bg-[#fafafa] rounded-2xl p-5 lg:p-6">
-              <div className="flex flex-col gap-2 mb-10 lg:mb-12">
-                <h1 className="font-rubik font-semibold text-2xl lg:text-[32px] text-[#232321] leading-normal">
+            <div className="flex-1 bg-[#fafafa] rounded-2xl p-4 lg:p-6">
+              <div className="flex flex-col gap-2 mb-2 lg:mb-12">
+                <h1 className="font-rubik font-semibold text-xl lg:text-[32px] text-[#232321] leading-normal">
                   Your Bag
                 </h1>
                 <p className="font-open-sans text-sm lg:text-base text-[#232321]/80 leading-normal">
@@ -83,9 +83,9 @@ export default function CartPage() {
             </div>
 
             {/* Right: Order Summary — Figma node 1:3942 */}
-            <div className="w-full lg:w-[418px] shrink-0 flex flex-col gap-6">
-              <div className="flex flex-col gap-6">
-                <h2 className="font-rubik font-semibold text-2xl lg:text-[32px] text-[#232321] leading-normal">
+            <div className="w-full lg:w-[418px] shrink-0 bg-[#fafafa] lg:bg-transparent rounded-2xl lg:rounded-none p-4 lg:p-0 flex flex-col gap-4 lg:gap-6">
+              <div className="flex flex-col gap-4 lg:gap-6">
+                <h2 className="font-rubik font-semibold text-xl lg:text-[32px] text-[#232321] leading-normal">
                   Order Summary
                 </h2>
 
@@ -127,7 +127,7 @@ export default function CartPage() {
                 Checkout
               </button>
 
-              <button className="font-open-sans font-semibold text-base lg:text-xl text-[#232321] underline text-left cursor-pointer">
+              <button className="font-open-sans font-semibold text-base lg:text-xl text-[#232321] underline text-left cursor-pointer hover:opacity-80 transition-opacity">
                 Use a promo code
               </button>
             </div>
