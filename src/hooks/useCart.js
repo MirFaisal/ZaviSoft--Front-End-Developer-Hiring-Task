@@ -26,8 +26,9 @@ export function useCart() {
         title: product.title,
         price: product.price,
         image: product.images?.[0] || "",
+        description: product.description || "",
         quantity: 1,
-      })
+      }),
     );
   };
 

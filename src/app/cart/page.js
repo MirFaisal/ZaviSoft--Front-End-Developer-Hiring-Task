@@ -103,29 +103,26 @@ export default function CartPage() {
                       {/* Info block — flex gap-[80px] between details and price */}
                       <div className="flex gap-4 lg:gap-20">
                         {/* Product details — w-[325px], gap-[20px] */}
-                        <div className="flex-1 lg:flex-none lg:w-[325px] flex flex-col gap-3 lg:gap-5">
+                        <div className="flex-1 lg:flex-none lg:w-[325px] flex flex-col gap-3">
                           {/* Title + descriptions — gap-[8px] */}
-                          <div className="flex flex-col gap-1 lg:gap-2">
-                            <h3 className="font-rubik font-semibold text-sm lg:text-2xl text-[#232321] uppercase leading-normal">
+                          <div className="flex flex-col gap-1">
+                            <h3 className="font-rubik font-semibold text-sm lg:text-xl text-[#232321] uppercase leading-normal">
                               {item.title}
                             </h3>
-                            <p className="font-open-sans font-semibold text-xs lg:text-xl text-[#232321]/80 leading-normal">
-                              Men&apos;s Road Running Shoes
-                            </p>
-                            <p className="font-open-sans font-semibold text-xs lg:text-xl text-[#232321]/80 leading-normal">
-                              Enamel Blue/ University White
+                            <p className="font-open-sans font-semibold text-xs lg:text-lg text-[#232321]/80 leading-normal line-clamp-2">
+                              {item.description || "No description available"}
                             </p>
                           </div>
                           {/* Size + Quantity — gap-[40px], each gap-[24px] */}
                           <div className="flex items-center gap-6 lg:gap-10">
                             <div className="flex items-center gap-3 lg:gap-6">
-                              <span className="font-open-sans font-semibold text-xs lg:text-xl text-[#232321]/80">
+                              <span className="font-open-sans font-semibold text-xs lg:text-lg text-[#232321]/80">
                                 Size 10
                               </span>
                               <Image src="/icons/caret-down.svg" alt="" width={24} height={24} />
                             </div>
                             <div className="flex items-center gap-3 lg:gap-6">
-                              <span className="font-open-sans font-semibold text-xs lg:text-xl text-[#232321]/80">
+                              <span className="font-open-sans font-semibold text-xs lg:text-lg text-[#232321]/80">
                                 Quantity {item.quantity}
                               </span>
                               <Image src="/icons/caret-down.svg" alt="" width={24} height={24} />

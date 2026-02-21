@@ -25,6 +25,7 @@ export default function ProductCard({ product }) {
         title,
         price,
         image: imageUrl,
+        description: product.description || "",
         quantity: 1,
       })
     );

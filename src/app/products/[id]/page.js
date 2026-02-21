@@ -35,12 +35,15 @@ export default function ProductDetailPage({ params }) {
 
   const handleAddToCart = () => {
     if (!product) return;
+
+    console.log(product);
     dispatch(
       addToCart({
         id: product.id,
         title: product.title,
         price: product.price,
         image: getValidImageUrl(product.images?.[0], PLACEHOLDER),
+        description: product.description || "",
         quantity: 1,
       }),
     );
