@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectCartItems,
@@ -15,6 +16,7 @@ import {
 
 export default function Cart() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const items = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
   const isOpen = useSelector(selectIsCartOpen);
@@ -164,6 +166,14 @@ export default function Cart() {
                 <span className="font-rubik font-semibold text-lg text-[#ffa52f]">${total.toFixed(2)}</span>
               </div>
             </div>
+            <button
+              onClick={() => {
+                dispatch(closeCart());
+                router.push("/cart");
+              }}
+              className="w-full h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
+              View Cart
+            </button>
             <button className="w-full h-12 bg-[#232321] text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
               Checkout
             </button>

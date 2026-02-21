@@ -2,7 +2,13 @@
 export { Header, Footer } from "./layout";
 
 // Product components
-export { ProductCard, ProductCardBranded, ProductGrid, ProductCardSkeleton } from "./products";
+export {
+  ProductCard,
+  ProductCardBranded,
+  ProductGrid,
+  ProductCardSkeleton,
+  YouMayAlsoLike,
+} from "./products";
 
 // Cart components
 export { Cart } from "./cart";

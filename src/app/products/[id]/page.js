@@ -4,8 +4,8 @@ import { use, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { Spinner, NavArrows, SectionHeader, ImageSlider } from "@/components/ui";
-import { ProductCardBranded } from "@/components/products";
+import { Spinner, ImageSlider } from "@/components/ui";
+import { YouMayAlsoLike } from "@/components/products";
 import { useGetProductByIdQuery, useGetProductsByCategoryQuery, addToCart } from "@/store";
 import { getValidImageUrl, getValidImages } from "@/lib/utils";
 
@@ -22,7 +22,6 @@ export default function ProductDetailPage({ params }) {
   const dispatch = useDispatch();
   const [selectedSize, setSelectedSize] = useState(38);
   const [selectedColor, setSelectedColor] = useState(COLORS[0].value);
-  const [relatedPage, setRelatedPage] = useState(0);
 
   const { data: product, isLoading, error } = useGetProductByIdQuery(id);
 
@@ -32,9 +31,7 @@ export default function ProductDetailPage({ params }) {
   );
 
   // Related products = same category, excluding current product
-  const relatedProducts = (categoryProducts || []).filter((p) => p.id !== Number(id)).slice(0, 8);
-  const relatedVisible = relatedProducts.slice(relatedPage * 4, relatedPage * 4 + 4);
-  const relatedPageCount = Math.ceil(relatedProducts.length / 4) || 1;
+  const relatedProducts = (categoryProducts || []).filter((p) => p.id !== Number(id)).slice(0, 16);
 
   const handleAddToCart = () => {
     if (!product) return;
@@ -241,47 +238,10 @@ export default function ProductDetailPage({ params }) {
         </section>
 
         {/* ─── You may also like ─── */}
-        {relatedProducts.length > 0 && (
-          <section className="max-w-[1440px] mx-auto px-4 lg:px-[60px] pb-12 lg:pb-20">
-            <div className="flex flex-col gap-8 items-center">
-              {/* Header */}
-              <SectionHeader
-                title="You may also like"
-                className="w-full"
-                action={
-                  <NavArrows
-                    onPrev={() => setRelatedPage((p) => Math.max(0, p - 1))}
-                    onNext={() => setRelatedPage((p) => Math.min(relatedPageCount - 1, p + 1))}
-                    canGoBack={relatedPage > 0}
-                    canGoForward={relatedPage < relatedPageCount - 1}
-                    variant="dark"
-                  />
-                }
-              />
-
-              {/* Product Cards Grid */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-                {relatedVisible.map((rp) => (
-                  <ProductCardBranded key={rp.id} product={rp} badge="New" />
-                ))}
-              </div>
-
-              {/* Pagination Dots */}
-              <div className="flex gap-1">
-                {Array.from({ length: relatedPageCount }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setRelatedPage(i)}
-                    className={`h-1.5 w-10 rounded-lg transition-colors ${
-                      i === relatedPage ? "bg-[#4a69e2]" : "bg-[#232321]/25"
-                    }`}
-                    aria-label={`Page ${i + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+        <YouMayAlsoLike
+          products={relatedProducts}
+          className="max-w-[1440px] mx-auto px-4 lg:px-[60px] pb-12 lg:pb-20"
+        />
       </main>
     </div>
   );
