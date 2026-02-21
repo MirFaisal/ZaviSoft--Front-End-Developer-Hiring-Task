@@ -115,17 +115,17 @@ export default function CartPage() {
                           </div>
                           {/* Size + Quantity — gap-[40px], each gap-[24px] */}
                           <div className="flex items-center gap-6 lg:gap-10">
-                            <div className="flex items-center gap-3 lg:gap-6">
+                            <div className="flex items-center gap-3 lg:gap-4">
                               <span className="font-open-sans font-semibold text-xs lg:text-lg text-[#232321]/80">
                                 Size 10
                               </span>
-                              <Image src="/icons/caret-down.svg" alt="" width={24} height={24} />
+                              <Image src="/icons/caret-down.svg" alt="" width={18} height={18} />
                             </div>
-                            <div className="flex items-center gap-3 lg:gap-6">
+                            <div className="flex items-center gap-3 lg:gap-4">
                               <span className="font-open-sans font-semibold text-xs lg:text-lg text-[#232321]/80">
                                 Quantity {item.quantity}
                               </span>
-                              <Image src="/icons/caret-down.svg" alt="" width={24} height={24} />
+                              <Image src="/icons/caret-down.svg" alt="" width={18} height={18} />
                             </div>
                           </div>
                         </div>
