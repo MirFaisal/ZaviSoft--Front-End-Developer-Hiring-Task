@@ -7,18 +7,20 @@
  */
 export default function Pagination({ page, hasMore, onPrev, onNext }) {
   return (
-    <div className="flex items-center justify-center gap-4 mt-8 pt-8 border-t">
+    <div className="flex items-center justify-center gap-4 mt-8 pt-8 border-t border-[#e7e7e3]">
       <button
         onClick={onPrev}
         disabled={page === 0}
-        className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+        className="h-10 px-5 rounded-lg bg-white border border-[#e7e7e3] text-[#232321] font-rubik font-medium text-sm uppercase tracking-wider hover:bg-[#e7e7e3] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer">
         ← Previous
       </button>
-      <span className="text-gray-600">Page {page + 1}</span>
+      <span className="font-rubik font-semibold text-sm text-[#232321]">
+        Page {page + 1}
+      </span>
       <button
         onClick={onNext}
         disabled={!hasMore}
-        className="px-4 py-2 rounded-lg bg-[#232321] text-white hover:bg-[#1a1a18] disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+        className="h-10 px-5 rounded-lg bg-[#232321] text-white font-rubik font-medium text-sm uppercase tracking-wider hover:bg-[#1a1a18] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer">
         Next →
       </button>
     </div>

@@ -32,43 +32,44 @@ export default function ProductCard({ product }) {
 
   return (
     <Link href={`/products/${id}`} className="group block">
-      <article className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+      <article className="bg-[#fafafa] rounded-2xl overflow-hidden hover:shadow-lg transition-shadow">
         {/* Image */}
-        <div className="relative aspect-square overflow-hidden bg-gray-100">
-          <Image
-            src={imageUrl}
-            alt={title}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
-            onError={() => setImgError(true)}
-            unoptimized
-          />
+        <div className="relative aspect-square overflow-hidden bg-[#e7e7e3] p-2">
+          <div className="relative w-full h-full rounded-xl overflow-hidden">
+            <Image
+              src={imageUrl}
+              alt={title}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
+              onError={() => setImgError(true)}
+              unoptimized
+            />
+          </div>
+          {/* Category badge */}
+          {category && (
+            <div className="absolute top-2 left-2 bg-[#4a69e2] px-2 py-1 rounded-br-xl rounded-tl-xl">
+              <span className="font-rubik font-semibold text-xs text-white">{category.name}</span>
+            </div>
+          )}
           {/* Quick Add Button */}
           <button
             onClick={handleAddToCart}
-            className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-indigo-600 text-white px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-indigo-700 text-sm font-medium"
+            className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-[#232321] text-white px-5 py-2.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-[#1a1a18] font-rubik font-medium text-xs uppercase tracking-wider cursor-pointer whitespace-nowrap"
           >
             Add to Cart
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-4">
-          {/* Category */}
-          {category && (
-            <span className="text-xs text-indigo-600 font-medium uppercase tracking-wide">
-              {category.name}
-            </span>
-          )}
-
+        <div className="p-4 flex flex-col gap-1">
           {/* Title */}
-          <h3 className="mt-1 text-gray-900 font-medium line-clamp-2 group-hover:text-indigo-600 transition-colors">
+          <h3 className="font-rubik font-semibold text-sm text-[#232321] line-clamp-2 uppercase leading-snug">
             {title}
           </h3>
 
           {/* Price */}
-          <p className="mt-2 text-lg font-bold text-gray-900">
+          <p className="font-rubik font-semibold text-base text-[#4a69e2]">
             ${price.toFixed(2)}
           </p>
         </div>

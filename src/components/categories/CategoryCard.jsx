@@ -28,7 +28,7 @@ export default function CategoryCard({ category }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-4">
-          <h3 className="text-white text-xl font-semibold group-hover:text-indigo-300 transition-colors">
+          <h3 className="text-white font-rubik font-semibold text-xl uppercase group-hover:text-[#ffa52f] transition-colors">
             {name}
           </h3>
         </div>

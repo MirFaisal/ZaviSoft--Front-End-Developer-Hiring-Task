@@ -38,9 +38,11 @@ export default function CategoryPage({ params }) {
   if (!category && !isLoading) {
     return (
       <div className="min-h-screen flex flex-col">
-        <main className="flex-1 flex items-center justify-center">
+        <main className="flex-1 bg-[#e7e7e3] flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Category Not Found</h1>
+            <h1 className="font-rubik font-semibold text-2xl text-[#232321] mb-4 uppercase">
+              Category Not Found
+            </h1>
             <Link
               href="/categories"
               className="inline-block bg-[#232321] text-white px-6 py-3 rounded-lg hover:bg-[#1a1a18] transition-colors font-rubik font-medium text-sm uppercase tracking-wider">
@@ -54,7 +56,7 @@ export default function CategoryPage({ params }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-1 bg-gray-50">
+      <main className="flex-1 bg-[#e7e7e3]">
         <PageHeader
           title={category?.name || "Loading..."}
           description={`Browse all products in ${category?.name || "this category"}`}
@@ -65,29 +67,27 @@ export default function CategoryPage({ params }) {
           ]}
         />
 
-        <div className="container mx-auto px-4 py-8">
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            {/* Results info */}
-            <div className="flex items-center justify-between mb-6">
-              <p className="text-gray-600">
-                Showing page {page + 1}
-                {isFetching && <span className="ml-2 text-[#4a69e2]">Loading...</span>}
-              </p>
-            </div>
-
-            {/* Products */}
-            <ProductGrid products={products} isLoading={isLoading} error={error} />
-
-            {/* Pagination */}
-            {products && products.length > 0 && (
-              <Pagination
-                page={page}
-                hasMore={products.length >= PRODUCTS_PER_PAGE}
-                onPrev={handlePrevPage}
-                onNext={handleNextPage}
-              />
-            )}
+        <div className="max-w-[1440px] mx-auto px-4 lg:px-[60px] py-8 lg:py-12">
+          {/* Results info */}
+          <div className="flex items-center justify-between mb-6">
+            <p className="font-open-sans text-sm text-[#232321]/60">
+              Showing page {page + 1}
+              {isFetching && <span className="ml-2 text-[#4a69e2] font-rubik font-medium">Loading...</span>}
+            </p>
           </div>
+
+          {/* Products */}
+          <ProductGrid products={products} isLoading={isLoading} error={error} />
+
+          {/* Pagination */}
+          {products && products.length > 0 && (
+            <Pagination
+              page={page}
+              hasMore={products.length >= PRODUCTS_PER_PAGE}
+              onPrev={handlePrevPage}
+              onNext={handleNextPage}
+            />
+          )}
         </div>
       </main>
     </div>

@@ -8,11 +8,15 @@ import Breadcrumb from "./Breadcrumb";
  */
 export default function PageHeader({ title, description, breadcrumbs }) {
   return (
-    <div className="bg-white border-b">
-      <div className="container mx-auto px-4 py-8">
+    <div className="bg-[#fafafa]">
+      <div className="max-w-[1440px] mx-auto px-4 lg:px-[60px] py-8 lg:py-12">
         {breadcrumbs && <Breadcrumb items={breadcrumbs} />}
-        <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
-        {description && <p className="mt-2 text-gray-600">{description}</p>}
+        <h1 className="font-rubik font-semibold text-3xl lg:text-5xl text-[#232321] uppercase">
+          {title}
+        </h1>
+        {description && (
+          <p className="mt-2 font-open-sans text-base text-[#232321]/60">{description}</p>
+        )}
       </div>
     </div>
   );

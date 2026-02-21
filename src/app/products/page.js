@@ -34,27 +34,29 @@ export default function ProductsPage() {
 
   return (
     <div className="flex flex-col">
-      <main className="flex-1 bg-gray-50">
+      <main className="flex-1 bg-[#e7e7e3]">
         <PageHeader
           title="All Products"
           description="Browse our collection of quality products"
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Products" }]}
         />
 
-        <div className="container mx-auto px-4 py-8">
+        <div className="max-w-[1440px] mx-auto px-4 lg:px-[60px] py-8 lg:py-12">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Sidebar Filters */}
             <aside className="lg:w-64 flex-shrink-0">
-              <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24">
-                <h2 className="font-semibold text-gray-900 mb-4">Categories</h2>
-                <ul className="space-y-2">
+              <div className="bg-[#fafafa] rounded-2xl p-6 sticky top-24">
+                <h2 className="font-rubik font-semibold text-[#232321] uppercase text-sm tracking-wider mb-4">
+                  Categories
+                </h2>
+                <ul className="space-y-1">
                   <li>
                     <button
                       onClick={() => setSelectedCategory(null)}
-                      className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                      className={`w-full text-left px-3 py-2.5 rounded-xl transition-colors font-rubik text-sm cursor-pointer ${
                         !selectedCategory
-                          ? "bg-[#4a69e2]/10 text-[#4a69e2]"
-                          : "text-gray-600 hover:bg-gray-100"
+                          ? "bg-[#4a69e2] text-white font-semibold"
+                          : "text-[#232321]/70 hover:bg-[#e7e7e3]"
                       }`}>
                       All Categories
                     </button>
@@ -63,10 +65,10 @@ export default function ProductsPage() {
                     <li key={category.id}>
                       <button
                         onClick={() => setSelectedCategory(category.id)}
-                        className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                        className={`w-full text-left px-3 py-2.5 rounded-xl transition-colors font-rubik text-sm cursor-pointer ${
                           selectedCategory === category.id
-                            ? "bg-[#4a69e2]/10 text-[#4a69e2]"
-                            : "text-gray-600 hover:bg-gray-100"
+                            ? "bg-[#4a69e2] text-white font-semibold"
+                            : "text-[#232321]/70 hover:bg-[#e7e7e3]"
                         }`}>
                         {category.name}
                       </button>
@@ -78,28 +80,28 @@ export default function ProductsPage() {
 
             {/* Product Grid */}
             <div className="flex-1">
-              <div className="bg-white rounded-lg shadow-sm p-6">
-                {/* Results info */}
-                <div className="flex items-center justify-between mb-6">
-                  <p className="text-gray-600">
-                    Showing page {page + 1}
-                    {isFetching && <span className="ml-2 text-[#4a69e2]">Loading...</span>}
-                  </p>
-                </div>
-
-                {/* Products */}
-                <ProductGrid products={products} isLoading={isLoading} error={error} />
-
-                {/* Pagination */}
-                {products && products.length > 0 && (
-                  <Pagination
-                    page={page}
-                    hasMore={products.length >= PRODUCTS_PER_PAGE}
-                    onPrev={handlePrevPage}
-                    onNext={handleNextPage}
-                  />
-                )}
+              {/* Results info */}
+              <div className="flex items-center justify-between mb-6">
+                <p className="font-open-sans text-sm text-[#232321]/60">
+                  Showing page {page + 1}
+                  {isFetching && (
+                    <span className="ml-2 text-[#4a69e2] font-rubik font-medium">Loading...</span>
+                  )}
+                </p>
               </div>
+
+              {/* Products */}
+              <ProductGrid products={products} isLoading={isLoading} error={error} />
+
+              {/* Pagination */}
+              {products && products.length > 0 && (
+                <Pagination
+                  page={page}
+                  hasMore={products.length >= PRODUCTS_PER_PAGE}
+                  onPrev={handlePrevPage}
+                  onNext={handleNextPage}
+                />
+              )}
             </div>
           </div>
         </div>
