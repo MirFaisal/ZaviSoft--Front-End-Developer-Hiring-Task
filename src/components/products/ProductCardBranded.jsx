@@ -18,6 +18,14 @@ export default function ProductCardBranded({ product, badge = "New" }) {
   const { id, title, price, images } = product;
   const [imgError, setImgError] = useState(false);
 
+  // 
+  /**
+   * Determines the image URL to display for a product card.
+   * If an image error occurred, uses the placeholder image.
+   * Otherwise, attempts to get the first valid image from the images array,
+   * falling back to the placeholder if no valid image is found.
+   * @type {string}
+   */
   const imageUrl = imgError ? PLACEHOLDER : (getFirstValidImage(images) || PLACEHOLDER);
 
   return (
