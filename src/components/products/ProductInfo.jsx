@@ -29,6 +29,7 @@ export default function ProductInfo({ product }) {
         image: getValidImageUrl(product.images?.[0], PLACEHOLDER_PRODUCT),
         description: product.description || "",
         quantity: 1,
+        size: selectedSize,
       }),
     );
   };

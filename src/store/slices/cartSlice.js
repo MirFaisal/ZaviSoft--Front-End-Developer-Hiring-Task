@@ -41,11 +41,12 @@ const cartSlice = createSlice({
 
     // Add item to cart
     addToCart: (state, action) => {
-      const { id, title, price, image, description, quantity = 1 } = action.payload;
+      const { id, title, price, image, description, quantity = 1, size = null } = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
 
       if (existingItem) {
         existingItem.quantity += quantity;
+        if (size !== null) existingItem.size = size;
       } else {
         state.items.push({
           id,
@@ -54,6 +55,7 @@ const cartSlice = createSlice({
           image,
           description,
           quantity,
+          size,
         });
       }
       state.lastAddedItem = { id, title, price, image };
@@ -80,6 +82,28 @@ const cartSlice = createSlice({
           item.quantity -= 1;
         } else {
           state.items = state.items.filter((i) => i.id !== action.payload);
+        }
+      }
+    },
+
+    // Update size of an item
+    updateSize: (state, action) => {
+      const { id, size } = action.payload;
+      const item = state.items.find((item) => item.id === id);
+      if (item) {
+        item.size = size;
+      }
+    },
+
+    // Set quantity directly
+    setQuantity: (state, action) => {
+      const { id, quantity } = action.payload;
+      const item = state.items.find((item) => item.id === id);
+      if (item) {
+        if (quantity < 1) {
+          state.items = state.items.filter((i) => i.id !== id);
+        } else {
+          item.quantity = quantity;
         }
       }
     },
@@ -113,6 +137,8 @@ export const {
   removeFromCart,
   incrementQuantity,
   decrementQuantity,
+  updateSize,
+  setQuantity,
   clearCart,
   toggleCart,
   closeCart,
