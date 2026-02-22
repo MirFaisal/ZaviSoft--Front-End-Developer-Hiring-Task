@@ -38,7 +38,7 @@ export default function ProductCardBranded({ product, badge = "New" }) {
 
       {/* Product info */}
       <div className="flex flex-col gap-2 lg:gap-4">
-        <p className="font-rubik font-semibold text-base lg:text-2xl text-kicks-dark leading-tight line-clamp-2 uppercase">
+        <p className="font-rubik font-semibold text-base lg:text-2xl text-kicks-dark leading-tight line-clamp-2 uppercase min-h-[2lh]!">
           {title}
         </p>
         <Link

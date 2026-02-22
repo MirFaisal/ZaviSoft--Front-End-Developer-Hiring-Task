@@ -65,7 +65,7 @@ export default function ProductCard({ product }) {
         {/* Content */}
         <div className="p-4 flex flex-col gap-1">
           {/* Title */}
-          <h3 className="font-rubik font-semibold text-sm text-kicks-dark line-clamp-2 uppercase leading-snug">
+          <h3 className="font-rubik font-semibold text-sm text-kicks-dark line-clamp-2 uppercase leading-snug min-h-[2lh]!">
             {title}
           </h3>
 
