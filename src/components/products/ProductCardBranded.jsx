@@ -5,6 +5,7 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { getFirstValidImage, formatPrice } from "@/lib/utils";
 import { PLACEHOLDER_NO_IMAGE } from "@/lib/constants";
+import Link from "next/link";
 
 /**
  * Branded product card matching the KICKS Figma design.
@@ -30,6 +31,7 @@ export default function ProductCardBranded({ product, badge = "New" }) {
   return (
     <div className="flex flex-col gap-4">
       {/* Image container */}
+      <Link href={`/products/${id}`}>
       <div className="relative bg-kicks-card rounded-2xl lg:rounded-[28px] p-2 h-45 lg:h-87.5">
         <div className="relative w-full h-full rounded-xl lg:rounded-3xl overflow-hidden">
           <Image
@@ -48,6 +50,7 @@ export default function ProductCardBranded({ product, badge = "New" }) {
           </div>
         )}
       </div>
+      </Link>
 
       {/* Product info */}
       <div className="flex flex-col gap-2 lg:gap-4">

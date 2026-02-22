@@ -10,7 +10,7 @@ export default function NewDrops() {
   return (
     <section className="mx-4 lg:mx-10 xl:mx-15">
       {/* Header row */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-end justify-between mb-8">
         <h2 className="font-rubik font-semibold text-2xl lg:text-[74px] text-kicks-dark uppercase leading-normal lg:leading-[0.95] max-w-55 lg:max-w-147.25">
           Don&apos;t miss out new drops
         </h2>
