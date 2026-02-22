@@ -24,7 +24,7 @@ export default function NavArrows({ onPrev, onNext, canGoBack = true, canGoForwa
         type="button"
         onClick={onPrev}
         disabled={!canGoBack}
-        className={`flex items-center justify-center h-10 px-3 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed ${btnClass}`}
+        className={`flex items-center justify-center py-2 px-2 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed ${btnClass}`}
         aria-label="Previous">
         <Image
           src="/icons/chevron-forward-white.svg"
@@ -38,15 +38,9 @@ export default function NavArrows({ onPrev, onNext, canGoBack = true, canGoForwa
         type="button"
         onClick={onNext}
         disabled={!canGoForward}
-        className={`flex items-center justify-center h-10 px-3 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed ${btnClass}`}
+        className={`flex items-center justify-center py-2 px-2 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed ${btnClass}`}
         aria-label="Next">
-        <Image
-          src="/icons/chevron-forward-white.svg"
-          alt=""
-          width={24}
-          height={24}
-          className={iconClass}
-        />
+        <Image src="/icons/chevron-forward-white.svg" alt="" width={24} height={24} className={iconClass} />
       </button>
     </div>
   );
