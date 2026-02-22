@@ -6,6 +6,7 @@ import { initializeCart } from "@/store";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Cart } from "@/components/cart";
+import CartToast from "@/components/cart/CartToast";
 
 export default function LayoutShell({ children }) {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ export default function LayoutShell({ children }) {
     <div className="max-w-360 mx-auto">
       <Header />
       <Cart />
+      <CartToast />
       {children}
       <Footer />
     </div>

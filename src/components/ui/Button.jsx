@@ -19,7 +19,7 @@ export default function Button({
   ...props
 }) {
   const base =
-    "inline-flex items-center justify-center font-rubik font-medium uppercase tracking-wider rounded-lg transition-colors";
+    "inline-flex items-center justify-center font-rubik font-medium uppercase tracking-wider rounded-lg transition-colors cursor-pointer";
 
   const variants = {
     dark: "bg-kicks-dark text-white hover:bg-kicks-dark-hover",

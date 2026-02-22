@@ -3,18 +3,16 @@
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { selectCartItems, selectCartTotal, selectCartItemCount, useGetProductsQuery } from "@/store";
-import { YouMayAlsoLike, CartItem, CartEmptyState } from "@/components";
-
-const DELIVERY_FEE = 6.99;
+import { YouMayAlsoLike, CartItem, CartEmptyState, Button } from "@/components";
 
 export default function CartPage() {
   const items = useSelector(selectCartItems);
   const subtotal = useSelector(selectCartTotal);
   const itemCount = useSelector(selectCartItemCount);
 
-  const { data: suggestedProducts } = useGetProductsQuery({ offset: 0, limit: 16 });
+  const { data: suggestedProducts, error: suggestError } = useGetProductsQuery({ offset: 0, limit: 16 });
 
-  const total = items.length > 0 ? subtotal + DELIVERY_FEE : 0;
+  const total = subtotal;
 
   return (
     <div className="bg-kicks-bg min-h-screen">
@@ -67,7 +65,7 @@ export default function CartPage() {
             </div>
 
             {/* Right: Order Summary — Figma node 1:3942 */}
-            <div className="w-full lg:w-[418px] shrink-0 bg-kicks-card lg:bg-transparent rounded-2xl lg:rounded-none p-4 lg:p-0 flex flex-col gap-4 lg:gap-6">
+            <div className="w-full lg:w-104.5 shrink-0 bg-kicks-card lg:bg-transparent rounded-2xl lg:rounded-none p-4 lg:p-0 flex flex-col gap-4 lg:gap-6">
               <div className="flex flex-col gap-4 lg:gap-6">
                 <h2 className="font-rubik font-semibold text-xl lg:text-[32px] text-kicks-dark leading-normal">
                   Order Summary
@@ -86,8 +84,8 @@ export default function CartPage() {
                     <span className="font-open-sans font-semibold text-base lg:text-xl text-kicks-dark">
                       Delivery
                     </span>
-                    <span className="font-open-sans font-semibold text-base lg:text-xl text-kicks-dark/80">
-                      ${DELIVERY_FEE.toFixed(2)}
+                    <span className="font-open-sans font-semibold text-base lg:text-xl text-kicks-blue">
+                      Free
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
@@ -99,7 +97,9 @@ export default function CartPage() {
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="font-rubik font-semibold text-xl lg:text-2xl text-kicks-dark">Total</span>
+                    <span className="font-rubik font-semibold text-xl lg:text-2xl text-kicks-dark">
+                      Total
+                    </span>
                     <span className="font-rubik font-semibold text-xl lg:text-2xl text-kicks-dark/80">
                       ${total.toFixed(2)}
                     </span>
@@ -107,9 +107,9 @@ export default function CartPage() {
                 </div>
               </div>
 
-              <button className="w-full h-12 bg-kicks-dark text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-[0.25px] hover:bg-kicks-dark-hover transition-colors cursor-pointer">
+              <Button variant="dark" size="md" className="w-full">
                 Checkout
-              </button>
+              </Button>
 
               <button className="font-open-sans font-semibold text-base lg:text-xl text-kicks-dark underline text-left cursor-pointer hover:opacity-80 transition-opacity">
                 Use a promo code
@@ -118,7 +118,7 @@ export default function CartPage() {
           </div>
         )}
 
-        <YouMayAlsoLike products={suggestedProducts || []} className="mt-12 lg:mt-20" />
+        {!suggestError && <YouMayAlsoLike products={suggestedProducts || []} className="mt-12 lg:mt-20" />}
       </div>
     </div>
   );

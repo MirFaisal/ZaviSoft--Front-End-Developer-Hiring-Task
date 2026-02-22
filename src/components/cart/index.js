@@ -1,3 +1,4 @@
 export { default as Cart } from "./Cart";
 export { default as CartItem } from "./CartItem";
 export { default as CartEmptyState } from "./CartEmptyState";
+export { default as CartToast } from "./CartToast";

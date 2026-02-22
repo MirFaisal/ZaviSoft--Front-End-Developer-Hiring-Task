@@ -10,7 +10,7 @@ import { getValidImageUrl } from "@/lib/utils";
 const CATEGORY_PLACEHOLDER = "https://placehold.co/600x600/e2e8f0/475569?text=Category";
 
 export default function CategoriesSection() {
-  const { data: rawCategories, isLoading, error } = useGetCategoriesQuery();
+  const { data: rawCategories, isLoading, error, refetch } = useGetCategoriesQuery();
   const [startIndex, setStartIndex] = useState(0);
 
   // Filter out test/junk categories, keep even number (max 6)
@@ -57,6 +57,15 @@ export default function CategoriesSection() {
           <div className="flex flex-col items-center justify-center py-20 gap-3">
             <p className="font-rubik font-semibold text-white text-lg">Something went wrong</p>
             <p className="font-open-sans text-sm text-white/60">Could not load categories. Please try again later.</p>
+            <button
+              onClick={refetch}
+              className="mt-2 h-10 px-6 bg-kicks-blue text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
+              Try Again
+            </button>
+          </div>
+        ) : allCategories.length === 0 ? (
+          <div className="flex items-center justify-center py-20">
+            <p className="font-rubik font-semibold text-white/60">No categories available</p>
           </div>
         ) : (
           <div className="flex flex-col lg:flex-row gap-0 lg:h-150">

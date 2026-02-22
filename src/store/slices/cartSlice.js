@@ -27,6 +27,7 @@ const saveCartToStorage = (cart) => {
 const initialState = {
   items: [],
   isCartOpen: false,
+  lastAddedItem: null,
 };
 
 const cartSlice = createSlice({
@@ -55,6 +56,7 @@ const cartSlice = createSlice({
           quantity,
         });
       }
+      state.lastAddedItem = { id, title, price, image };
       saveCartToStorage(state.items);
     },
 
@@ -121,6 +123,11 @@ const cartSlice = createSlice({
     closeCart: (state) => {
       state.isCartOpen = false;
     },
+
+    // Clear last added notification
+    clearLastAdded: (state) => {
+      state.lastAddedItem = null;
+    },
   },
 });
 
@@ -136,6 +143,7 @@ export const {
   toggleCart,
   openCart,
   closeCart,
+  clearLastAdded,
 } = cartSlice.actions;
 
 // Selectors
@@ -145,6 +153,7 @@ export const selectCartItemCount = (state) =>
 export const selectCartTotal = (state) =>
   state.cart.items.reduce((total, item) => total + item.price * item.quantity, 0);
 export const selectIsCartOpen = (state) => state.cart.isCartOpen;
+export const selectLastAddedItem = (state) => state.cart.lastAddedItem;
 export const selectCartItemById = (id) => (state) => state.cart.items.find((item) => item.id === id);
 
 export default cartSlice.reducer;

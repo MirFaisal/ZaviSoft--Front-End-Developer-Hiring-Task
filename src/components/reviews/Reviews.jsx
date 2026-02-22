@@ -1,5 +1,5 @@
-import Link from "next/link";
 import ReviewCard from "./ReviewCard";
+import { Button } from "@/components/ui";
 
 const reviews = [
   {
@@ -12,16 +12,16 @@ const reviews = [
   },
   {
     id: 2,
-    title: "Good Quality",
-    text: "I highly recommend shopping from kicks",
-    rating: 5,
+    title: "Amazing Comfort",
+    text: "Best sneakers I have ever bought, super comfortable for all-day wear",
+    rating: 4,
     avatar: "/images/review-avatar-2.png",
     productImage: "/images/review-product-2.png",
   },
   {
     id: 3,
-    title: "Good Quality",
-    text: "I highly recommend shopping from kicks",
+    title: "Fast Delivery",
+    text: "Ordered on Monday and received by Wednesday. Great packaging too!",
     rating: 5,
     avatar: "/images/review-avatar-3.png",
     productImage: "/images/review-product-3.png",
@@ -36,11 +36,9 @@ export default function Reviews() {
         <h2 className="font-rubik font-semibold text-3xl lg:text-[74px] text-kicks-dark uppercase leading-[0.95]">
           Reviews
         </h2>
-        <Link
-          href="#"
-          className="inline-flex items-center justify-center h-12 px-4 rounded-lg bg-kicks-blue font-rubik font-medium text-sm text-white uppercase tracking-wider hover:opacity-90 transition-colors">
+        <Button variant="blue" size="md" href="#">
           See all
-        </Link>
+        </Button>
       </div>
 
       {/* Review cards grid */}

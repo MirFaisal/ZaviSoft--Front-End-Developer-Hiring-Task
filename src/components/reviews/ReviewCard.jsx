@@ -49,7 +49,7 @@ export default function ReviewCard({ title, text, rating, avatar, productImage }
       </div>
 
       {/* Product image */}
-      <div className="bg-white rounded-b-4xl overflow-hidden h-[250px] lg:h-[325px] relative">
+      <div className="bg-white rounded-b-4xl overflow-hidden h-62.5 lg:h-81.25 relative">
         <Image
           src={productImage}
           alt="Product"

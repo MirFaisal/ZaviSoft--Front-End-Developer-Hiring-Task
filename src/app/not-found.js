@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui";
 
 export default function NotFound() {
   return (
@@ -46,16 +47,12 @@ export default function NotFound() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link
-              href="/"
-              className="h-12 px-8 bg-kicks-dark text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:bg-kicks-dark-hover transition-colors flex items-center justify-center">
+            <Button variant="dark" size="md" href="/" className="px-8">
               Back to Home
-            </Link>
-            <Link
-              href="/products"
-              className="h-12 px-8 border border-kicks-dark text-kicks-dark rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:bg-kicks-dark/5 transition-colors flex items-center justify-center">
+            </Button>
+            <Button variant="outline" size="md" href="/products" className="px-8">
               Shop Now
-            </Link>
+            </Button>
           </div>
 
           {/* Help link */}

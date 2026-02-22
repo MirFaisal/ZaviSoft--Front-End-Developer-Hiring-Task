@@ -21,8 +21,10 @@ export {
   clearCart,
   toggleCart,
   closeCart,
+  clearLastAdded,
   selectCartItems,
   selectCartItemCount,
   selectCartTotal,
   selectIsCartOpen,
+  selectLastAddedItem,
 } from "./slices/cartSlice";

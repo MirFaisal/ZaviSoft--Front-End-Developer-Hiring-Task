@@ -2,7 +2,7 @@
 
 import { use } from "react";
 import Link from "next/link";
-import { Spinner, ImageSlider } from "@/components/ui";
+import { Spinner, ImageSlider, Button } from "@/components/ui";
 import { YouMayAlsoLike, ProductImageGrid, ProductInfo } from "@/components/products";
 import { useGetProductByIdQuery, useGetProductsByCategoryQuery } from "@/store";
 import { getValidImages } from "@/lib/utils";
@@ -14,7 +14,7 @@ export default function ProductDetailPage({ params }) {
 
   const { data: product, isLoading, error } = useGetProductByIdQuery(id);
 
-  const { data: categoryProducts } = useGetProductsByCategoryQuery(
+  const { data: categoryProducts, error: relatedError } = useGetProductsByCategoryQuery(
     { categoryId: product?.category?.id, offset: 0, limit: 20 },
     { skip: !product?.category?.id },
   );
@@ -41,11 +41,9 @@ export default function ProductDetailPage({ params }) {
             <p className="text-kicks-dark/60 mb-6">
               The product you&apos;re looking for doesn&apos;t exist or has been removed.
             </p>
-            <Link
-              href="/products"
-              className="inline-block bg-kicks-dark text-white px-6 py-3 rounded-lg hover:bg-kicks-dark-hover transition-colors font-rubik font-medium text-sm uppercase tracking-wider">
+            <Button variant="dark" size="md" href="/products">
               Browse Products
-            </Link>
+            </Button>
           </div>
         </main>
       </div>
@@ -58,7 +56,7 @@ export default function ProductDetailPage({ params }) {
     <div className="min-h-screen flex flex-col bg-kicks-bg">
       <main className="flex-1">
         {/* ─── Product Section ─── */}
-        <section className="max-w-[1440px] mx-auto px-4 lg:px-[60px] pt-6 lg:pt-8 pb-12 lg:pb-20">
+        <section className="max-w-360 mx-auto px-4 lg:px-15 pt-6 lg:pt-8 pb-12 lg:pb-20">
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
             {/* ─── Images ─── */}
             <div className="w-full lg:w-[80%]">
@@ -75,10 +73,12 @@ export default function ProductDetailPage({ params }) {
         </section>
 
         {/* ─── You may also like ─── */}
-        <YouMayAlsoLike
-          products={relatedProducts}
-          className="max-w-[1440px] mx-auto px-4 lg:px-[60px] pb-12 lg:pb-20"
-        />
+        {!relatedError && (
+          <YouMayAlsoLike
+            products={relatedProducts}
+            className="max-w-360 mx-auto px-4 lg:px-15 pb-12 lg:pb-20"
+          />
+        )}
       </main>
     </div>
   );

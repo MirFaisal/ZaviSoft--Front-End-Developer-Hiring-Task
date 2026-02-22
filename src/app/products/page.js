@@ -36,7 +36,7 @@ export default function ProductsPage() {
     { skip: selectedCategory === null },
   );
 
-  const { data: categories } = useGetCategoriesQuery();
+  const { data: categories, isLoading: catSidebarLoading, error: catSidebarError } = useGetCategoriesQuery();
 
   // Pick the active dataset
   const products = selectedCategory ? categoryProducts : allProducts;
@@ -68,11 +68,11 @@ export default function ProductsPage() {
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Products" }]}
         />
 
-        <div className="max-w-360 mx-auto px-4 lg:px-[60px] py-8 lg:py-12">
+        <div className="max-w-360 mx-auto px-4 lg:px-15 py-8 lg:py-12">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Sidebar Filters */}
-            <aside className="lg:w-64 flex-shrink-0">
-              <div className="bg-kicks-card rounded-2xl p-6 sticky top-[100px]">
+            <aside className="lg:w-64 shrink-0">
+              <div className="bg-kicks-card rounded-2xl p-6 sticky top-25">
                 <h2 className="font-rubik font-semibold text-kicks-dark uppercase text-sm tracking-wider mb-4">
                   Categories
                 </h2>
@@ -88,19 +88,29 @@ export default function ProductsPage() {
                       All Categories
                     </button>
                   </li>
-                  {categories?.map((category) => (
-                    <li key={category.id}>
-                      <button
-                        onClick={() => handleCategoryChange(category.id)}
-                        className={`w-full text-left px-3 py-2.5 rounded-xl transition-colors font-rubik text-sm cursor-pointer ${
-                          selectedCategory === category.id
-                            ? "bg-kicks-blue text-white font-semibold"
-                            : "text-kicks-dark/70 hover:bg-kicks-bg"
-                        }`}>
-                        {category.name}
-                      </button>
+                  {catSidebarLoading ? (
+                    <li className="px-3 py-4 text-center">
+                      <span className="font-open-sans text-xs text-kicks-dark/50">Loading…</span>
                     </li>
-                  ))}
+                  ) : catSidebarError ? (
+                    <li className="px-3 py-2">
+                      <p className="font-open-sans text-xs text-red-500">Failed to load</p>
+                    </li>
+                  ) : (
+                    categories?.map((category) => (
+                      <li key={category.id}>
+                        <button
+                          onClick={() => handleCategoryChange(category.id)}
+                          className={`w-full text-left px-3 py-2.5 rounded-xl transition-colors font-rubik text-sm cursor-pointer ${
+                            selectedCategory === category.id
+                              ? "bg-kicks-blue text-white font-semibold"
+                              : "text-kicks-dark/70 hover:bg-kicks-bg"
+                          }`}>
+                          {category.name}
+                        </button>
+                      </li>
+                    ))
+                  )}
                 </ul>
               </div>
             </aside>

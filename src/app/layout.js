@@ -1,17 +1,7 @@
-import { Geist, Geist_Mono, Rubik, Open_Sans, Inter } from "next/font/google";
+import { Rubik, Open_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ReduxProvider } from "@/providers";
 import { LayoutShell } from "@/components/layout";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -41,8 +31,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable} ${openSans.variable} ${inter.variable} antialiased`}>
+      <body className={`${rubik.variable} ${openSans.variable} ${inter.variable} antialiased`}>
         <ReduxProvider>
           <LayoutShell>{children}</LayoutShell>
         </ReduxProvider>

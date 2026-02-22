@@ -4,7 +4,7 @@ import { CategoryCard, Spinner, PageHeader } from "@/components";
 import { useGetCategoriesQuery } from "@/store";
 
 export default function CategoriesPage() {
-  const { data: categories, isLoading, error } = useGetCategoriesQuery();
+  const { data: categories, isLoading, error, refetch } = useGetCategoriesQuery();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -15,7 +15,7 @@ export default function CategoriesPage() {
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Categories" }]}
         />
 
-        <div className="max-w-[1440px] mx-auto px-4 lg:px-[60px] py-8 lg:py-12">
+        <div className="max-w-360 mx-auto px-4 lg:px-15 py-8 lg:py-12">
           {isLoading ? (
             <div className="flex justify-center py-12">
               <Spinner size="lg" />
@@ -25,6 +25,18 @@ export default function CategoriesPage() {
               <p className="font-rubik font-semibold text-lg text-kicks-dark">Something went wrong</p>
               <p className="font-open-sans text-sm text-kicks-dark/60 mt-1">
                 Failed to load categories. Please try again.
+              </p>
+              <button
+                onClick={refetch}
+                className="mt-4 h-10 px-6 bg-kicks-dark text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:bg-kicks-dark-hover transition-colors cursor-pointer">
+                Try Again
+              </button>
+            </div>
+          ) : !categories || categories.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="font-rubik font-semibold text-lg text-kicks-dark">No categories found</p>
+              <p className="font-open-sans text-sm text-kicks-dark/60 mt-1">
+                There are no product categories available at the moment.
               </p>
             </div>
           ) : (

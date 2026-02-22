@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui";
 
 const categories = [
   { name: "Runners", href: "/categories" },
@@ -60,11 +61,9 @@ export default function Footer() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="flex-1 min-w-0 h-12 px-4 rounded-lg border border-white lg:border-white bg-transparent font-inter text-base text-white placeholder:text-white/70 lg:placeholder:text-white/70 outline-none focus:ring-2 focus:ring-white/40 tracking-[0.5px]"
                 />
-                <button
-                  type="submit"
-                  className="h-12 px-4 lg:px-6 rounded-lg bg-kicks-dark font-rubik font-medium text-sm text-white uppercase tracking-wider hover:bg-kicks-dark-hover transition-colors cursor-pointer">
+                <Button type="submit" variant="dark" size="md">
                   Submit
-                </button>
+                </Button>
               </form>
             </div>
 

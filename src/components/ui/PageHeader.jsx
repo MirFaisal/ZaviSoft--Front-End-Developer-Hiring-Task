@@ -9,7 +9,7 @@ import Breadcrumb from "./Breadcrumb";
 export default function PageHeader({ title, description, breadcrumbs }) {
   return (
     <div className="">
-      <div className="max-w-360 mx-auto px-4 lg:px-[60px] py-8 lg:py-12">
+      <div className="max-w-360 mx-auto px-4 lg:px-15 py-8 lg:py-12">
         {breadcrumbs && <Breadcrumb items={breadcrumbs} />}
         <h1 className="font-rubik font-semibold text-3xl lg:text-5xl text-kicks-dark uppercase">
           {title}

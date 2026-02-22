@@ -13,6 +13,7 @@ import {
   incrementQuantity,
   decrementQuantity,
 } from "@/store";
+import { Button } from "@/components/ui";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -74,12 +75,9 @@ export default function Cart() {
                   Looks like you haven&apos;t added anything yet
                 </p>
               </div>
-              <button
-                onClick={() => dispatch(closeCart())}
-                className="mt-2 h-12 px-8 bg-kicks-blue text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer"
-              >
+              <Button variant="blue" size="md" onClick={() => dispatch(closeCart())} className="mt-2">
                 Continue Shopping
-              </button>
+              </Button>
             </div>
           ) : (
             <ul className="space-y-3">
@@ -166,17 +164,19 @@ export default function Cart() {
                 <span className="font-rubik font-semibold text-lg text-kicks-yellow">${total.toFixed(2)}</span>
               </div>
             </div>
-            <button
+            <Button
+              variant="dark"
+              size="md"
+              className="w-full"
               onClick={() => {
                 dispatch(closeCart());
                 router.push("/cart");
-              }}
-              className="w-full h-12 bg-kicks-dark text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
+              }}>
               View Cart
-            </button>
-            <button className="w-full h-12 bg-kicks-dark text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
+            </Button>
+            <Button variant="dark" size="md" className="w-full">
               Checkout
-            </button>
+            </Button>
           </div>
         )}
       </div>

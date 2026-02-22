@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store";
 import { getValidImageUrl } from "@/lib/utils";
+import { Button } from "@/components/ui";
 
 const PLACEHOLDER = "https://placehold.co/600x600/e2e8f0/475569?text=Product";
 const ALL_SIZES = [38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
@@ -106,18 +107,16 @@ export default function ProductInfo({ product }) {
       {/* Action Buttons */}
       <div className="flex flex-col gap-2">
         <div className="flex gap-2">
-          <button
-            onClick={handleAddToCart}
-            className="flex-1 h-12 bg-kicks-dark text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
+          <Button variant="dark" size="md" onClick={handleAddToCart} className="flex-1">
             Add to cart
-          </button>
+          </Button>
           <button className="h-12 px-4 bg-kicks-dark rounded-lg flex items-center justify-center hover:opacity-90 transition-colors cursor-pointer">
             <Image src="/icons/heart.svg" alt="Wishlist" width={24} height={24} />
           </button>
         </div>
-        <button className="w-full h-12 bg-kicks-blue text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
+        <Button variant="blue" size="md" className="w-full">
           Buy it now
-        </button>
+        </Button>
       </div>
 
       {/* About the product */}
