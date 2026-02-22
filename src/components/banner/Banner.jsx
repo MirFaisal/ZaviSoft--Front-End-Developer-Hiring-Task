@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-// ── Static banner assets (local) ─────────────────────────────────────────────
+// ── Static banner assets 
 const ALL_IMAGES = [
   "/images/banner/banner-hero.jpg",    // main hero
   "/images/banner/banner-thumb-1.jpg", // thumb 1
@@ -23,7 +23,7 @@ export default function Banner() {
   const [activeIndex, setActiveIndex] = useState(0);
   const headingRef = useRef(null);
 
-  // ── Fluid "DO IT RIGHT" heading ────────────────────────────────────────────
+  // ── Fluid "DO IT RIGHT" heading
   const fitText = useCallback(() => {
     const el = headingRef.current;
     if (!el) return;
