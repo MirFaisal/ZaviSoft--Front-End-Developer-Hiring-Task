@@ -6,3 +6,4 @@ export { default as SectionHeader } from "./SectionHeader";
 export { default as PageHeader } from "./PageHeader";
 export { default as Pagination } from "./Pagination";
 export { default as ImageSlider } from "./ImageSlider";
+export { default as SelectDropdown } from "./SelectDropdown";
