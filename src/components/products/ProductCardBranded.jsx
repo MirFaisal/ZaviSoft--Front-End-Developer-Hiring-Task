@@ -1,8 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getFirstValidImage } from "@/lib/utils";
+
+const PLACEHOLDER = "https://placehold.co/400x400/e2e8f0/475569?text=No+Image";
 
 /**
  * Branded product card matching the KICKS Figma design.
@@ -13,12 +16,14 @@ import { getFirstValidImage } from "@/lib/utils";
  */
 export default function ProductCardBranded({ product, badge = "New" }) {
   const { id, title, price, images } = product;
-  const imageUrl = getFirstValidImage(images);
+  const [imgError, setImgError] = useState(false);
+
+  const imageUrl = imgError ? PLACEHOLDER : (getFirstValidImage(images) || PLACEHOLDER);
 
   return (
     <div className="flex flex-col gap-4">
       {/* Image container */}
-      <div className="relative bg-kicks-card rounded-2xl lg:rounded-[28px] p-2 h-[180px] lg:h-87.5">
+      <div className="relative bg-kicks-card rounded-2xl lg:rounded-[28px] p-2 h-45 lg:h-87.5">
         <div className="relative w-full h-full rounded-xl lg:rounded-3xl overflow-hidden">
           <Image
             src={imageUrl}
@@ -26,6 +31,7 @@ export default function ProductCardBranded({ product, badge = "New" }) {
             fill
             className="object-cover"
             sizes="(max-width: 1024px) 50vw, 25vw"
+            onError={() => setImgError(true)}
             unoptimized
           />
         </div>
