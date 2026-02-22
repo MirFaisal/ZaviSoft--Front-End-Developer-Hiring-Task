@@ -14,9 +14,9 @@ export default function CategoryCardItem({ category, index }) {
 
   return (
     <div
-      className={`relative flex-none lg:flex-1 h-87 lg:h-full ${
+      className={`relative flex-none w-1/2 lg:shrink-0 h-87 lg:h-full ${
         index === 1 ? "bg-[#f6f6f6]" : "bg-[#eceef0]"
-      } ${index === 0 ? "rounded-tl-3xl lg:rounded-tl-[64px]" : ""} overflow-hidden`}>
+      } overflow-hidden`}>
       {/* Category image */}
       <Link href={`/categories/${category.id}`}>
         <Image
