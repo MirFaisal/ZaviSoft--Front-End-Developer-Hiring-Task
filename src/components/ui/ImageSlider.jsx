@@ -1,25 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 
 /**
- * Reusable image slider with hero image, dot navigation, and thumbnails.
+ * Reusable image slider with hero image, dot navigation, thumbnails, and swipe support.
  * @param {string[]} images - Array of image URLs to display
  * @param {string} alt - Alt text prefix for images
  * @param {string} className - Additional wrapper class names
  */
 export default function ImageSlider({ images = [], alt = "Image", className = "" }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const touchStartX = useRef(null);
 
   const uniqueImages = [...new Set(images)];
 
   if (uniqueImages.length === 0) return null;
 
+  const goNext = () => setActiveIndex((i) => (i + 1) % uniqueImages.length);
+  const goPrev = () => setActiveIndex((i) => (i - 1 + uniqueImages.length) % uniqueImages.length);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 40) {
+      delta > 0 ? goNext() : goPrev();
+    }
+    touchStartX.current = null;
+  };
+
   return (
     <div className={`flex flex-col gap-6 ${className}`}>
       {/* Hero image */}
-      <div className="relative h-96 rounded-2xl overflow-hidden bg-kicks-card">
+      <div
+        className="relative h-96 rounded-2xl overflow-hidden bg-kicks-card cursor-grab active:cursor-grabbing"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <Image
           src={uniqueImages[activeIndex]}
           alt={`${alt} - ${activeIndex + 1}`}
@@ -71,3 +92,4 @@ export default function ImageSlider({ images = [], alt = "Image", className = ""
     </div>
   );
 }
+
