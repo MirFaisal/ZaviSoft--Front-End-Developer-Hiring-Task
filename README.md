@@ -177,12 +177,17 @@ invalidation.
 }
 ```
 
-**Cart actions available:** | Action | Description | | ------------------ |
------------------------------------------------- | | `initializeCart` | Loads persisted cart from
-`localStorage` on mount | | `addToCart` | Adds item or increments quantity if already in cart | |
-`removeFromCart` | Removes item by ID | | `incrementQuantity`| Increases item qty by 1 | |
-`decrementQuantity`| Decreases item qty by 1, removes at 0 | | `clearCart` | Empties the entire cart | |
-`toggleCart` | Opens/closes the cart sidebar |
+**Cart actions available:**
+
+| Action               | Description                                        |
+| -------------------- | -------------------------------------------------- |
+| `initializeCart`     | Loads persisted cart from `localStorage` on mount  |
+| `addToCart`          | Adds item or increments quantity if already in cart |
+| `removeFromCart`     | Removes item by ID                                 |
+| `incrementQuantity`  | Increases item qty by 1                            |
+| `decrementQuantity`  | Decreases item qty by 1, removes item at 0         |
+| `clearCart`          | Empties the entire cart                            |
+| `toggleCart`         | Opens/closes the cart sidebar                      |
 
 **Selectors exported from the store:**
 
