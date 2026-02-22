@@ -14,7 +14,7 @@ export default function CategoryCard({ category }) {
 
   return (
     <Link href={`/categories/${id}`} className="group block">
-      <article className="relative h-48 rounded-xl overflow-hidden">
+      <div className="relative h-48 rounded-xl overflow-hidden">
         <Image
           src={imageUrl}
           alt={name}
@@ -32,7 +32,7 @@ export default function CategoryCard({ category }) {
             {name}
           </h3>
         </div>
-      </article>
+      </div>
     </Link>
   );
 }
