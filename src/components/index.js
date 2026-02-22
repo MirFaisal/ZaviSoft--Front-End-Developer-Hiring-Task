@@ -3,7 +3,6 @@ export { Header, Footer } from "./layout";
 
 // Product components
 export {
-  ProductCard,
   ProductCardBranded,
   ProductGrid,
   ProductCardSkeleton,
