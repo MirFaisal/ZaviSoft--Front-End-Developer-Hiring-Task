@@ -6,7 +6,7 @@ import { NavArrows } from "@/components/ui";
 import { CategoryCardItem } from "@/components/categories";
 
 export default function CategoriesMobileCarousel({ categories }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ axis: "y", align: "start", slidesToScroll: 1 });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ axis: "y", align: "start", slidesToScroll: 1, watchDrag: false });
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(false);
 
