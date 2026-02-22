@@ -12,7 +12,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-kicks-card rounded-3xl mx-4 lg:mx-10 xl:mx-15 mt-8">
+    <header className="sticky top-8 z-50 bg-kicks-card rounded-3xl mx-4 lg:mx-10 xl:mx-15 mt-8 shadow">
       <div className="flex items-center justify-between p-4 lg:p-8">
         {/* Left Navigation */}
         <nav className="hidden lg:flex items-start gap-10 w-82.75 font-rubik font-semibold text-base text-kicks-dark">
