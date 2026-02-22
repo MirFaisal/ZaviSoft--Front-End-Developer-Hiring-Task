@@ -61,9 +61,9 @@ export default function ProductCardBranded({ product, badge = "New" }) {
           href={`/products/${id}`}
           variant="dark"
           size="sm"
-          className="w-full flex items-center justify-center">
-          <span>View Product -&nbsp;</span>
-          <span className="text-kicks-yellow">{formatPrice(price)}</span>
+          className="w-full flex flex-row items-center justify-center whitespace-nowrap overflow-hidden px-2 sm:px-4 text-[10px] sm:text-xs">
+          <span className="shrink-0">View Product -&nbsp;</span>
+          <span className="text-kicks-yellow shrink-0">{formatPrice(price)}</span>
         </Button>
       </div>
     </div>

@@ -19,7 +19,7 @@ export default function ImageSlider({ images = [], alt = "Image", className = ""
   return (
     <div className={`flex flex-col gap-6 ${className}`}>
       {/* Hero image */}
-      <div className="relative h-68.25 rounded-2xl overflow-hidden bg-kicks-card">
+      <div className="relative h-96 rounded-2xl overflow-hidden bg-kicks-card">
         <Image
           src={uniqueImages[activeIndex]}
           alt={`${alt} - ${activeIndex + 1}`}
