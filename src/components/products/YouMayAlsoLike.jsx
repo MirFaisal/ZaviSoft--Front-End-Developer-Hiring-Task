@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ProductCardBranded } from "./";
 import { NavArrows, SectionHeader } from "@/components/ui";
 
+// Splits an array into groups of `size` for rendering one slide per group
 function chunkArray(arr, size) {
   const chunks = [];
   for (let i = 0; i < arr.length; i += size) {
@@ -14,13 +15,19 @@ function chunkArray(arr, size) {
 }
 
 export default function YouMayAlsoLike({ products = [], title = "You may also like", className = "" }) {
+  // emblaRef  — attach to the scroll container DOM node
+  // emblaApi  — imperative API: scrollPrev, scrollNext, scrollTo, canScrollPrev, etc.
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", slidesToScroll: 1 });
 
+  // selectedIndex — tracks the active dot indicator
   const [selectedIndex, setSelectedIndex] = useState(0);
+  // scrollSnaps — array of snap positions used to render the dot indicators
   const [scrollSnaps, setScrollSnaps] = useState([]);
+  // canScrollPrev / canScrollNext — controls the disabled state of NavArrows
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
 
+  // Called by Embla whenever the selected slide changes
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
@@ -30,10 +37,12 @@ export default function YouMayAlsoLike({ products = [], title = "You may also li
 
   useEffect(() => {
     if (!emblaApi) return;
+    // Initialise snap list and state on mount
     setScrollSnaps(emblaApi.scrollSnapList());
     onSelect();
-    emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onSelect);
+    // Subscribe to Embla events
+    emblaApi.on("select", onSelect);  // fires on slide change
+    emblaApi.on("reInit", onSelect);  // fires on resize / reInit
     return () => {
       emblaApi.off("select", onSelect);
       emblaApi.off("reInit", onSelect);
