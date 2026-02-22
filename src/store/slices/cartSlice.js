@@ -14,10 +14,10 @@ const loadCartFromStorage = () => {
 };
 
 // Helper function to save cart to localStorage
-const saveCartToStorage = (cart) => {
+export const saveCartToStorage = (items) => {
   if (typeof window !== "undefined") {
     try {
-      localStorage.setItem("cart", JSON.stringify(cart));
+      localStorage.setItem("cart", JSON.stringify(items));
     } catch {
       // Handle storage errors silently
     }
@@ -57,28 +57,11 @@ const cartSlice = createSlice({
         });
       }
       state.lastAddedItem = { id, title, price, image };
-      saveCartToStorage(state.items);
     },
 
     // Remove item from cart
     removeFromCart: (state, action) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
-      saveCartToStorage(state.items);
-    },
-
-    // Update item quantity
-    updateQuantity: (state, action) => {
-      const { id, quantity } = action.payload;
-      const item = state.items.find((item) => item.id === id);
-
-      if (item) {
-        if (quantity <= 0) {
-          state.items = state.items.filter((item) => item.id !== id);
-        } else {
-          item.quantity = quantity;
-        }
-        saveCartToStorage(state.items);
-      }
     },
 
     // Increment item quantity
@@ -86,7 +69,6 @@ const cartSlice = createSlice({
       const item = state.items.find((item) => item.id === action.payload);
       if (item) {
         item.quantity += 1;
-        saveCartToStorage(state.items);
       }
     },
 
@@ -99,24 +81,17 @@ const cartSlice = createSlice({
         } else {
           state.items = state.items.filter((i) => i.id !== action.payload);
         }
-        saveCartToStorage(state.items);
       }
     },
 
     // Clear entire cart
     clearCart: (state) => {
       state.items = [];
-      saveCartToStorage(state.items);
     },
 
     // Toggle cart sidebar
     toggleCart: (state) => {
       state.isCartOpen = !state.isCartOpen;
-    },
-
-    // Open cart
-    openCart: (state) => {
-      state.isCartOpen = true;
     },
 
     // Close cart
@@ -136,12 +111,10 @@ export const {
   initializeCart,
   addToCart,
   removeFromCart,
-  updateQuantity,
   incrementQuantity,
   decrementQuantity,
   clearCart,
   toggleCart,
-  openCart,
   closeCart,
   clearLastAdded,
 } = cartSlice.actions;
@@ -154,6 +127,5 @@ export const selectCartTotal = (state) =>
   state.cart.items.reduce((total, item) => total + item.price * item.quantity, 0);
 export const selectIsCartOpen = (state) => state.cart.isCartOpen;
 export const selectLastAddedItem = (state) => state.cart.lastAddedItem;
-export const selectCartItemById = (id) => (state) => state.cart.items.find((item) => item.id === id);
 
 export default cartSlice.reducer;

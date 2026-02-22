@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useGetCategoriesQuery } from "@/store";
-import { Spinner, NavArrows } from "@/components/ui";
+import { Spinner, NavArrows, Button } from "@/components/ui";
 import { getValidImageUrl } from "@/lib/utils";
 
 const CATEGORY_PLACEHOLDER = "https://placehold.co/600x600/e2e8f0/475569?text=Category";
@@ -57,11 +57,9 @@ export default function CategoriesSection() {
           <div className="flex flex-col items-center justify-center py-20 gap-3">
             <p className="font-rubik font-semibold text-white text-lg">Something went wrong</p>
             <p className="font-open-sans text-sm text-white/60">Could not load categories. Please try again later.</p>
-            <button
-              onClick={refetch}
-              className="mt-2 h-10 px-6 bg-kicks-blue text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors cursor-pointer">
+            <Button variant="blue" size="sm" onClick={refetch} className="mt-2">
               Try Again
-            </button>
+            </Button>
           </div>
         ) : allCategories.length === 0 ? (
           <div className="flex items-center justify-center py-20">

@@ -15,7 +15,6 @@ export {
   initializeCart,
   addToCart,
   removeFromCart,
-  updateQuantity,
   incrementQuantity,
   decrementQuantity,
   clearCart,

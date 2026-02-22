@@ -3,6 +3,11 @@
 A modern e-commerce landing page built with **Next.js 16**, **Redux Toolkit**, **RTK Query**, and **Tailwind
 CSS**.
 
+🔗 **Figma Design:**
+[Frontend Task (Copy)](https://www.figma.com/design/dZOtspuOvPzaaU5rczAOq0/Frontend-task--Copy-?node-id=1-3197&m=dev)
+
+🌐 **Live Demo:** [https://zavisoft-kicks.vercel.app](https://zavisoft-kicks.vercel.app)
+
 ## 🚀 Tech Stack
 
 - **Framework:** Next.js 16 (App Router)

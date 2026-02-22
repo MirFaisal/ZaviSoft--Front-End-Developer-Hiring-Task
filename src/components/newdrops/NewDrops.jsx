@@ -28,11 +28,9 @@ export default function NewDrops() {
         <div className="flex flex-col items-center justify-center py-20 gap-3">
           <p className="font-rubik font-semibold text-kicks-dark text-lg">Something went wrong</p>
           <p className="font-open-sans text-sm text-kicks-dark/60">Could not load new drops. Please try again later.</p>
-          <button
-            onClick={refetch}
-            className="mt-2 h-10 px-6 bg-kicks-dark text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:bg-kicks-dark-hover transition-colors cursor-pointer">
+          <Button variant="dark" size="sm" onClick={refetch} className="mt-2">
             Try Again
-          </button>
+          </Button>
         </div>
       ) : (products || []).length === 0 ? (
         <div className="flex items-center justify-center py-20">

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Button } from "@/components/ui";
 
 export default function CartEmptyState() {
   return (
@@ -13,11 +13,9 @@ export default function CartEmptyState() {
           Looks like you haven&apos;t added anything yet
         </p>
       </div>
-      <Link
-        href="/products"
-        className="h-12 px-8 bg-kicks-blue text-white rounded-lg font-rubik font-medium text-sm uppercase tracking-wider hover:opacity-90 transition-colors flex items-center justify-center">
+      <Button variant="blue" size="md" href="/products">
         Continue Shopping
-      </Link>
+      </Button>
     </div>
   );
 }

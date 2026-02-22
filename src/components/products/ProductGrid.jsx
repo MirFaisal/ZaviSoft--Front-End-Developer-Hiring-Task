@@ -2,13 +2,19 @@
 
 import { ProductCardBranded } from "./";
 import ProductCardSkeleton from "./ProductCardSkeleton";
+import { Button } from "@/components/ui";
 
-export default function ProductGrid({ products, isLoading, error }) {
+export default function ProductGrid({ products, isLoading, error, onRetry }) {
   if (error) {
     return (
       <div className="text-center py-16">
         <p className="font-rubik font-semibold text-lg text-kicks-dark">Something went wrong</p>
         <p className="font-open-sans text-sm text-kicks-dark/60 mt-1">Failed to load products. Please try again.</p>
+        {onRetry && (
+          <Button variant="dark" size="sm" onClick={onRetry} className="mt-4">
+            Try Again
+          </Button>
+        )}
       </div>
     );
   }
