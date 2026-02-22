@@ -178,7 +178,7 @@ export default function Footer() {
           </div>
 
           {/* Large KICKS watermark logo */}
-          <div className="px-1 pb-1 mt-10 h-17 lg:h-40 xl:h-60 lg:px-7 lg:pb-6">
+          <div className="px-1 pb-1 mt-10 h-17 lg:h-40 xl:h-52 lg:px-7 lg:pb-6">
             <Image
               src="/images/logo-white.svg"
               alt="KICKS"
