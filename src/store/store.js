@@ -21,7 +21,6 @@ store.subscribe(() => {
   }
 });
 
-// Enable refetchOnFocus and refetchOnReconnect
 setupListeners(store.dispatch);
 
 export default store;

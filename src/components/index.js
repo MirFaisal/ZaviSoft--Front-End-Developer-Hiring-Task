@@ -1,33 +1,19 @@
-// Layout components
 export { Header, Footer } from "./layout";
 
-// Product components
-export {
-  ProductCardBranded,
-  ProductGrid,
-  ProductCardSkeleton,
-  YouMayAlsoLike,
-} from "./products";
+export { ProductCardBranded, ProductGrid, ProductCardSkeleton, YouMayAlsoLike } from "./products";
 
-// Cart components
 export { Cart, CartItem, CartEmptyState } from "./cart";
 
-// Banner components
 export { Banner } from "./banner";
 
-// New Drops components
 export { NewDrops } from "./newdrops";
 
-// Categories Section components
 export { CategoriesSection } from "./categories-section";
 
-// Reviews components
 export { Reviews, ReviewCard } from "./reviews";
 
-// Category components
 export { CategoryCard } from "./categories";
 
-// UI components
 export {
   Button,
   Spinner,

@@ -62,7 +62,7 @@ export default function CartClient() {
               </div>
             </div>
 
-            {/* Right: Order Summary — Figma node 1:3942 */}
+            {/* Right: Order Summary */}
             <div className="w-full lg:w-104.5 shrink-0 bg-kicks-card lg:bg-transparent rounded-2xl lg:rounded-none p-4 lg:p-0 flex flex-col gap-4 lg:gap-6">
               <div className="flex flex-col gap-4 lg:gap-6">
                 <h2 className="font-rubik font-semibold text-xl lg:text-[32px] text-kicks-dark leading-normal">
