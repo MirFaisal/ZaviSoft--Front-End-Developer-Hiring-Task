@@ -1,29 +1,4 @@
 /**
- * Format price with currency symbol
- * @param {number} price - The price to format
- * @param {string} currency - Currency code (default: USD)
- * @returns {string} Formatted price string
- */
-export function formatPrice(price, currency = "USD") {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency,
-  }).format(price);
-}
-
-/**
- * Truncate text to specified length
- * @param {string} text - Text to truncate
- * @param {number} maxLength - Maximum length
- * @returns {string} Truncated text with ellipsis if needed
- */
-export function truncateText(text, maxLength = 50) {
-  if (!text) return "";
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength).trim() + "...";
-}
-
-/**
  * Validate a single image URL string.
  * Returns the URL if valid, otherwise the placeholder.
  * @param {string} url - Single image URL

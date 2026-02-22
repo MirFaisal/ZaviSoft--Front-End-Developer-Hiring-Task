@@ -6,12 +6,8 @@ export {
   apiSlice,
   useGetProductsQuery,
   useGetProductByIdQuery,
-  useGetProductBySlugQuery,
-  useGetRelatedProductsQuery,
   useGetCategoriesQuery,
   useGetProductsByCategoryQuery,
-  useSearchProductsQuery,
-  useFilterProductsByPriceQuery,
 } from "./api/apiSlice";
 
 // Cart slice exports
@@ -24,11 +20,9 @@ export {
   decrementQuantity,
   clearCart,
   toggleCart,
-  openCart,
   closeCart,
   selectCartItems,
   selectCartItemCount,
   selectCartTotal,
   selectIsCartOpen,
-  selectCartItemById,
 } from "./slices/cartSlice";

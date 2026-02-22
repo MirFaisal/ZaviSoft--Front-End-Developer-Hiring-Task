@@ -1,10 +1,11 @@
 # ZaviSoft E-Commerce
 
-A modern e-commerce landing page built with **Next.js 15**, **Redux Toolkit**, **RTK Query**, and **Tailwind CSS**.
+A modern e-commerce landing page built with **Next.js 16**, **Redux Toolkit**, **RTK Query**, and **Tailwind
+CSS**.
 
 ## 🚀 Tech Stack
 
-- **Framework:** Next.js 15 (App Router)
+- **Framework:** Next.js 16 (App Router)
 - **State Management:** Redux Toolkit + RTK Query
 - **Styling:** Tailwind CSS
 - **Language:** JavaScript (ES6+)
@@ -33,58 +34,58 @@ src/
 ├── providers/             # Context providers
 │   └── ReduxProvider.jsx  # Redux Provider wrapper
 ├── hooks/                 # Custom React hooks
-│   └── useCart.js         # Cart operations hook
-└── lib/                   # Utilities and constants
-    ├── utils.js           # Helper functions
-    └── constants.js       # App constants
+└── lib/                   # Utilities
+    └── utils.js           # Image validation helpers
 ```
 
 ## 🛠️ Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. **Navigate to project directory:**
+
    ```bash
    cd zavisoft-ecommerce
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Run development server:**
+
    ```bash
    npm run dev
    ```
 
-4. **Open browser:**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+4. **Open browser:** Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## 📜 Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
+| Command         | Description              |
+| --------------- | ------------------------ |
+| `npm run dev`   | Start development server |
+| `npm run build` | Build for production     |
+| `npm run start` | Start production server  |
+| `npm run lint`  | Run ESLint               |
 
 ## 🔌 API Endpoints Used
 
 The app uses the [Platzi Fake Store API](https://api.escuelajs.co/api/v1):
 
-| Endpoint | Description |
-|----------|-------------|
-| `GET /products` | Get all products with pagination |
-| `GET /products/:id` | Get single product |
-| `GET /categories` | Get all categories |
-| `GET /categories/:id/products` | Get products by category |
+| Endpoint                       | Description                      |
+| ------------------------------ | -------------------------------- |
+| `GET /products`                | Get all products with pagination |
+| `GET /products/:id`            | Get single product               |
+| `GET /categories`              | Get all categories               |
+| `GET /categories/:id/products` | Get products by category         |
 
 ## 🎨 Features
 
@@ -115,18 +116,12 @@ The app uses the [Platzi Fake Store API](https://api.escuelajs.co/api/v1):
 
 ```javascript
 // Products
-useGetProductsQuery({ offset, limit })
-useGetProductByIdQuery(id)
-useGetProductBySlugQuery(slug)
-useGetRelatedProductsQuery(id)
+useGetProductsQuery({ offset, limit });
+useGetProductByIdQuery(id);
 
 // Categories
-useGetCategoriesQuery()
-useGetProductsByCategoryQuery({ categoryId, offset, limit })
-
-// Search & Filter
-useSearchProductsQuery({ title, offset, limit })
-useFilterProductsByPriceQuery({ price_min, price_max, offset, limit })
+useGetCategoriesQuery();
+useGetProductsByCategoryQuery({ categoryId, offset, limit });
 ```
 
 ## 🤝 Contributing

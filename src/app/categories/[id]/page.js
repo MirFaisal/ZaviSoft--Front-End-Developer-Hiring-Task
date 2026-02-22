@@ -67,7 +67,7 @@ export default function CategoryPage({ params }) {
           ]}
         />
 
-        <div className="max-w-[1440px] mx-auto px-4 lg:px-[60px] py-8 lg:py-12">
+        <div className="max-w-360 mx-auto px-4 lg:px-15 py-8 lg:py-12">
           {/* Results info */}
           <div className="flex items-center justify-between mb-6">
             <p className="font-open-sans text-sm text-kicks-dark/60">

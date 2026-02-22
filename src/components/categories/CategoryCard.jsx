@@ -25,7 +25,7 @@ export default function CategoryCard({ category }) {
           unoptimized
         />
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent" />
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <h3 className="text-white font-rubik font-semibold text-xl uppercase group-hover:text-kicks-yellow transition-colors line-clamp-2">

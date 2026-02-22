@@ -10,7 +10,7 @@ import { getValidImageUrl } from "@/lib/utils";
 const CATEGORY_PLACEHOLDER = "https://placehold.co/600x600/e2e8f0/475569?text=Category";
 
 export default function CategoriesSection() {
-  const { data: rawCategories, isLoading } = useGetCategoriesQuery();
+  const { data: rawCategories, isLoading, error } = useGetCategoriesQuery();
   const [startIndex, setStartIndex] = useState(0);
 
   // Filter out test/junk categories, keep even number (max 6)
@@ -53,6 +53,11 @@ export default function CategoriesSection() {
           <div className="flex items-center justify-center py-20">
             <Spinner size="lg" />
           </div>
+        ) : error ? (
+          <div className="flex flex-col items-center justify-center py-20 gap-3">
+            <p className="font-rubik font-semibold text-white text-lg">Something went wrong</p>
+            <p className="font-open-sans text-sm text-white/60">Could not load categories. Please try again later.</p>
+          </div>
         ) : (
           <div className="flex flex-col lg:flex-row gap-0 lg:h-150">
             {visibleCategories.map((category, index) => (
@@ -72,7 +77,7 @@ function CategoryCardItem({ category, index }) {
 
   return (
     <div
-      className={`relative flex-none lg:flex-1 h-[348px] lg:h-full ${
+      className={`relative flex-none lg:flex-1 h-87 lg:h-full ${
         index === 1 ? "bg-[#f6f6f6]" : "bg-[#eceef0]"
       } ${index === 0 ? "rounded-tl-3xl lg:rounded-tl-[64px]" : ""} overflow-hidden`}>
       {/* Category image */}

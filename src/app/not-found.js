@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
       {/* ── Left: Dark Panel ── */}
-      <div className="lg:w-1/2 flex flex-col justify-center p-8 lg:p-16 h-full min-h-80 lg:min-h-screen">
+      <div className="lg:w-1/2 bg-kicks-dark flex flex-col justify-center p-8 lg:p-16 h-full min-h-80 lg:min-h-screen">
         {/* Big 404 + label */}
         <div className="flex flex-col gap-3">
           <p className="font-rubik font-bold text-[120px] lg:text-[200px] leading-none text-kicks-yellow select-none">

@@ -10,14 +10,10 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     // Get all products with pagination
     getProducts: builder.query({
-      query: ({ offset = 0, limit = 10 } = {}) =>
-        `/products?offset=${offset}&limit=${limit}`,
+      query: ({ offset = 0, limit = 10 } = {}) => `/products?offset=${offset}&limit=${limit}`,
       providesTags: (result) =>
         result
-          ? [
-              ...result.map(({ id }) => ({ type: "Products", id })),
-              { type: "Products", id: "LIST" },
-            ]
+          ? [...result.map(({ id }) => ({ type: "Products", id })), { type: "Products", id: "LIST" }]
           : [{ type: "Products", id: "LIST" }],
     }),
 
@@ -25,22 +21,6 @@ export const apiSlice = createApi({
     getProductById: builder.query({
       query: (id) => `/products/${id}`,
       providesTags: (result, error, id) => [{ type: "Product", id }],
-    }),
-
-    // Get single product by slug
-    getProductBySlug: builder.query({
-      query: (slug) => `/products/slug/${slug}`,
-      providesTags: (result) =>
-        result ? [{ type: "Product", id: result.id }] : [],
-    }),
-
-    // Get related products
-    getRelatedProducts: builder.query({
-      query: (id) => `/products/${id}/related`,
-      providesTags: (result) =>
-        result
-          ? result.map(({ id }) => ({ type: "Products", id }))
-          : [],
     }),
 
     // Get all categories
@@ -55,25 +35,8 @@ export const apiSlice = createApi({
         `/categories/${categoryId}/products?offset=${offset}&limit=${limit}`,
       providesTags: (result) =>
         result
-          ? [
-              ...result.map(({ id }) => ({ type: "Products", id })),
-              { type: "Products", id: "CATEGORY_LIST" },
-            ]
+          ? [...result.map(({ id }) => ({ type: "Products", id })), { type: "Products", id: "CATEGORY_LIST" }]
           : [{ type: "Products", id: "CATEGORY_LIST" }],
-    }),
-
-    // Search/filter products by title
-    searchProducts: builder.query({
-      query: ({ title, offset = 0, limit = 10 }) =>
-        `/products?title=${encodeURIComponent(title)}&offset=${offset}&limit=${limit}`,
-      providesTags: [{ type: "Products", id: "SEARCH" }],
-    }),
-
-    // Filter products by price range
-    filterProductsByPrice: builder.query({
-      query: ({ price_min, price_max, offset = 0, limit = 10 }) =>
-        `/products?price_min=${price_min}&price_max=${price_max}&offset=${offset}&limit=${limit}`,
-      providesTags: [{ type: "Products", id: "FILTER" }],
     }),
   }),
 });
@@ -82,10 +45,6 @@ export const apiSlice = createApi({
 export const {
   useGetProductsQuery,
   useGetProductByIdQuery,
-  useGetProductBySlugQuery,
-  useGetRelatedProductsQuery,
   useGetCategoriesQuery,
   useGetProductsByCategoryQuery,
-  useSearchProductsQuery,
-  useFilterProductsByPriceQuery,
 } = apiSlice;
