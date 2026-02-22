@@ -4,12 +4,13 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getValidImageUrl } from "@/lib/utils";
+import { PLACEHOLDER_CATEGORY } from "@/lib/constants";
 
 export default function CategoryCard({ category }) {
   const { id, name, image } = category;
   const [imgError, setImgError] = useState(false);
 
-  const placeholder = `https://placehold.co/400x300/e2e8f0/475569?text=${encodeURIComponent(name)}`;
+  const placeholder = `${PLACEHOLDER_CATEGORY.split("?")[0]}?text=${encodeURIComponent(name)}`;
   const imageUrl = imgError ? placeholder : getValidImageUrl(image, placeholder);
 
   return (
