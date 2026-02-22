@@ -7,13 +7,6 @@ import { getFirstValidImage, formatPrice } from "@/lib/utils";
 import { PLACEHOLDER_NO_IMAGE } from "@/lib/constants";
 import Link from "next/link";
 
-/**
- * Branded product card matching the KICKS Figma design.
- * Used in NewDrops section and "You may also like" related products.
- *
- * @param {object} product - Product data { id, title, price, images }
- * @param {string} badge - Badge text (e.g. "New")
- */
 export default function ProductCardBranded({ product, badge = "New" }) {
   const { id, title, price, images } = product;
   const [imgError, setImgError] = useState(false);
