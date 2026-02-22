@@ -57,7 +57,7 @@ export default function CartItem({ item }) {
       </div>
 
       {/* Details */}
-      <div className="flex-1 flex flex-col gap-2 lg:gap-12">
+      <div className="flex-1 flex flex-col gap-2 lg:gap-4">
         {/* Info + Price: stacked on mobile, side-by-side on desktop */}
         <div className="flex flex-col gap-2 lg:flex-row lg:gap-20">
           {/* Product details */}
