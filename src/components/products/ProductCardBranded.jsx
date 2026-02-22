@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { getFirstValidImage } from "@/lib/utils";
-
-const PLACEHOLDER = "https://placehold.co/400x400/e2e8f0/475569?text=No+Image";
+import Button from "@/components/ui/Button";
+import { getFirstValidImage, formatPrice } from "@/lib/utils";
+import { PLACEHOLDER_NO_IMAGE } from "@/lib/constants";
 
 /**
  * Branded product card matching the KICKS Figma design.
@@ -26,7 +25,7 @@ export default function ProductCardBranded({ product, badge = "New" }) {
    * falling back to the placeholder if no valid image is found.
    * @type {string}
    */
-  const imageUrl = imgError ? PLACEHOLDER : (getFirstValidImage(images) || PLACEHOLDER);
+  const imageUrl = imgError ? PLACEHOLDER_NO_IMAGE : (getFirstValidImage(images) || PLACEHOLDER_NO_IMAGE);
 
   return (
     <div className="flex flex-col gap-4">
@@ -55,12 +54,14 @@ export default function ProductCardBranded({ product, badge = "New" }) {
         <p className="font-rubik font-semibold text-base lg:text-2xl text-kicks-dark leading-tight line-clamp-2 uppercase min-h-[2lh]!">
           {title}
         </p>
-        <Link
+        <Button
           href={`/products/${id}`}
-          className="flex items-center justify-center h-10 lg:h-12 w-full rounded-lg bg-kicks-dark font-rubik font-medium text-xs lg:text-sm text-white uppercase tracking-wider hover:bg-kicks-dark-hover transition-colors">
+          variant="dark"
+          size="sm"
+          className="w-full flex items-center justify-center">
           <span>View Product -&nbsp;</span>
-          <span className="text-kicks-yellow">${price}</span>
-        </Link>
+          <span className="text-kicks-yellow">{formatPrice(price)}</span>
+        </Button>
       </div>
     </div>
   );

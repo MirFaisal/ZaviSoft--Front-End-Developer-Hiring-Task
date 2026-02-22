@@ -65,8 +65,7 @@ export default function CartItem({ item }) {
 
         {/* Actions */}
         <div className="flex items-center gap-6">
-          <button
-            className="size-6 flex items-center justify-center hover:opacity-70 transition-opacity cursor-pointer"
+          <button className="size-6 flex items-center justify-center hover:opacity-70 transition-opacity cursor-pointer bg-transparent"
             aria-label="Add to wishlist">
             <Image src="/icons/heart-dark.svg" alt="Wishlist" width={24} height={24} />
           </button>

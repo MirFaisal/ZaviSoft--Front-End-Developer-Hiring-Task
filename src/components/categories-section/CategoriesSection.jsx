@@ -6,8 +6,7 @@ import Link from "next/link";
 import { useGetCategoriesQuery } from "@/store";
 import { Spinner, NavArrows, Button } from "@/components/ui";
 import { getValidImageUrl } from "@/lib/utils";
-
-const CATEGORY_PLACEHOLDER = "https://placehold.co/600x600/e2e8f0/475569?text=Category";
+import { PLACEHOLDER_CATEGORY } from "@/lib/constants";
 
 export default function CategoriesSection() {
   const { data: rawCategories, isLoading, error, refetch } = useGetCategoriesQuery();
@@ -79,7 +78,7 @@ export default function CategoriesSection() {
 
 function CategoryCardItem({ category, index }) {
   const [imgError, setImgError] = useState(false);
-  const placeholder = `https://placehold.co/600x600/e2e8f0/475569?text=${encodeURIComponent(category.name)}`;
+  const placeholder = `${PLACEHOLDER_CATEGORY.split("?")[0]}?text=${encodeURIComponent(category.name)}`;
   const src = imgError ? placeholder : getValidImageUrl(category.image, placeholder);
 
   return (
@@ -103,9 +102,11 @@ function CategoryCardItem({ category, index }) {
         <h3 className="font-rubik font-semibold text-2xl lg:text-4xl text-kicks-dark uppercase leading-tight line-clamp-2">
           {category.name}
         </h3>
-        <Link
+        <Button
           href={`/categories/${category.id}`}
-          className="flex items-center justify-center p-2 rounded lg:rounded-lg bg-kicks-dark hover:bg-kicks-dark-hover transition-colors shrink-0">
+          variant="dark"
+          size="sm"
+          className="flex items-center justify-center p-2 rounded lg:rounded-lg shrink-0">
           <Image
             src="/icons/arrow-trend-right-up.svg"
             alt="View category"
@@ -113,7 +114,7 @@ function CategoryCardItem({ category, index }) {
             height={24}
             className="-rotate-45"
           />
-        </Link>
+        </Button>
       </div>
     </div>
   );

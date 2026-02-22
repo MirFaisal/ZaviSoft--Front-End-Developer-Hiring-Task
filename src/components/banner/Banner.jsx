@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "../ui";
 
 // ── Static banner assets 
 const ALL_IMAGES = [
@@ -87,11 +88,14 @@ export default function Banner() {
               {BANNER.subtitle}
             </p>
           </div>
-          <Link
+          <Button
             href={BANNER.ctaHref}
-            className="inline-flex items-center justify-center h-8 lg:h-12 px-4 rounded-lg bg-kicks-dark font-rubik font-medium text-sm text-white uppercase tracking-wider hover:bg-kicks-dark-hover transition-colors w-fit">
+            variant="dark"
+            size="md"
+            className="w-fit"
+          >
             {BANNER.cta}
-          </Link>
+          </Button>
         </div>
 
         {/* Right-side thumbnails — click to swap with main image */}

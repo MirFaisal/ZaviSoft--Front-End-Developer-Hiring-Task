@@ -4,10 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store";
-import { getValidImageUrl } from "@/lib/utils";
+import { getValidImageUrl, formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui";
-
-const PLACEHOLDER = "https://placehold.co/600x600/e2e8f0/475569?text=Product";
+import { PLACEHOLDER_PRODUCT } from "@/lib/constants";
 const ALL_SIZES = [38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
 const DISABLED_SIZES = new Set([39, 40]);
 const COLORS = [
@@ -27,7 +26,7 @@ export default function ProductInfo({ product }) {
         id: product.id,
         title: product.title,
         price: product.price,
-        image: getValidImageUrl(product.images?.[0], PLACEHOLDER),
+        image: getValidImageUrl(product.images?.[0], PLACEHOLDER_PRODUCT),
         description: product.description || "",
         quantity: 1,
       }),
@@ -45,7 +44,7 @@ export default function ProductInfo({ product }) {
           {product.title}
         </h1>
         <p className="font-rubik font-semibold text-2xl text-kicks-blue">
-          ${product.price.toFixed(2)}
+          {formatPrice(product.price)}
         </p>
       </div>
 
@@ -110,9 +109,12 @@ export default function ProductInfo({ product }) {
           <Button variant="dark" size="md" onClick={handleAddToCart} className="flex-1">
             Add to cart
           </Button>
-          <button className="h-12 px-4 bg-kicks-dark rounded-lg flex items-center justify-center hover:opacity-90 transition-colors cursor-pointer">
+          <Button
+            variant="dark"
+            size="md"
+            className="px-4 flex items-center justify-center">
             <Image src="/icons/heart.svg" alt="Wishlist" width={24} height={24} />
-          </button>
+          </Button>
         </div>
         <Button variant="blue" size="md" className="w-full">
           Buy it now

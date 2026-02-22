@@ -1,3 +1,4 @@
+
 /**
  * Validate a single image URL string.
  * Returns the URL if valid, otherwise the placeholder.
@@ -51,4 +52,14 @@ export function getValidImages(
   const valid = images.map((img) => getValidImageUrl(img, placeholder));
   while (valid.length < count) valid.push(valid[valid.length - 1]);
   return valid.slice(0, count);
+}
+
+/**
+ * Formats a number as a price string in USD currency format.
+ * @param {number|string} price - The price value to format.
+ * @returns {string} The formatted price string, e.g., "$12.34".
+ */
+
+export function formatPrice(price) {
+  return `$${Number(price).toFixed(2)}`;
 }
