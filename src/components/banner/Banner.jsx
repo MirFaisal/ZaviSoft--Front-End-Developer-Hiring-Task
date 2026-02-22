@@ -90,7 +90,7 @@ export default function Banner() {
           </div>
           <Button
             href={BANNER.ctaHref}
-            variant="dark"
+            variant="blue"
             size="md"
             className="w-fit"
           >
