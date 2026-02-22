@@ -7,7 +7,8 @@ state management, API integration, and responsive UI implementation.
 🔗 **Figma Design:**
 [Frontend Task (Copy)](https://www.figma.com/design/dZOtspuOvPzaaU5rczAOq0/Frontend-task--Copy-?node-id=1-3197&m=dev)
 
-🌐 **Live Demo:** [https://zavi-soft-front-end-developer-hirin.vercel.app/](https://zavi-soft-front-end-developer-hirin.vercel.app/)
+🌐 **Live Demo:**
+[https://zavi-soft-front-end-developer-hirin.vercel.app/](https://zavi-soft-front-end-developer-hirin.vercel.app/)
 
 ---
 
@@ -179,15 +180,15 @@ invalidation.
 
 **Cart actions available:**
 
-| Action               | Description                                        |
-| -------------------- | -------------------------------------------------- |
-| `initializeCart`     | Loads persisted cart from `localStorage` on mount  |
-| `addToCart`          | Adds item or increments quantity if already in cart |
-| `removeFromCart`     | Removes item by ID                                 |
-| `incrementQuantity`  | Increases item qty by 1                            |
-| `decrementQuantity`  | Decreases item qty by 1, removes item at 0         |
-| `clearCart`          | Empties the entire cart                            |
-| `toggleCart`         | Opens/closes the cart sidebar                      |
+| Action              | Description                                         |
+| ------------------- | --------------------------------------------------- |
+| `initializeCart`    | Loads persisted cart from `localStorage` on mount   |
+| `addToCart`         | Adds item or increments quantity if already in cart |
+| `removeFromCart`    | Removes item by ID                                  |
+| `incrementQuantity` | Increases item qty by 1                             |
+| `decrementQuantity` | Decreases item qty by 1, removes item at 0          |
+| `clearCart`         | Empties the entire cart                             |
+| `toggleCart`        | Opens/closes the cart sidebar                       |
 
 **Selectors exported from the store:**
 
