@@ -39,7 +39,7 @@ export default function ProductInfo({ product }) {
       {/* Badge + Title + Price */}
       <div className="flex flex-col gap-4">
         <span className="self-start bg-kicks-blue text-white font-rubik font-semibold text-xs px-4 py-2 rounded-lg">
-          New Release
+          {product?.category?.name || "New Release"}
         </span>
         <h1 className="font-rubik font-semibold text-xl lg:text-[32px] text-kicks-dark uppercase leading-tight">
           {product.title}
